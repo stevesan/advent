@@ -11,7 +11,7 @@ def v2np(v): return np.array(v)
 grid = []
 start_pos = None
 end_pos = None
-with open('d12a-test.txt') as f:
+with open('d12a-input.txt') as f:
   row = 0
   for line in f:
     line = line.strip()
@@ -49,24 +49,27 @@ pos2prev = {}
 pos2prevmove = {}
 visited = set([start_pos])
 def visit(node):
-  assert node in visited
-  len_to_nbor = pos2len[node] + 1
-  nodeval = grid[node[0]][node[1]]
-  for dir in DIRS:
-    nbor = vadd(node, dir)
+  queue = [node]
+  while queue:
+    node = queue.pop()
+    assert node in visited
+    len_to_nbor = pos2len[node] + 1
+    nodeval = grid[node[0]][node[1]]
+    for dir in DIRS:
+      nbor = vadd(node, dir)
 
-    if nbor[0] < 0 or nbor[0] >= len(grid): continue
-    if nbor[1] < 0 or nbor[1] >= len(grid[0]): continue
+      if nbor[0] < 0 or nbor[0] >= len(grid): continue
+      if nbor[1] < 0 or nbor[1] >= len(grid[0]): continue
 
-    nborval = grid[nbor[0]][nbor[1]]
-    if nborval > nodeval + 1: continue
+      nborval = grid[nbor[0]][nbor[1]]
+      if nborval > nodeval + 1: continue
 
-    if nbor not in visited or len_to_nbor < pos2len[nbor]:
-      visited.add(nbor)
-      pos2len[nbor] = len_to_nbor
-      pos2prev[nbor] = node
-      pos2prevmove[nbor] = dir
-      visit(nbor)
+      if nbor not in visited or len_to_nbor < pos2len[nbor]:
+        visited.add(nbor)
+        pos2len[nbor] = len_to_nbor
+        pos2prev[nbor] = node
+        pos2prevmove[nbor] = dir
+        queue.append(nbor)
 
 visit(start_pos)
 
