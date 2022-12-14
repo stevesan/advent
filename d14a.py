@@ -152,7 +152,6 @@ def drop_sand():
   if G[p] == 'o': return False
 
   while True:
-    print(p)
     q = p + Int2(0, 1)
     if q.y >= G.H:
       # Fallen off
@@ -167,7 +166,7 @@ def drop_sand():
       else:
         # Try right..
         q.x += 2
-        if G[p] == '.':
+        if G[q] == '.':
           p = q
         else:
           # Can't move anymore - mark rest and done
