@@ -1,4 +1,6 @@
 
+import functools
+
 def enum_pairs(f):
   while True:
     try:
@@ -57,15 +59,27 @@ def do_compare(lefts:list, rights:list):
 
 with open ('d13a-input.txt') as f:
   sum_of_correct_indices = 0
+  packets = []
   for i, (left, right) in enumerate(enum_pairs(f)):
     left = parse_line(left)
     right = parse_line(right)
-    print(f'== Pair {i+1} ==')
-    print(i, left, right)
-    rv = do_compare(left, right)
-    assert rv != 0
-    if rv == 1:
-      print('RIGHT')
-      index = i + 1
-      sum_of_correct_indices += index
-  print(f'FINAL SUM: {sum_of_correct_indices}')
+    packets.append(left)
+    packets.append(right)
+
+  # Add divibers
+  div1 = [[2]]
+  div2 = [[6]]
+  packets.append(div1)
+  packets.append(div2)
+
+  packets.sort(key=functools.cmp_to_key(do_compare), reverse=True)
+  print('\n'.join([str(p) for p in packets]))
+
+  decoderkey = 1
+  for i in range(len(packets)):
+    if packets[i] == div1:
+      decoderkey *= i+1
+    elif packets[i] == div2:
+      decoderkey *= i+1
+
+  print(decoderkey)
