@@ -93,7 +93,7 @@ class Grid2:
 
 
 paths = []
-with open('d14a-test.txt') as f:
+with open('d14a-input.txt') as f:
   for line in f:
     line = line.strip()
     pt_strs = line.split(' -> ')
@@ -104,7 +104,7 @@ with open('d14a-test.txt') as f:
       path.append(pt)
     paths.append(path)
 
-print(paths)
+# print(paths)
 
 allpts = []
 for path in paths:
@@ -115,7 +115,6 @@ width = max([p.x for p in allpts] + [500]) + 1
 height = max([p.y for p in allpts]) + 1
 
 print('size is ', width, height)
-print(paths)
 
 G = Grid2(width, height, '.')
 
@@ -132,9 +131,7 @@ for path in paths:
     start = path[i]
     end = path[i+1]
     dir = Int2.max(Int2(-1), Int2.min(Int2(1), (end - start)))
-    print(start, end, dir)
     while start != end:
-      print(start)
       G[start] = '#'
       start += dir
     G[start] = '#'
@@ -153,7 +150,7 @@ def drop_sand():
 
   while True:
     q = p + Int2(0, 1)
-    if q.y >= G.H:
+    if not G.check(q):
       # Fallen off
       return False
     if G[q] == '.':
