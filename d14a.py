@@ -80,15 +80,19 @@ class Grid2:
     return p.x >= 0 and p.x < self.W and p.y >= 0 and p.y < self.H
 
   def get(self,x,y):
+    assert self.check(Int2(x, y))
     return self.grid[self.W*y + x]
 
   def pget(self,p):
+    assert self.check(p)
     return self.grid[self.W*p.y + p.x]
 
   def set(self,x,y,value):
+    assert self.check(Int2(x, y))
     self.grid[self.W*y+x] = value
 
   def pset(self,p,value):
+    assert self.check(p)
     self.grid[self.W*p.y+p.x] = value
 
 
@@ -149,21 +153,21 @@ def drop_sand():
   if G[p] == 'o': return False
 
   while True:
+    # Case where we fall out of bounds - sand can do this, we just need to check
+    if not G.check(p): return False
     q = p + Int2(0, 1)
-    if not G.check(q):
-      # Fallen off
-      return False
-    if G[q] == '.':
+    # IMPORTANT: Note how we allow sand to fall out of bounds - thus the "not G.check" clauses
+    if not G.check(q) or G[q] == '.':
       p = q
     elif G[q] == '#' or G[q] == 'o':
       # Try left..
       q.x -= 1
-      if G[q] == '.':
+      if not G.check(q) or G[q] == '.':
         p = q
       else:
         # Try right..
         q.x += 2
-        if G[q] == '.':
+        if not G.check(q) or G[q] == '.':
           p = q
         else:
           # Can't move anymore - mark rest and done
@@ -173,5 +177,5 @@ def drop_sand():
 grains = 0
 while drop_sand():
   grains += 1
-print_grid()
+# print_grid()
 print('final grain count: ', grains)
