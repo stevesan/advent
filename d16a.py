@@ -21,6 +21,7 @@ hmm nah, it's not necessarily true that you need to open 15 valves for max relea
 class SearchState:
   opened: list[Node]
   path: list[Node]
+  actions: list[str]
   pressure_released:int = 0
 
   def curr_node(self):
@@ -32,71 +33,88 @@ class SearchState:
   def get_total_rate(self):
     return sum([node.rate for node in self.opened])
 
+  def get_path_names(self):
+    return [node.name for node in self.path]
+
   def clone(self):
-    return SearchState(opened=list(self.opened), path=list(self.path), pressure_released=self.pressure_released)
+    return SearchState(opened=list(self.opened), path=list(self.path), actions=list(self.actions), pressure_released=self.pressure_released)
 
   def release_pressure(self, minutes=1):
     self.pressure_released += self.get_total_rate() * minutes
 
 def find_max_release(name2node:dict[str, Node]):
   init_node = name2node['AA']
-  init_state = SearchState(opened=[], path=[init_node])
+  init_state = SearchState(opened=[], path=[init_node], actions=[])
   assert init_state.get_time() == 0
   states_to_explore:list[SearchState] = [init_state]
 
   nonzero_valve_names = [node.name for node in name2node.values() if node.rate > 0]
 
-  world_state_to_best_time = {}
+  indep_state_to_best_time = {}
+  indep_state_to_best_pressure = {}
 
   best_score = None
   iters = 0
   while states_to_explore:
     iters += 1
     state:SearchState = states_to_explore.pop(0)
+    opened_valve_names = [node.name for node in state.opened]
+    opened_valve_names.sort()
+    indep_key = (state.curr_node().name, tuple(opened_valve_names))
+
+    # print(iters, indep_key)
+
+    # PRUNE: If we have been at this node before with the same opened valves, and we did it in less time before AND more pressure right now, we do not need to explore further!
+    # Be very conservative about pruning..
+    prev_time = indep_state_to_best_time.get(indep_key, None)
+    prev_pressure = indep_state_to_best_pressure.get(indep_key, None)
+    if prev_time is None:
+      assert prev_pressure is None
+      indep_state_to_best_time[indep_key] = state.get_time()
+      indep_state_to_best_pressure[indep_key] = state.pressure_released
+    else:
+      if (state.get_time() >= prev_time and state.pressure_released <= prev_pressure):
+        # The current state is worse or equiv. Do not bother checking its score or exploring further
+        print(f'pruned, strictly worse than prior. t={state.get_time()} p={state.pressure_released}.\n  actions = {state.actions}')
+        continue
+      elif (state.get_time() < prev_time and state.pressure_released > prev_pressure):
+        # Current state is strictly better. Make this the new watermark.
+        indep_state_to_best_time[indep_key] = state.get_time()
+        indep_state_to_best_pressure[indep_key] = state.pressure_released
+
     if state.get_time() >= 30:
       # Can't explore further.
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
-        print(f'improved to {best_score}')
+        print(f'improved to {best_score}. end state: {indep_key}')
       continue
 
-    # PRUNE: If no more valves left to open, then just release pressure for remaining time
+    # PRUNE: If no more non-zero valves left to open, then just release pressure for remaining time
     if len(state.opened) == len(nonzero_valve_names):
       remain_minutes = 30 - state.get_time()
       state.release_pressure(remain_minutes)
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
-        print(f'ffwd improved to {best_score}')
-      continue
-
-    # PRUNE: If we have been at this node before with the same opened valves, and we did it in less steps before, we do not need to explore further!
-    opened_valve_names = [node.name for node in state.opened]
-    opened_valve_names.sort()
-    world_state = (state.curr_node().name, tuple(opened_valve_names))
-    prev_time = world_state_to_best_time.get(world_state, None)
-    print(world_state)
-    if prev_time == None or state.get_time() < prev_time:
-      world_state_to_best_time[world_state] = state.get_time()
-    else:
-      # This search path is strictly worse. No need to keep trying.
-      print(f'Pruned state {world_state}')
+        print(f'ffwd improved to {best_score}. end state: {indep_key}. idled for {remain_minutes} minutes\n  actions: {state.actions}')
       continue
 
     # Keep exploring from this state
+
+    # Open this valve?
     if state.curr_node().rate > 0 and not state.curr_node() in state.opened:
-      # We could open this valve
       opened_state = state.clone()
       # Important to release before we open the current valve. We do not get to count the current node as open for this minute.
       opened_state.release_pressure()
       opened_state.opened.append(state.curr_node())
+      opened_state.actions.append(f'open {state.curr_node().name}')
       states_to_explore.append(opened_state)
 
     # We could move to any nbor
-    # Note we need to allow moving to previously visited nodes. For the dead-end case.
     for nbor in state.curr_node().nbors:
       moved_state = state.clone()
       moved_state.release_pressure()
       moved_state.path.append(nbor)
+      moved_state.actions.append(f'goto {nbor.name}')
       states_to_explore.append(moved_state)
 
   print(f'done in {iters}. best = {best_score}')
@@ -133,4 +151,5 @@ def main(inputf):
   return find_max_release(name2node)
 
 assert main('d16tiny.txt') == 29
-# main(sys.argv[1])
+if len(sys.argv) > 1:
+  main(sys.argv[1])
