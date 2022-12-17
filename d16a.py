@@ -47,10 +47,6 @@ def find_max_release(name2node:dict[str, Node]):
   best_score = None
   while states_to_explore:
     state:SearchState = states_to_explore.pop(-1)
-    # print('-----')
-    # print([node.name for node in state.path])
-    # print([node.name for node in state.opened])
-    # print(best_score)
     if state.get_time() >= 30:
       # Can't explore further.
       if best_score is None or state.pressure_released > best_score:
