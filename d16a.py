@@ -35,8 +35,8 @@ class SearchState:
   def clone(self):
     return SearchState(opened=list(self.opened), path=list(self.path), pressure_released=self.pressure_released)
 
-  def release_pressure_for_one_minute(self):
-    self.pressure_released += self.get_total_rate()
+  def release_pressure(self, minutes=1):
+    self.pressure_released += self.get_total_rate() * minutes
 
 def find_max_release(name2node:dict[str, Node]):
   init_node = name2node['AA']
@@ -45,8 +45,10 @@ def find_max_release(name2node:dict[str, Node]):
   states_to_explore:list[SearchState] = [init_state]
 
   best_score = None
+  iters = 0
   while states_to_explore:
-    state:SearchState = states_to_explore.pop(-1)
+    iters += 1
+    state:SearchState = states_to_explore.pop(0)
     if state.get_time() >= 30:
       # Can't explore further.
       if best_score is None or state.pressure_released > best_score:
@@ -54,12 +56,21 @@ def find_max_release(name2node:dict[str, Node]):
         print(f'improved to {best_score}')
       continue
 
+    # PRUNE: If no more valves left to open, then just release pressure for remaining time
+    if len(state.opened) == len(name2node):
+      remain_minutes = 30 - state.get_time()
+      state.release_pressure(remain_minutes)
+      if best_score is None or state.pressure_released > best_score:
+        best_score = state.pressure_released
+        print(f'ffwd improved to {best_score}')
+      continue
+
     # Keep exploring from this state
-    if not state.curr_node() in state.opened:
+    if state.curr_node().rate > 0 and not state.curr_node() in state.opened:
       # We could open this valve
       opened_state = state.clone()
       # Important to release before we open the current valve. We do not get to count the current node as open for this minute.
-      opened_state.release_pressure_for_one_minute()
+      opened_state.release_pressure()
       opened_state.opened.append(state.curr_node())
       states_to_explore.append(opened_state)
 
@@ -67,16 +78,16 @@ def find_max_release(name2node:dict[str, Node]):
     # Note we need to allow moving to previously visited nodes. For the dead-end case.
     for nbor in state.curr_node().nbors:
       moved_state = state.clone()
-      moved_state.release_pressure_for_one_minute()
+      moved_state.release_pressure()
       moved_state.path.append(nbor)
       states_to_explore.append(moved_state)
 
-  print(best_score)
+  print(f'done in {iters}')
+  return best_score
 
-
-def main():
+def main(inputf):
   name2node:dict[str, Node] = {}
-  with open(sys.argv[1]) as f:
+  with open(inputf) as f:
     for line in f:
       line = line.strip()
       """Valve AA has flow rate=0; tunnels lead to valves DD, II, BB"""
@@ -102,6 +113,7 @@ def main():
     nbors = [name2node[name] for name in node.nbor_names]
     node.nbors = nbors
 
-  find_max_release(name2node)
+  return find_max_release(name2node)
 
-main()
+assert main('d16tiny.txt') == 29
+# main(sys.argv[1])
