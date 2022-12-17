@@ -44,6 +44,10 @@ def find_max_release(name2node:dict[str, Node]):
   assert init_state.get_time() == 0
   states_to_explore:list[SearchState] = [init_state]
 
+  nonzero_valve_names = [node.name for node in name2node.values() if node.rate > 0]
+
+  world_state_to_best_time = {}
+
   best_score = None
   iters = 0
   while states_to_explore:
@@ -57,12 +61,25 @@ def find_max_release(name2node:dict[str, Node]):
       continue
 
     # PRUNE: If no more valves left to open, then just release pressure for remaining time
-    if len(state.opened) == len(name2node):
+    if len(state.opened) == len(nonzero_valve_names):
       remain_minutes = 30 - state.get_time()
       state.release_pressure(remain_minutes)
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
         print(f'ffwd improved to {best_score}')
+      continue
+
+    # PRUNE: If we have been at this node before with the same opened valves, and we did it in less steps before, we do not need to explore further!
+    opened_valve_names = [node.name for node in state.opened]
+    opened_valve_names.sort()
+    world_state = (state.curr_node().name, tuple(opened_valve_names))
+    prev_time = world_state_to_best_time.get(world_state, None)
+    print(world_state)
+    if prev_time == None or state.get_time() < prev_time:
+      world_state_to_best_time[world_state] = state.get_time()
+    else:
+      # This search path is strictly worse. No need to keep trying.
+      print(f'Pruned state {world_state}')
       continue
 
     # Keep exploring from this state
@@ -82,7 +99,7 @@ def find_max_release(name2node:dict[str, Node]):
       moved_state.path.append(nbor)
       states_to_explore.append(moved_state)
 
-  print(f'done in {iters}')
+  print(f'done in {iters}. best = {best_score}')
   return best_score
 
 def main(inputf):
