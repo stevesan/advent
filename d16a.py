@@ -62,16 +62,17 @@ def find_max_release(name2node:dict[str, Node]):
     if not state.curr_node() in state.opened:
       # We could open this valve
       opened_state = state.clone()
-      opened_state.opened.append(state.curr_node())
+      # Important to release before we open the current valve. We do not get to count the current node as open for this minute.
       opened_state.release_pressure_for_one_minute()
+      opened_state.opened.append(state.curr_node())
       states_to_explore.append(opened_state)
 
     # We could move to any nbor
     # Note we need to allow moving to previously visited nodes. For the dead-end case.
     for nbor in state.curr_node().nbors:
       moved_state = state.clone()
-      moved_state.path.append(nbor)
       moved_state.release_pressure_for_one_minute()
+      moved_state.path.append(nbor)
       states_to_explore.append(moved_state)
 
   print(best_score)
