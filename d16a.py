@@ -2,6 +2,7 @@
 import sys
 from dataclasses import dataclass
 import time
+from datetime import datetime
 
 @dataclass
 class Node:
@@ -71,7 +72,7 @@ class NodeStates:
   def add(self, state:SearchState):
     self.states.insert(0, state)
 
-def find_max_release(name2node:dict[str, Node]):
+def find_max_release(name2node:dict[str, Node], timing_csvf):
   print(' -----------')
   init_node = name2node['AA']
   init_state = SearchState(opened=set(), path=[init_node], actions=[])
@@ -91,12 +92,17 @@ def find_max_release(name2node:dict[str, Node]):
     state:SearchState = states_to_explore.pop(0)
 
     if iters % 10000 == 0:
-      print(f'dt={time.time()-t0} iter {iters}, stack#={len(states_to_explore)}, state={state}')
+      elapsed = time.time() - t0
+      print(f'dt={elapsed} iter={iters} stack#={len(states_to_explore)}, state={state}')
 
       numpasts = 0
       for node, paststates in node2states.items():
         numpasts += len(paststates.states)
+      avg = numpasts/len(node2states)
       print(f'  average past states per node: {numpasts/len(node2states)}')
+
+      if timing_csvf:
+        timing_csvf.write(f'{elapsed},{iters},{avg}')
 
     # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
     # Otherwise, explore, and add it to the node's list.
@@ -194,7 +200,8 @@ def main(inputf):
     nbors = [name2node[name] for name in node.nbor_names]
     node.nbors = nbors
 
-  return find_max_release(name2node)
+  with open(f'd16timings/{inputf}-timings-{datetime.now().isoformat()}.csv', 'w') as f:
+    return find_max_release(name2node, f)
 
 assert main('d16tiny.txt') == 29
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 565
