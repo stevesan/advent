@@ -181,7 +181,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
         states_to_explore.append(new_state)
         
 
-  print(f'done in {iters}. best = {best_score}')
+  print(f'done in {iters} iters, best = {best_score}')
   return best_score
 
 def main(inputf):
@@ -218,8 +218,8 @@ def main(inputf):
 
 # main('d16-chain.txt')
 # assert main('d16tiny.txt') == 
+assert main('d16-chain.txt') == 22 * 20
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 24 + 23*20
 assert main('d16test.txt') == 1707
-# assert main('d16-chain.txt') == 
 if len(sys.argv) > 1:
   main(sys.argv[1])
