@@ -64,7 +64,7 @@ class NodeStates:
   states: list[SearchState]
 
   def add(self, state:SearchState):
-    self.states.append(state)
+    self.states.insert(0, state)
 
 def find_max_release(name2node:dict[str, Node]):
   print(' -----------')
