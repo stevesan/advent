@@ -164,5 +164,6 @@ def main(inputf):
   return find_max_release(name2node)
 
 assert main('d16tiny.txt') == 29
+assert main('d16test.txt') == 1651
 if len(sys.argv) > 1:
   main(sys.argv[1])
