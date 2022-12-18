@@ -216,8 +216,7 @@ def main(inputf):
   with open(f'd16timings/{inputf}-timings-{datetime.now().isoformat()}.csv', 'w') as f:
     return find_max_release(name2node, f)
 
-# main('d16-chain.txt')
-# assert main('d16tiny.txt') == 
+assert main('d16tiny.txt') == 25
 assert main('d16-chain.txt') == 22 * 20
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 24 + 23*20
 assert main('d16test.txt') == 1707
