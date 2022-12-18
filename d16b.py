@@ -24,8 +24,8 @@ hmm nah, it's not necessarily true that you need to open 15 valves for max relea
 @dataclass
 class SearchState:
   opened: set[Node]
-  path: list[Node]
-  el_path: list[Node]
+  my_node: Node
+  el_node: Node
   actions: list[str]
   pressure_released:int = 0
   time:int = 0
@@ -34,8 +34,8 @@ class SearchState:
   def clone(self):
     return SearchState(
       opened=set(self.opened),
-      path=list(self.path),
-      el_path=list(self.el_path),
+      my_node=self.my_node,
+      el_node=self.el_node,
       actions=list(self.actions),
       pressure_released=self.pressure_released,
       time=self.time,
@@ -70,7 +70,7 @@ def ordpair(a:str, b:str):
 
 def find_max_release(name2node:dict[str, Node], timing_csvf):
   init_node = name2node['AA']
-  init_state = SearchState(opened=set(), path=[init_node], el_path=[init_node], actions=[], time=0)
+  init_state = SearchState(opened=set(), my_node=init_node, el_node=init_node, actions=[], time=0)
   states_to_explore:list[SearchState] = [init_state]
 
   nonzero_valve_names = [node.name for node in name2node.values() if node.rate > 0]
@@ -101,7 +101,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
     # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
     # Otherwise, explore, and add it to the node's list.
 
-    pos = ordpair(state.path[-1].name, state.el_path[-1].name)
+    pos = ordpair(state.my_node.name, state.el_node.name)
     if pos not in pos2states:
       pos2states[pos] = []
     is_pruned = False
@@ -140,14 +140,14 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
 
     # Keep exploring from this state
 
-    my_node = state.path[-1]
+    my_node = state.my_node
     my_actions = [(MOVE, nbor) for nbor in my_node.nbors]
     if my_node.rate > 0 and my_node not in state.opened:
       my_actions.append((OPEN, None))
 
     for my_action in my_actions:
       # If I do this, what can the elephant do?
-      el_node = state.el_path[-1]
+      el_node = state.el_node
       el_actions = [(MOVE, nbor) for nbor in el_node.nbors]
       if el_node.rate > 0 and el_node not in state.opened:
         if my_node == el_node and my_action[0] == OPEN:
@@ -168,7 +168,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
           new_state.total_rate += my_node.rate
           # new_state.actions.append(f'i open {my_node.name}')
         else:
-          new_state.path.append(my_action[1])
+          new_state.my_node = my_action[1]
           # new_state.actions.append(f'i goto {my_action[1].name}')
 
         if el_action[0] == OPEN:
@@ -176,7 +176,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
           new_state.total_rate += el_node.rate
           # new_state.actions.append(f'el open {el_node.name}')
         else:
-          new_state.el_path.append(el_action[1])
+          new_state.el_node = el_action[1]
           # new_state.actions.append(f'el goto {el_action[1].name}')
 
         states_to_explore.append(new_state)
