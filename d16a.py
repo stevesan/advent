@@ -1,6 +1,7 @@
 
 import sys
 from dataclasses import dataclass
+import time
 
 @dataclass
 class Node:
@@ -61,19 +62,9 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
 @dataclass
 class NodeStates:
   states: list[SearchState]
-  # Values to short-circuit the non-prune case
-  most_opened: int
-  min_time: int
-  max_pressure: int
 
   def add(self, state:SearchState):
     self.states.append(state)
-    self.most_opened = max(self.most_opened, len(state.opened))
-    if self.min_time is None:
-      self.min_time = state.get_time()
-    else:
-      self.min_time = min(self.min_time, state.get_time())
-    self.max_pressure = max(self.max_pressure, state.pressure_released)
 
 def find_max_release(name2node:dict[str, Node]):
   print(' -----------')
@@ -88,33 +79,28 @@ def find_max_release(name2node:dict[str, Node]):
 
   best_score = None
   iters = 0
+  t0 = time.time()
   while states_to_explore:
     iters += 1
     state:SearchState = states_to_explore.pop(0)
 
     if iters % 1000 == 0:
-      print(f'iter {iters}, stack#={len(states_to_explore)}, state={state}')
+      print(f'dt={time.time()-t0} iter {iters}, stack#={len(states_to_explore)}, state={state}')
 
     # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
     # Otherwise, explore, and add it to the node's list.
 
     node = state.curr_node()
     if node.name not in node2states:
-      node2states[node.name] = NodeStates(states=[], most_opened=0, min_time=None, max_pressure=0)
+      node2states[node.name] = NodeStates(states=[])
     states = node2states[node.name]
     is_pruned = False
-    if len(states.states) == 0 or state.pressure_released > states.max_pressure \
-      or state.get_time() < states.min_time \
-      or len(state.opened) > states.most_opened:
-      # definitely not pruned
-      is_pruned = False
-    else:
-      # may be pruned - have to do exhaustive serach
-      for other in states.states:
-        if state_is_worse_or_equal(state, other):
-          # print(f'pruned because it is worse or equal to: {other}')
-          is_pruned = True
-          break
+    # may be pruned - have to do exhaustive serach
+    for other in states.states:
+      if state_is_worse_or_equal(state, other):
+        # print(f'pruned because it is worse or equal to: {other}')
+        is_pruned = True
+        break
     if is_pruned:
       continue
     states.add(state)
@@ -188,6 +174,7 @@ def main(inputf):
   return find_max_release(name2node)
 
 assert main('d16tiny.txt') == 29
+assert main('d16-example-where-opening-BB-first-is-worse.txt') == 565
 assert main('d16test.txt') == 1651
 if len(sys.argv) > 1:
   main(sys.argv[1])

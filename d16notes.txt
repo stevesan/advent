@@ -1,0 +1,6 @@
+w/o short-circuit logic:
+dt=28.352602243423462 iter 100000, stack#=32914
+with:
+dt=28.26199722290039 iter 100000, stack#=32914
+
+so...no difference whatsoever
