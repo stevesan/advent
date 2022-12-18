@@ -43,6 +43,7 @@ class SearchState:
     self.pressure_released += self.get_total_rate() * minutes
 
 def find_max_release(name2node:dict[str, Node]):
+  print(' -----------')
   init_node = name2node['AA']
   init_state = SearchState(opened=[], path=[init_node], actions=[])
   assert init_state.get_time() == 0
@@ -62,7 +63,7 @@ def find_max_release(name2node:dict[str, Node]):
     opened_valve_names.sort()
     indep_key = (state.curr_node().name, tuple(opened_valve_names))
 
-    # print(iters, indep_key)
+    print(f'doing {indep_key}, time = {state.get_time()}, pres = {state.pressure_released}')
 
     # PRUNE: If we have been at this node before with the same opened valves, and we did it in less time before AND more pressure right now, we do not need to explore further!
     # Be very conservative about pruning..
@@ -70,15 +71,18 @@ def find_max_release(name2node:dict[str, Node]):
     prev_pressure = indep_state_to_best_pressure.get(indep_key, None)
     if prev_time is None:
       assert prev_pressure is None
+      print(f'  adding {indep_key}, time = {state.get_time()}, pres = {state.pressure_released}')
       indep_state_to_best_time[indep_key] = state.get_time()
       indep_state_to_best_pressure[indep_key] = state.pressure_released
     else:
+      print(f'  comparing to t={prev_time} p={prev_time} ')
       if (state.get_time() >= prev_time and state.pressure_released <= prev_pressure):
         # The current state is worse or equiv. Do not bother checking its score or exploring further
         print(f'pruned, strictly worse than prior. t={state.get_time()} p={state.pressure_released}.\n  actions = {state.actions}')
         continue
       elif (state.get_time() < prev_time and state.pressure_released > prev_pressure):
         # Current state is strictly better. Make this the new watermark.
+        print(f'  adding {indep_key}, time = {state.get_time()}, pres = {state.pressure_released}')
         indep_state_to_best_time[indep_key] = state.get_time()
         indep_state_to_best_pressure[indep_key] = state.pressure_released
 
@@ -86,7 +90,7 @@ def find_max_release(name2node:dict[str, Node]):
       # Can't explore further.
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
-        print(f'improved to {best_score}. end state: {indep_key}')
+        print(f'  improved to {best_score}. end state: {indep_key}')
       continue
 
     # PRUNE: If no more non-zero valves left to open, then just release pressure for remaining time
@@ -95,7 +99,7 @@ def find_max_release(name2node:dict[str, Node]):
       state.release_pressure(remain_minutes)
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
-        print(f'ffwd improved to {best_score}. end state: {indep_key}. idled for {remain_minutes} minutes\n  actions: {state.actions}')
+        print(f'  ffwd improved to {best_score}. end state: {indep_key}. idled for {remain_minutes} minutes\n  actions: {state.actions}')
       continue
 
     # Keep exploring from this state
