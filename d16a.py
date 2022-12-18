@@ -82,10 +82,10 @@ def find_max_release(name2node:dict[str, Node]):
     if node.name not in node2states:
       node2states[node.name] = []
     states = node2states[node.name]
-    for other in states:
-      if state_is_worse_or_equal(state, other):
-        print(f'pruned {state}')
-        continue
+    is_pruned = any(state_is_worse_or_equal(state, other) for other in states)
+    if is_pruned:
+      print(f'pruned {state}')
+      continue
     states.append(state)
 
     if state.get_time() >= 30:
