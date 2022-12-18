@@ -10,6 +10,7 @@ class Node:
   nbor_names: list[str]
   rate: int
   nbors: list[object] = None
+  id: int = None
 
   def __hash__(self): return hash(self.name)
 
@@ -30,6 +31,7 @@ class SearchState:
   pressure_released:int = 0
   time:int = 0
   total_rate:int = 0
+  opened_bits:int = 0
 
   def clone(self):
     return SearchState(
@@ -54,7 +56,7 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   # This is actually quite slow, surprisingly.
   # assert a.curr_node() == b.curr_node()
 
-  return a.opened.issubset(b.opened) and a.time >= b.time and a.pressure_released <= b.pressure_released
+  return (a.opened_bits | b.opened_bits) == b.opened_bits and a.time >= b.time and a.pressure_released <= b.pressure_released
 
 OPEN = 0
 MOVE = 1
@@ -163,6 +165,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
 
         if my_action[0] == OPEN:
           new_state.opened.add(my_node)
+          new_state.opened_bits |= 1 << my_node.id
           new_state.total_rate += my_node.rate
           # new_state.actions.append(f'i open {my_node.name}')
         else:
@@ -171,6 +174,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
 
         if el_action[0] == OPEN:
           new_state.opened.add(el_node)
+          new_state.opened_bits |= 1 << el_node.id
           new_state.total_rate += el_node.rate
           # new_state.actions.append(f'el open {el_node.name}')
         else:
@@ -212,12 +216,23 @@ def main(inputf):
     nbors = [name2node[name] for name in node.nbor_names]
     node.nbors = nbors
 
+  # assign IDs
+  nodes = name2node.values()
+  node2id = {node:i for i, node in enumerate(nodes)}
+  for node in nodes:
+    node.id = node2id[node]
+
   with open(f'd16timings/{inputf}-timings-{datetime.now().isoformat()}.csv', 'w') as f:
     return find_max_release(name2node, f)
+
 
 assert main('d16tiny.txt') == 25
 assert main('d16-chain.txt') == 22 * 20
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 24 + 23*20
 assert main('d16test.txt') == 1707
+
+import cProfile
+cProfile.run('assert main("d16test.txt") == 1707')
+
 if len(sys.argv) > 1:
   main(sys.argv[1])
