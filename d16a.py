@@ -84,7 +84,7 @@ def find_max_release(name2node:dict[str, Node]):
     iters += 1
     state:SearchState = states_to_explore.pop(0)
 
-    if iters % 1000 == 0:
+    if iters % 10000 == 0:
       print(f'dt={time.time()-t0} iter {iters}, stack#={len(states_to_explore)}, state={state}')
 
     # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
@@ -99,7 +99,7 @@ def find_max_release(name2node:dict[str, Node]):
     for other in states.states:
       # print(f'comparing to {other}')
       if state_is_worse_or_equal(state, other):
-        print(f'pruned!')
+        # print(f'pruned!')
         is_pruned = True
         break
     if is_pruned:
