@@ -9,6 +9,8 @@ class Node:
   rate: int
   nbors: list[object] = None
 
+  def __hash__(self): return hash(self.name)
+
 """
 order of opening doesn't matter
 you can open at most 15 valves
@@ -19,7 +21,7 @@ hmm nah, it's not necessarily true that you need to open 15 valves for max relea
 
 @dataclass
 class SearchState:
-  opened: list[Node]
+  opened: set[Node]
   path: list[Node]
   actions: list[str]
   pressure_released:int = 0
@@ -37,7 +39,7 @@ class SearchState:
     return [node.name for node in self.path]
 
   def clone(self):
-    return SearchState(opened=list(self.opened), path=list(self.path), actions=list(self.actions), pressure_released=self.pressure_released)
+    return SearchState(opened=set(self.opened), path=list(self.path), actions=list(self.actions), pressure_released=self.pressure_released)
 
   def release_pressure(self, minutes=1):
     self.pressure_released += self.get_total_rate() * minutes
@@ -54,12 +56,12 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   # Can't really say which is worse if they're at different nodes
   if a.curr_node() != b.curr_node(): return False
 
-  return set(a.opened_names()).issubset(set(b.opened_names())) and a.get_time() >= b.get_time() and a.pressure_released <= b.pressure_released
+  return a.opened.issubset(b.opened) and a.get_time() >= b.get_time() and a.pressure_released <= b.pressure_released
 
 def find_max_release(name2node:dict[str, Node]):
   print(' -----------')
   init_node = name2node['AA']
-  init_state = SearchState(opened=[], path=[init_node], actions=[])
+  init_state = SearchState(opened=set(), path=[init_node], actions=[])
   assert init_state.get_time() == 0
   states_to_explore:list[SearchState] = [init_state]
 
@@ -116,7 +118,7 @@ def find_max_release(name2node:dict[str, Node]):
       opened_state = state.clone()
       # Important to release before we open the current valve. We do not get to count the current node as open for this minute.
       opened_state.release_pressure()
-      opened_state.opened.append(state.curr_node())
+      opened_state.opened.add(state.curr_node())
       opened_state.actions.append(f'open {state.curr_node().name}')
       states_to_explore.append(opened_state)
 
