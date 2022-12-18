@@ -94,10 +94,10 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
       for _, paststates in pos2states.items():
         numpasts += len(paststates)
       avg = numpasts/len(pos2states)
-      print(f'  average past states per node: {avg}')
+      print(f'  average past states per node: {avg} for {len(pos2states)} nodes')
 
       if timing_csvf:
-        timing_csvf.write(f'{elapsed},{iters},{avg}')
+        timing_csvf.write(f'{elapsed},{iters},{avg}\n')
 
     # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
     # Otherwise, explore, and add it to the node's list.
@@ -166,17 +166,17 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
 
         if my_action[0] == OPEN:
           new_state.opened.add(my_node)
-          new_state.actions.append(f'i open {my_node.name}')
+          # new_state.actions.append(f'i open {my_node.name}')
         else:
           new_state.path.append(my_action[1])
-          new_state.actions.append(f'i goto {my_action[1].name}')
+          # new_state.actions.append(f'i goto {my_action[1].name}')
 
         if el_action[0] == OPEN:
           new_state.opened.add(el_node)
-          new_state.actions.append(f'el open {el_node.name}')
+          # new_state.actions.append(f'el open {el_node.name}')
         else:
           new_state.el_path.append(el_action[1])
-          new_state.actions.append(f'el goto {el_action[1].name}')
+          # new_state.actions.append(f'el goto {el_action[1].name}')
 
         states_to_explore.append(new_state)
         
