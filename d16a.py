@@ -42,6 +42,20 @@ class SearchState:
   def release_pressure(self, minutes=1):
     self.pressure_released += self.get_total_rate() * minutes
 
+  def __str__(self):
+    return ';'.join(self.actions)
+
+  def opened_names(self):
+    return [node.name for node in self.opened]
+
+def state_is_worse_or_equal(a:SearchState, b:SearchState):
+  """ Only returns true if a is definitely NOT better than b """
+
+  # Can't really say which is worse if they're at different nodes
+  if a.curr_node() != b.curr_node(): return False
+
+  return set(a.opened_names()).issubset(set(b.opened_names())) and a.get_time() >= b.get_time() and a.pressure_released <= b.pressure_released
+
 def find_max_release(name2node:dict[str, Node]):
   print(' -----------')
   init_node = name2node['AA']
@@ -51,46 +65,34 @@ def find_max_release(name2node:dict[str, Node]):
 
   nonzero_valve_names = [node.name for node in name2node.values() if node.rate > 0]
 
-  indep_state_to_best_time = {}
-  indep_state_to_best_pressure = {}
+  node2states:dict[str, list[SearchState]] = {}
 
   best_score = None
   iters = 0
   while states_to_explore:
     iters += 1
     state:SearchState = states_to_explore.pop(0)
-    opened_valve_names = [node.name for node in state.opened]
-    opened_valve_names.sort()
-    indep_key = (state.curr_node().name, tuple(opened_valve_names))
 
-    print(f'doing {indep_key}, time = {state.get_time()}, pres = {state.pressure_released}')
+    print(f'iter {iters}, state={";".join(state.actions)}, t={state.get_time()}, p={state.pressure_released}')
 
-    # PRUNE: If we have been at this node before with the same opened valves, and we did it in less time before AND more pressure right now, we do not need to explore further!
-    # Be very conservative about pruning..
-    prev_time = indep_state_to_best_time.get(indep_key, None)
-    prev_pressure = indep_state_to_best_pressure.get(indep_key, None)
-    if prev_time is None:
-      assert prev_pressure is None
-      print(f'  adding {indep_key}, time = {state.get_time()}, pres = {state.pressure_released}')
-      indep_state_to_best_time[indep_key] = state.get_time()
-      indep_state_to_best_pressure[indep_key] = state.pressure_released
-    else:
-      print(f'  comparing to t={prev_time} p={prev_time} ')
-      if (state.get_time() >= prev_time and state.pressure_released <= prev_pressure):
-        # The current state is worse or equiv. Do not bother checking its score or exploring further
-        print(f'pruned, strictly worse than prior. t={state.get_time()} p={state.pressure_released}.\n  actions = {state.actions}')
+    # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
+    # Otherwise, explore, and add it to the node's list.
+
+    node = state.curr_node()
+    if node.name not in node2states:
+      node2states[node.name] = []
+    states = node2states[node.name]
+    for other in states:
+      if state_is_worse_or_equal(state, other):
+        print(f'pruned {state}')
         continue
-      elif (state.get_time() < prev_time and state.pressure_released > prev_pressure):
-        # Current state is strictly better. Make this the new watermark.
-        print(f'  adding {indep_key}, time = {state.get_time()}, pres = {state.pressure_released}')
-        indep_state_to_best_time[indep_key] = state.get_time()
-        indep_state_to_best_pressure[indep_key] = state.pressure_released
+    states.append(state)
 
     if state.get_time() >= 30:
       # Can't explore further.
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
-        print(f'  improved to {best_score}. end state: {indep_key}')
+        print(f'  improved to {best_score}. end state: {state}')
       continue
 
     # PRUNE: If no more non-zero valves left to open, then just release pressure for remaining time
@@ -99,7 +101,7 @@ def find_max_release(name2node:dict[str, Node]):
       state.release_pressure(remain_minutes)
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
-        print(f'  ffwd improved to {best_score}. end state: {indep_key}. idled for {remain_minutes} minutes\n  actions: {state.actions}')
+        print(f'  ffwd improved to {best_score}. end state: {state}. idled for {remain_minutes} minutes\n  actions: {state.actions}')
       continue
 
     # Keep exploring from this state
