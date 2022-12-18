@@ -55,7 +55,7 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   """ Only returns true if a is definitely NOT better than b """
 
   # Can't really say which is worse if they're at different nodes
-  if a.curr_node() != b.curr_node(): return False
+  # assert a.curr_node() == b.curr_node()
 
   return a.opened.issubset(b.opened) and a.get_time() >= b.get_time() and a.pressure_released <= b.pressure_released
 
@@ -97,8 +97,9 @@ def find_max_release(name2node:dict[str, Node]):
     is_pruned = False
     # may be pruned - have to do exhaustive serach
     for other in states.states:
+      # print(f'comparing to {other}')
       if state_is_worse_or_equal(state, other):
-        # print(f'pruned because it is worse or equal to: {other}')
+        # print(f'pruned!')
         is_pruned = True
         break
     if is_pruned:
