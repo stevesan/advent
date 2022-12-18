@@ -123,14 +123,12 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
       continue
 
     # Rebuild states, but remove ones which are definitely worse than the new one.
-    if True:
-      new_states = [state]
-      for other in states.states:
-        if not state_is_worse_or_equal(other, state):
-          new_states.append(other)
-      states.states = new_states
-    else:
-      states.states.append(state)
+    # This, along with time-caching, puts me at 17minutes vs 2 hours for part1! w00t.
+    new_states = [state]
+    for other in states.states:
+      if not state_is_worse_or_equal(other, state):
+        new_states.append(other)
+    states.states = new_states
 
     if state.cached_time >= 30:
       # Can't explore further.
