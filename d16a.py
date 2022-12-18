@@ -73,7 +73,8 @@ def find_max_release(name2node:dict[str, Node]):
     iters += 1
     state:SearchState = states_to_explore.pop(0)
 
-    # print(f'iter {iters}, state={state}, t={state.get_time()}, p={state.pressure_released}')
+    if iters % 1000 == 0:
+      print(f'iter {iters}, state={state}, t={state.get_time()}, p={state.pressure_released}')
 
     # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
     # Otherwise, explore, and add it to the node's list.
