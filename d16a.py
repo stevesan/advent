@@ -26,6 +26,10 @@ class SearchState:
   path: list[Node]
   actions: list[str]
   pressure_released:int = 0
+  cached_time:int = None
+
+  def cache_time(self):
+    self.cached_time = self.get_time()
 
   def curr_node(self):
     return self.path[-1]
@@ -55,9 +59,10 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   """ Only returns true if a is definitely NOT better than b """
 
   # Can't really say which is worse if they're at different nodes
+  # This is actually quite slow, surprisingly.
   # assert a.curr_node() == b.curr_node()
 
-  return a.opened.issubset(b.opened) and a.get_time() >= b.get_time() and a.pressure_released <= b.pressure_released
+  return a.opened.issubset(b.opened) and a.cached_time >= b.cached_time and a.pressure_released <= b.pressure_released
 
 @dataclass
 class NodeStates:
@@ -70,6 +75,7 @@ def find_max_release(name2node:dict[str, Node]):
   print(' -----------')
   init_node = name2node['AA']
   init_state = SearchState(opened=set(), path=[init_node], actions=[])
+  init_state.cache_time()
   assert init_state.get_time() == 0
   states_to_explore:list[SearchState] = [init_state]
 
@@ -87,6 +93,11 @@ def find_max_release(name2node:dict[str, Node]):
     if iters % 10000 == 0:
       print(f'dt={time.time()-t0} iter {iters}, stack#={len(states_to_explore)}, state={state}')
 
+      numpasts = 0
+      for node, paststates in node2states.items():
+        numpasts += len(paststates.states)
+      print(f'  average past states per node: {numpasts/len(node2states)}')
+
     # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
     # Otherwise, explore, and add it to the node's list.
 
@@ -95,7 +106,7 @@ def find_max_release(name2node:dict[str, Node]):
       node2states[node.name] = NodeStates(states=[])
     states = node2states[node.name]
     is_pruned = False
-    # may be pruned - have to do exhaustive serach
+    # may be pruned - have to do exhaustive search
     for other in states.states:
       # print(f'comparing to {other}')
       if state_is_worse_or_equal(state, other):
@@ -104,9 +115,18 @@ def find_max_release(name2node:dict[str, Node]):
         break
     if is_pruned:
       continue
-    states.add(state)
 
-    if state.get_time() >= 30:
+    # Rebuild states, but remove ones which are definitely worse than the new one.
+    if True:
+      new_states = [state]
+      for other in states.states:
+        if not state_is_worse_or_equal(other, state):
+          new_states.append(other)
+      states.states = new_states
+    else:
+      states.states.append(state)
+
+    if state.cached_time >= 30:
       # Can't explore further.
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
@@ -115,7 +135,7 @@ def find_max_release(name2node:dict[str, Node]):
 
     # PRUNE: If no more non-zero valves left to open, then just release pressure for remaining time
     if len(state.opened) == len(nonzero_valve_names):
-      remain_minutes = 30 - state.get_time()
+      remain_minutes = 30 - state.cached_time
       extrapolated_pressure = state.pressure_released + state.get_total_rate() * remain_minutes
       if best_score is None or extrapolated_pressure > best_score:
         best_score = extrapolated_pressure
@@ -131,6 +151,7 @@ def find_max_release(name2node:dict[str, Node]):
       opened_state.release_pressure()
       opened_state.opened.add(state.curr_node())
       opened_state.actions.append(f'open {state.curr_node().name}')
+      opened_state.cache_time()
       states_to_explore.append(opened_state)
 
     # We could move to any nbor
@@ -139,6 +160,7 @@ def find_max_release(name2node:dict[str, Node]):
       moved_state.release_pressure()
       moved_state.path.append(nbor)
       moved_state.actions.append(f'goto {nbor.name}')
+      moved_state.cache_time()
       states_to_explore.append(moved_state)
 
   print(f'done in {iters}. best = {best_score}')
