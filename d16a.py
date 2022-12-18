@@ -46,7 +46,7 @@ class SearchState:
     self.pressure_released += self.get_total_rate() * minutes
 
   def __str__(self):
-    return ';'.join(self.actions) + ' (opened: ' + ",".join(self.opened_names()) + ", t=" + str(self.get_time()) + " p=" + str(self.pressure_released)
+    return ';'.join(self.actions) + ' opened=[' + ",".join(self.opened_names()) + "] t=" + str(self.get_time()) + " p=" + str(self.pressure_released)
 
   def opened_names(self):
     return [node.name for node in self.opened]
@@ -99,7 +99,7 @@ def find_max_release(name2node:dict[str, Node]):
     for other in states.states:
       # print(f'comparing to {other}')
       if state_is_worse_or_equal(state, other):
-        # print(f'pruned!')
+        print(f'pruned!')
         is_pruned = True
         break
     if is_pruned:
@@ -177,5 +177,6 @@ def main(inputf):
 assert main('d16tiny.txt') == 29
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 565
 assert main('d16test.txt') == 1651
+assert main('d16-chain.txt') == 520
 if len(sys.argv) > 1:
   main(sys.argv[1])
