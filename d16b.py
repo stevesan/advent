@@ -41,9 +41,6 @@ class SearchState:
       time=self.time,
       total_rate=self.total_rate)
 
-  def release_pressure(self, minutes=1):
-    self.pressure_released += self.total_rate * minutes
-
   def __str__(self):
     return ';'.join(self.actions) + ' opened=[' + ",".join(self.opened_names()) + "] t=" + str(self.time) + " p=" + str(self.pressure_released)
 
@@ -160,7 +157,8 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
       for el_action in el_actions:
         # Ok, for this action pair, create the resulting state and push it
         new_state = state.clone()
-        new_state.release_pressure()
+        # Important to do this before a update total_rate after applying open actions, since while opening, we can't use that rate yet!
+        new_state.pressure_released += new_state.total_rate
         new_state.time += 1
 
         if my_action[0] == OPEN:
