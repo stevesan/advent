@@ -29,9 +29,7 @@ class SearchState:
   actions: list[str]
   pressure_released:int = 0
   time:int = 0
-
-  def get_total_rate(self):
-    return sum([node.rate for node in self.opened])
+  total_rate:int = 0
 
   def clone(self):
     return SearchState(
@@ -40,10 +38,11 @@ class SearchState:
       el_path=list(self.el_path),
       actions=list(self.actions),
       pressure_released=self.pressure_released,
-      time=self.time)
+      time=self.time,
+      total_rate=self.total_rate)
 
   def release_pressure(self, minutes=1):
-    self.pressure_released += self.get_total_rate() * minutes
+    self.pressure_released += self.total_rate * minutes
 
   def __str__(self):
     return ';'.join(self.actions) + ' opened=[' + ",".join(self.opened_names()) + "] t=" + str(self.time) + " p=" + str(self.pressure_released)
@@ -133,7 +132,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
     # PRUNE: If no more non-zero valves left to open, then just release pressure for remaining time
     if len(state.opened) == len(nonzero_valve_names):
       remain_minutes = 26 - state.time
-      extrapolated_pressure = state.pressure_released + state.get_total_rate() * remain_minutes
+      extrapolated_pressure = state.pressure_released + state.total_rate * remain_minutes
       if best_score is None or extrapolated_pressure > best_score:
         best_score = extrapolated_pressure
         print(f'  ffwd improved to {best_score} \n  end state: {state}')
@@ -166,6 +165,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
 
         if my_action[0] == OPEN:
           new_state.opened.add(my_node)
+          new_state.total_rate += my_node.rate
           # new_state.actions.append(f'i open {my_node.name}')
         else:
           new_state.path.append(my_action[1])
@@ -173,6 +173,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
 
         if el_action[0] == OPEN:
           new_state.opened.add(el_node)
+          new_state.total_rate += el_node.rate
           # new_state.actions.append(f'el open {el_node.name}')
         else:
           new_state.el_path.append(el_action[1])
