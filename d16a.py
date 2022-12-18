@@ -43,7 +43,7 @@ class SearchState:
     self.pressure_released += self.get_total_rate() * minutes
 
   def __str__(self):
-    return ';'.join(self.actions)
+    return ';'.join(self.actions) + ' (opened: ' + ",".join(self.opened_names()) + ", t=" + str(self.get_time()) + " p=" + str(self.pressure_released)
 
   def opened_names(self):
     return [node.name for node in self.opened]
@@ -73,7 +73,7 @@ def find_max_release(name2node:dict[str, Node]):
     iters += 1
     state:SearchState = states_to_explore.pop(0)
 
-    print(f'iter {iters}, state={";".join(state.actions)}, t={state.get_time()}, p={state.pressure_released}')
+    # print(f'iter {iters}, state={state}, t={state.get_time()}, p={state.pressure_released}')
 
     # For every other state we've tried at the current node, compare them. If this state is definitely worse than any, no need to explore.
     # Otherwise, explore, and add it to the node's list.
@@ -82,9 +82,13 @@ def find_max_release(name2node:dict[str, Node]):
     if node.name not in node2states:
       node2states[node.name] = []
     states = node2states[node.name]
-    is_pruned = any(state_is_worse_or_equal(state, other) for other in states)
+    is_pruned = False
+    for other in states:
+      if state_is_worse_or_equal(state, other):
+        # print(f'pruned because it is worse or equal to: {other}')
+        is_pruned = True
+        break
     if is_pruned:
-      print(f'pruned {state}')
       continue
     states.append(state)
 
@@ -92,16 +96,16 @@ def find_max_release(name2node:dict[str, Node]):
       # Can't explore further.
       if best_score is None or state.pressure_released > best_score:
         best_score = state.pressure_released
-        print(f'  improved to {best_score}. end state: {state}')
+        print(f'  improved to {best_score}\n  end state: {state}')
       continue
 
     # PRUNE: If no more non-zero valves left to open, then just release pressure for remaining time
     if len(state.opened) == len(nonzero_valve_names):
       remain_minutes = 30 - state.get_time()
-      state.release_pressure(remain_minutes)
-      if best_score is None or state.pressure_released > best_score:
-        best_score = state.pressure_released
-        print(f'  ffwd improved to {best_score}. end state: {state}. idled for {remain_minutes} minutes\n  actions: {state.actions}')
+      extrapolated_pressure = state.pressure_released + state.get_total_rate() * remain_minutes
+      if best_score is None or extrapolated_pressure > best_score:
+        best_score = extrapolated_pressure
+        print(f'  ffwd improved to {best_score} \n  end state: {state}')
       continue
 
     # Keep exploring from this state
