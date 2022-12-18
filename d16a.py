@@ -58,6 +58,23 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
 
   return a.opened.issubset(b.opened) and a.get_time() >= b.get_time() and a.pressure_released <= b.pressure_released
 
+@dataclass
+class NodeStates:
+  states: list[SearchState]
+  # Values to short-circuit the non-prune case
+  most_opened: int
+  min_time: int
+  max_pressure: int
+
+  def add(self, state:SearchState):
+    self.states.append(state)
+    self.most_opened = max(self.most_opened, len(state.opened))
+    if self.min_time is None:
+      self.min_time = state.get_time()
+    else:
+      self.min_time = min(self.min_time, state.get_time())
+    self.max_pressure = max(self.max_pressure, state.pressure_released)
+
 def find_max_release(name2node:dict[str, Node]):
   print(' -----------')
   init_node = name2node['AA']
@@ -67,7 +84,7 @@ def find_max_release(name2node:dict[str, Node]):
 
   nonzero_valve_names = [node.name for node in name2node.values() if node.rate > 0]
 
-  node2states:dict[str, list[SearchState]] = {}
+  node2states:dict[str, NodeStates] = {}
 
   best_score = None
   iters = 0
@@ -83,17 +100,24 @@ def find_max_release(name2node:dict[str, Node]):
 
     node = state.curr_node()
     if node.name not in node2states:
-      node2states[node.name] = []
+      node2states[node.name] = NodeStates(states=[], most_opened=0, min_time=None, max_pressure=0)
     states = node2states[node.name]
     is_pruned = False
-    for other in states:
-      if state_is_worse_or_equal(state, other):
-        # print(f'pruned because it is worse or equal to: {other}')
-        is_pruned = True
-        break
+    if len(states.states) == 0 or state.pressure_released > states.max_pressure \
+      or state.get_time() < states.min_time \
+      or len(state.opened) > states.most_opened:
+      # definitely not pruned
+      is_pruned = False
+    else:
+      # may be pruned - have to do exhaustive serach
+      for other in states.states:
+        if state_is_worse_or_equal(state, other):
+          # print(f'pruned because it is worse or equal to: {other}')
+          is_pruned = True
+          break
     if is_pruned:
       continue
-    states.append(state)
+    states.add(state)
 
     if state.get_time() >= 30:
       # Can't explore further.
