@@ -41,7 +41,9 @@ class SearchState:
       actions=list(self.actions),
       pressure_released=self.pressure_released,
       time=self.time,
-      total_rate=self.total_rate)
+      total_rate=self.total_rate,
+      # opened_bits=self.opened_bits
+      )
 
   def __str__(self):
     return ';'.join(self.actions) + ' opened=[' + ",".join(self.opened_names()) + "] t=" + str(self.time) + " p=" + str(self.pressure_released)
@@ -56,7 +58,8 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   # This is actually quite slow, surprisingly.
   # assert a.curr_node() == b.curr_node()
 
-  return (a.opened_bits | b.opened_bits) == b.opened_bits and a.time >= b.time and a.pressure_released <= b.pressure_released
+  # return (a.opened_bits | b.opened_bits) == b.opened_bits and a.time >= b.time and a.pressure_released <= b.pressure_released
+  return a.time >= b.time and a.pressure_released <= b.pressure_released
 
 OPEN = 0
 MOVE = 1
@@ -232,7 +235,7 @@ assert main('d16-example-where-opening-BB-first-is-worse.txt') == 24 + 23*20
 assert main('d16test.txt') == 1707
 
 import cProfile
-cProfile.run('assert main("d16test.txt") == 1707')
+# cProfile.run('assert main("d16test.txt") == 1707')
 
 if len(sys.argv) > 1:
   main(sys.argv[1])
