@@ -202,6 +202,7 @@ def main(inputf):
     return find_max_release(name2node, f)
 
 assert main('d16tiny.txt') == 29
+assert main('d16-leftright.txt') == 28 + 25
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 565
 assert main('d16test.txt') == 1651
 assert main('d16-chain.txt') == 520
