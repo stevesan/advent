@@ -58,8 +58,7 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   # This is actually quite slow, surprisingly.
   # assert a.curr_node() == b.curr_node()
 
-  # return (a.opened_bits | b.opened_bits) == b.opened_bits and a.time >= b.time and a.pressure_released <= b.pressure_released
-  return a.time >= b.time and a.pressure_released <= b.pressure_released
+  return (a.opened_bits | b.opened_bits) == b.opened_bits and a.time >= b.time and a.pressure_released <= b.pressure_released
 
 OPEN = 0
 MOVE = 1
@@ -83,6 +82,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
   best_score = None
   iters = 0
   t0 = time.time()
+  total_compares = 0
   while states_to_explore:
     iters += 1
     state:SearchState = states_to_explore.pop(0)
@@ -95,7 +95,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
       for _, paststates in pos2states.items():
         numpasts += len(paststates)
       avg = numpasts/len(pos2states)
-      print(f'  average past states per node: {avg} for {len(pos2states)} nodes')
+      print(f'  average past states per node: {avg:.2f} for {len(pos2states)} nodes, avg compares per iter: {total_compares/iters:.2f}')
 
       if timing_csvf:
         timing_csvf.write(f'{elapsed},{iters},{avg}\n')
@@ -110,6 +110,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
     # may be pruned - have to do exhaustive search
     for other in pos2states[pos]:
       # print(f'comparing to {other}')
+      total_compares += 1
       if state_is_worse_or_equal(state, other):
         # print(f'pruned!')
         is_pruned = True
@@ -120,6 +121,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
     # Rebuild states, but remove ones which are definitely worse than the new one.
     new_states = [state]
     for other in pos2states[pos]:
+      total_compares += 1
       if not state_is_worse_or_equal(other, state):
         new_states.append(other)
     pos2states[pos] = new_states
@@ -229,10 +231,12 @@ def main(inputf):
     return find_max_release(name2node, f)
 
 
+assert main('d16-leftright.txt') == 48
 assert main('d16tiny.txt') == 25
 assert main('d16-chain.txt') == 22 * 20
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 24 + 23*20
 assert main('d16test.txt') == 1707
+assert main('d16real.txt') == 2790
 
 import cProfile
 # cProfile.run('assert main("d16test.txt") == 1707')
