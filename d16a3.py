@@ -57,7 +57,7 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   # This is actually quite slow, surprisingly.
   # assert a.curr_node() == b.curr_node()
 
-  return (a.last_open is None or a.last_open == b.last_open) and a.time >= b.time and a.pressure_released <= b.pressure_released
+  return a.time >= b.time and a.pressure_released <= b.pressure_released and a.total_rate <= b.total_rate
 
 OPEN = 0
 MOVE = 1

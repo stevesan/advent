@@ -31,7 +31,6 @@ class SearchState:
   pressure_released:int = 0
   time:int = 0
   total_rate:int = 0
-  opened_bits:int = 0
 
   def clone(self):
     return SearchState(
@@ -42,7 +41,6 @@ class SearchState:
       pressure_released=self.pressure_released,
       time=self.time,
       total_rate=self.total_rate,
-      # opened_bits=self.opened_bits
       )
 
   def __str__(self):
@@ -58,7 +56,7 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   # This is actually quite slow, surprisingly.
   # assert a.curr_node() == b.curr_node()
 
-  return (a.opened_bits | b.opened_bits) == b.opened_bits and a.time >= b.time and a.pressure_released <= b.pressure_released
+  return a.time >= b.time and a.pressure_released <= b.pressure_released and a.total_rate <= b.total_rate
 
 OPEN = 0
 MOVE = 1
@@ -170,7 +168,6 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
 
         if my_action[0] == OPEN:
           new_state.opened.add(my_node)
-          new_state.opened_bits |= 1 << my_node.id
           new_state.total_rate += my_node.rate
           new_state.actions.append(f'i open {my_node.name}')
         else:
@@ -179,7 +176,6 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
 
         if el_action[0] == OPEN:
           new_state.opened.add(el_node)
-          new_state.opened_bits |= 1 << el_node.id
           new_state.total_rate += el_node.rate
           new_state.actions.append(f'el open {el_node.name}')
         else:
