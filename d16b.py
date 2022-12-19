@@ -67,6 +67,10 @@ def ordpair(a:str, b:str):
   else:
     return (b, a)
 
+assert ordpair('a', 'b') == ('a', 'b')
+assert ordpair('b', 'a') == ('a', 'b')
+assert ordpair('a', 'a') == ('a', 'a')
+
 def find_max_release(name2node:dict[str, Node], timing_csvf):
   init_node = name2node['AA']
   init_state = SearchState(opened=set(), my_node=init_node, el_node=init_node, actions=[], time=0)
