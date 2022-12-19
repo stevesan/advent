@@ -73,7 +73,6 @@ class NodeStates:
     self.states.insert(0, state)
 
 def find_max_release(name2node:dict[str, Node], timing_csvf):
-  print(' -----------')
   init_node = name2node['AA']
   init_state = SearchState(opened=set(), path=[init_node], actions=[])
   init_state.cache_time()
@@ -171,6 +170,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
   return best_score
 
 def main(inputf):
+  print(f'---- doing {inputf}')
   name2node:dict[str, Node] = {}
   with open(inputf) as f:
     for line in f:
