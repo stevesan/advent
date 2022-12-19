@@ -205,5 +205,6 @@ assert main('d16tiny.txt') == 29
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 565
 assert main('d16test.txt') == 1651
 assert main('d16-chain.txt') == 520
+assert main('d16real.txt') == 1707
 if len(sys.argv) > 1:
   main(sys.argv[1])
