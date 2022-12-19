@@ -26,11 +26,11 @@ hmm nah, it's not necessarily true that you need to open 15 valves for max relea
 class SearchState:
   opened: set[Node]
   my_node: Node
+  last_open: Node
   actions: list[str]
   pressure_released:int = 0
   time:int = 0
   total_rate:int = 0
-  opened_bits:int = 0
 
   def clone(self):
     return SearchState(
@@ -40,7 +40,7 @@ class SearchState:
       pressure_released=self.pressure_released,
       time=self.time,
       total_rate=self.total_rate,
-      # opened_bits=self.opened_bits
+      last_open=self.last_open,
       )
 
   def __str__(self):
@@ -57,7 +57,7 @@ def state_is_worse_or_equal(a:SearchState, b:SearchState):
   # This is actually quite slow, surprisingly.
   # assert a.curr_node() == b.curr_node()
 
-  return (a.opened_bits | b.opened_bits) == b.opened_bits and a.time >= b.time and a.pressure_released <= b.pressure_released
+  return (a.last_open is None or a.last_open == b.last_open) and a.time >= b.time and a.pressure_released <= b.pressure_released
 
 OPEN = 0
 MOVE = 1
@@ -70,7 +70,7 @@ def ordpair(a:str, b:str):
 
 def find_max_release(name2node:dict[str, Node], timing_csvf):
   init_node = name2node['AA']
-  init_state = SearchState(opened=set(), my_node=init_node, actions=[], time=0)
+  init_state = SearchState(opened=set(), my_node=init_node, actions=[], time=0, last_open=None)
   states_to_explore:list[SearchState] = [init_state]
 
   nonzero_valve_names = [node.name for node in name2node.values() if node.rate > 0]
@@ -160,11 +160,12 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
       new_state.actions.append(f'score={new_state.pressure_released}')
 
       if my_action[0] == OPEN:
+        new_state.last_open = my_node
         new_state.opened.add(my_node)
-        new_state.opened_bits |= 1 << my_node.id
         new_state.total_rate += my_node.rate
         new_state.actions.append(f'open {my_node.name}/{my_node.rate}')
       else:
+        new_state.last_open = None
         new_state.my_node = my_action[1]
         new_state.actions.append(f'goto {my_action[1].name}')
 
