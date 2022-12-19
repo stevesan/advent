@@ -42,7 +42,7 @@ class SearchState:
       pressure_released=self.pressure_released,
       time=self.time,
       total_rate=self.total_rate,
-      # opened_bits=self.opened_bits
+      opened_bits=self.opened_bits
       )
 
   def __str__(self):
