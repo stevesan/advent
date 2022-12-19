@@ -170,19 +170,19 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
           new_state.opened.add(my_node)
           new_state.opened_bits |= 1 << my_node.id
           new_state.total_rate += my_node.rate
-          # new_state.actions.append(f'i open {my_node.name}')
+          new_state.actions.append(f'i open {my_node.name}')
         else:
           new_state.my_node = my_action[1]
-          # new_state.actions.append(f'i goto {my_action[1].name}')
+          new_state.actions.append(f'i goto {my_action[1].name}')
 
         if el_action[0] == OPEN:
           new_state.opened.add(el_node)
           new_state.opened_bits |= 1 << el_node.id
           new_state.total_rate += el_node.rate
-          # new_state.actions.append(f'el open {el_node.name}')
+          new_state.actions.append(f'el open {el_node.name}')
         else:
           new_state.el_node = el_action[1]
-          # new_state.actions.append(f'el goto {el_action[1].name}')
+          new_state.actions.append(f'el goto {el_action[1].name}')
 
         states_to_explore.append(new_state)
         
