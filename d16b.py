@@ -42,7 +42,7 @@ class SearchState:
       pressure_released=self.pressure_released,
       time=self.time,
       total_rate=self.total_rate,
-      opened_bits=self.opened_bits
+      # opened_bits=self.opened_bits
       )
 
   def __str__(self):
@@ -232,6 +232,7 @@ def main(inputf):
 
 
 assert main('d16-leftright.txt') == 48
+assert main('d16-leftright-2.txt') == 4642
 assert main('d16tiny.txt') == 25
 assert main('d16-chain.txt') == 22 * 20
 assert main('d16-example-where-opening-BB-first-is-worse.txt') == 24 + 23*20
