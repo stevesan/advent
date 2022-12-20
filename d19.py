@@ -59,7 +59,7 @@ class State:
       max_time = max(max_time, time)
     return max_time
 
-  def tick(self, bot_to_build:Res, bot_res2need:list[int]):
+  def build_bot(self, bot_to_build:Res, bot_res2need:list[int]):
     assert bot_to_build is not None
 
     # Time advances
@@ -146,7 +146,7 @@ def best_num_geodes(bp:Blueprint):
       # idle for time to afford, then build it
       new_state = state.clone()
       new_state.idle_for(time_to_afford)
-      new_state.tick(bottype, costs)
+      new_state.build_bot(bottype, costs)
       push(new_state)
 
     # If we could immediately build all bots, there's no point in idling.
