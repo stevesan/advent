@@ -2,8 +2,13 @@ from enum import Enum
 from dataclasses import dataclass
 import time
 from math import ceil
+import sys
 
 LOGPRE = []
+
+MAX_MINUTES = 24
+
+VERBOSE = False
 
 class Res(Enum):
   ORE = 0
@@ -25,11 +30,13 @@ class State:
   inv:list[int]
   bots:list[int]
   minutes:int
+  trace:str
 
   def clone(self):
     return State(inv=list(self.inv), \
       bots=list(self.bots), \
-      minutes=self.minutes)
+      minutes=self.minutes, \
+      trace=self.trace)
 
   def can_afford(self, costs:list[int]):
     assert len(costs) == 3
@@ -48,34 +55,37 @@ class State:
     return max_time
 
   def tick(self, bot_to_build:Res, bot_res2need:list[int]):
-    # We can only build bots we can afford at start of frame
-    if bot_to_build is not None:
-      assert self.can_afford(bot_res2need)
+    assert bot_to_build is not None
 
     # Time advances
     self.minutes += 1
+
+    # Spend resources to start building
+    for i in range(3):
+      self.inv[i] -= bot_res2need[i]
+      assert self.inv[i] >= 0
 
     # Current bots collect
     for i in range(len(self.bots)):
       self.inv[i] += self.bots[i]
 
-    if bot_to_build is not None:
-      # Spend resources to build
-      for i in range(3):
-        self.inv[i] -= bot_res2need[i]
-      # Build it
-      self.bots[bot_to_build.value] += 1
+    # Done building bot
+    # Do NOT do this before the above collection step - the newly built bot doesn't get to collect this minute!
+    self.bots[bot_to_build.value] += 1
+
+    self.trace += str(bot_to_build)[4:5]
 
   def idle_for(self, minutes:int):
     self.minutes += minutes
     for i in range(len(self.bots)):
       self.inv[i] += self.bots[i]
 
+    self.trace += str(minutes)
+
 def best_num_geodes(bp:Blueprint):
   t0 = time.time()
 
-  MAX_MINUTES = 24
-  init_state = State(inv=[0, 0, 0, 0], bots=[1, 0, 0, 0], minutes=0)
+  init_state = State(inv=[0, 0, 0, 0], bots=[1, 0, 0, 0], minutes=0, trace='O')
   stack:list[State] = [init_state]
   best_score = 0
   iters = 0
@@ -87,6 +97,8 @@ def best_num_geodes(bp:Blueprint):
 
     iters += 1
     state = stack.pop(0)
+
+    if VERBOSE: print(state)
 
     # Assess the idle-value of this state. Ie. just idling here, how much geode would we get?
     idle_score = state.inv[Res.GEODE.value] + (MAX_MINUTES-state.minutes) * state.bots[Res.GEODE.value]
@@ -168,6 +180,11 @@ def main(filep):
   LOGPRE.pop(-1)
   return total_qual
 
-assert main('d19tiny.txt') == 253
-assert main('d19tiny2.txt') == 253
-assert main('d19sample.txt') == 33
+if len(sys.argv) > 1:
+  VERBOSE = True
+  MAX_MINUTES = int(sys.argv[1])
+  assert main(sys.argv[2]) == int(sys.argv[3])
+else:
+  assert main('d19tiny.txt') == 253
+  assert main('d19tiny2.txt') == 253
+  assert main('d19sample.txt') == 33
