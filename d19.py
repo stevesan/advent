@@ -3,6 +3,8 @@ from dataclasses import dataclass
 import time
 from math import ceil
 
+LOGPRE = []
+
 class Res(Enum):
   ORE = 0
   CLAY = 1
@@ -72,7 +74,7 @@ class State:
 def best_num_geodes(bp:Blueprint):
   t0 = time.time()
 
-  MAX_MINUTES = 20
+  MAX_MINUTES = 24
   init_state = State(inv=[0, 0, 0, 0], bots=[1, 0, 0, 0], minutes=0)
   stack:list[State] = [init_state]
   best_score = 0
@@ -81,7 +83,7 @@ def best_num_geodes(bp:Blueprint):
     t1 = time.time()
     if t1 - t0 > 2:
       t0 = t1
-      print(f'iter {iters}, #stack={len(stack)}')
+      print(f'{LOGPRE} iter {iters}, #stack={len(stack)}')
 
     iters += 1
     state = stack.pop(0)
@@ -90,7 +92,7 @@ def best_num_geodes(bp:Blueprint):
     idle_score = state.inv[Res.GEODE.value] + (MAX_MINUTES-state.minutes) * state.bots[Res.GEODE.value]
     if idle_score > best_score:
       best_score = idle_score
-      print(f'improved to {best_score}')
+      print(f'{LOGPRE} improved to {best_score}')
 
     if state.minutes == MAX_MINUTES:
       continue
@@ -128,6 +130,7 @@ def best_num_geodes(bp:Blueprint):
 
 def main(filep):
   blueprints: list[Blueprint] = []
+  LOGPRE.append(filep)
   with open(filep, 'r') as f:
     for line in f:
       header, costs = line.split(':')
@@ -162,7 +165,9 @@ def main(filep):
     total_qual += qual
     print(f'blueprint {bp.id} can get {best} geodes')
 
+  LOGPRE.pop(-1)
   return total_qual
 
-assert main('d19tiny.txt') == 276
-# assert main('d19sample.txt') == 33
+assert main('d19tiny.txt') == 253
+assert main('d19tiny2.txt') == 253
+assert main('d19sample.txt') == 33
