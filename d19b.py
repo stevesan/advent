@@ -142,6 +142,14 @@ def best_num_geodes(bp:Blueprint):
     # fast forward to..which bot should we build next?
     # Favor building geode bots first..to improve potential pruning
     for bottype in [Res.GEODE, Res.OBSIDIAN, Res.CLAY, Res.ORE]:
+
+      # Do we have enough of this bot?
+      if bottype != Res.GEODE:
+        maxuse = max(bp.bot2costs[userbot.value][bottype.value] for userbot in Res)
+        if state.bots[bottype.value] >= maxuse:
+          # We already have enough bots to produce more of its resource than we'll ever need per-minute.
+          continue
+
       costs = bp.bot2costs[bottype.value]
       time_to_afford = state.time_to_afford_bot(costs)
       if time_to_afford is None or state.minutes + time_to_afford + 1 >= MAX_MINUTES:
