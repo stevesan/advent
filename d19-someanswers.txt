@@ -1,0 +1,1480 @@
+py d19.py
+['d19tiny.txt'] improved to 22 via State(inv=[1, 0, 0, 0], bots=[1, 0, 0, 1], minutes=2, trace='O1G')
+['d19tiny.txt'] improved to 43 via State(inv=[1, 0, 0, 1], bots=[1, 0, 0, 2], minutes=3, trace='O1G0G')
+['d19tiny.txt'] improved to 63 via State(inv=[1, 0, 0, 3], bots=[1, 0, 0, 3], minutes=4, trace='O1G0G0G')
+['d19tiny.txt'] improved to 82 via State(inv=[1, 0, 0, 6], bots=[1, 0, 0, 4], minutes=5, trace='O1G0G0G0G')
+['d19tiny.txt'] improved to 100 via State(inv=[1, 0, 0, 10], bots=[1, 0, 0, 5], minutes=6, trace='O1G0G0G0G0G')
+['d19tiny.txt'] improved to 117 via State(inv=[1, 0, 0, 15], bots=[1, 0, 0, 6], minutes=7, trace='O1G0G0G0G0G0G')
+['d19tiny.txt'] improved to 133 via State(inv=[1, 0, 0, 21], bots=[1, 0, 0, 7], minutes=8, trace='O1G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 148 via State(inv=[1, 0, 0, 28], bots=[1, 0, 0, 8], minutes=9, trace='O1G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 162 via State(inv=[1, 0, 0, 36], bots=[1, 0, 0, 9], minutes=10, trace='O1G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 175 via State(inv=[1, 0, 0, 45], bots=[1, 0, 0, 10], minutes=11, trace='O1G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 187 via State(inv=[1, 0, 0, 55], bots=[1, 0, 0, 11], minutes=12, trace='O1G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 198 via State(inv=[1, 0, 0, 66], bots=[1, 0, 0, 12], minutes=13, trace='O1G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 208 via State(inv=[1, 0, 0, 78], bots=[1, 0, 0, 13], minutes=14, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 217 via State(inv=[1, 0, 0, 91], bots=[1, 0, 0, 14], minutes=15, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 225 via State(inv=[1, 0, 0, 105], bots=[1, 0, 0, 15], minutes=16, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 232 via State(inv=[1, 0, 0, 120], bots=[1, 0, 0, 16], minutes=17, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 238 via State(inv=[1, 0, 0, 136], bots=[1, 0, 0, 17], minutes=18, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 243 via State(inv=[1, 0, 0, 153], bots=[1, 0, 0, 18], minutes=19, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 247 via State(inv=[1, 0, 0, 171], bots=[1, 0, 0, 19], minutes=20, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 250 via State(inv=[1, 0, 0, 190], bots=[1, 0, 0, 20], minutes=21, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 252 via State(inv=[1, 0, 0, 210], bots=[1, 0, 0, 21], minutes=22, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] improved to 253 via State(inv=[1, 0, 0, 231], bots=[1, 0, 0, 22], minutes=23, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny.txt'] Done in 23 iters, best = 253
+['d19tiny.txt'] blueprint 1 can get 253 geodes
+['d19tiny2.txt'] improved to 22 via State(inv=[1, 0, 0, 0], bots=[1, 0, 0, 1], minutes=2, trace='O1G')
+['d19tiny2.txt'] improved to 43 via State(inv=[1, 0, 0, 1], bots=[1, 0, 0, 2], minutes=3, trace='O1G0G')
+['d19tiny2.txt'] improved to 63 via State(inv=[1, 0, 0, 3], bots=[1, 0, 0, 3], minutes=4, trace='O1G0G0G')
+['d19tiny2.txt'] improved to 82 via State(inv=[1, 0, 0, 6], bots=[1, 0, 0, 4], minutes=5, trace='O1G0G0G0G')
+['d19tiny2.txt'] improved to 100 via State(inv=[1, 0, 0, 10], bots=[1, 0, 0, 5], minutes=6, trace='O1G0G0G0G0G')
+['d19tiny2.txt'] improved to 117 via State(inv=[1, 0, 0, 15], bots=[1, 0, 0, 6], minutes=7, trace='O1G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 133 via State(inv=[1, 0, 0, 21], bots=[1, 0, 0, 7], minutes=8, trace='O1G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 148 via State(inv=[1, 0, 0, 28], bots=[1, 0, 0, 8], minutes=9, trace='O1G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 162 via State(inv=[1, 0, 0, 36], bots=[1, 0, 0, 9], minutes=10, trace='O1G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 175 via State(inv=[1, 0, 0, 45], bots=[1, 0, 0, 10], minutes=11, trace='O1G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 187 via State(inv=[1, 0, 0, 55], bots=[1, 0, 0, 11], minutes=12, trace='O1G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 198 via State(inv=[1, 0, 0, 66], bots=[1, 0, 0, 12], minutes=13, trace='O1G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 208 via State(inv=[1, 0, 0, 78], bots=[1, 0, 0, 13], minutes=14, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 217 via State(inv=[1, 0, 0, 91], bots=[1, 0, 0, 14], minutes=15, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 225 via State(inv=[1, 0, 0, 105], bots=[1, 0, 0, 15], minutes=16, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 232 via State(inv=[1, 0, 0, 120], bots=[1, 0, 0, 16], minutes=17, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 238 via State(inv=[1, 0, 0, 136], bots=[1, 0, 0, 17], minutes=18, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 243 via State(inv=[1, 0, 0, 153], bots=[1, 0, 0, 18], minutes=19, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 247 via State(inv=[1, 0, 0, 171], bots=[1, 0, 0, 19], minutes=20, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 250 via State(inv=[1, 0, 0, 190], bots=[1, 0, 0, 20], minutes=21, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 252 via State(inv=[1, 0, 0, 210], bots=[1, 0, 0, 21], minutes=22, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] improved to 253 via State(inv=[1, 0, 0, 231], bots=[1, 0, 0, 22], minutes=23, trace='O1G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G0G')
+['d19tiny2.txt'] Done in 45 iters, best = 253
+['d19tiny2.txt'] blueprint 1 can get 253 geodes
+['d19lastminute.txt'] Done in 1 iters, best = 0
+['d19lastminute.txt'] blueprint 1 can get 0 geodes
+['d19lastminute1.txt'] improved to 1 via State(inv=[1, 0, 0, 0], bots=[1, 0, 0, 1], minutes=23, trace='O22G')
+['d19lastminute1.txt'] Done in 2 iters, best = 1
+['d19lastminute1.txt'] blueprint 1 can get 1 geodes
+['d19full.txt'] improved to 1 via State(inv=[15, 20, 3, 0], bots=[4, 5, 2, 1], minutes=23, trace='O3O2C1C1C1C1C0O0O1O0O2G')
+['d19full.txt'] improved to 2 via State(inv=[29, 28, 2, 0], bots=[5, 7, 2, 1], minutes=22, trace='O3O1O1C0O0C0C0C0C0O0C0O0C1O2G')
+['d19full.txt'] iter 95576, |Q|=75344
+['d19full.txt'] iter 191671, |Q|=114164
+['d19full.txt'] iter 292746, |Q|=131859
+['d19full.txt'] iter 402661, |Q|=128776
+['d19full.txt'] iter 506853, |Q|=121203
+['d19full.txt'] iter 618171, |Q|=112999
+['d19full.txt'] iter 731318, |Q|=98905
+['d19full.txt'] iter 841345, |Q|=92146
+
+['d19full.txt'] iter 959914, |Q|=66562
+['d19full.txt'] Done in 1056772 iters, best = 2
+['d19full.txt'] blueprint 1 can get 2 geodes
+['d19full.txt'] improved to 1 via State(inv=[25, 37, 1, 0], bots=[2, 3, 1, 1], minutes=23, trace='O2C1C1C1O2O10G')
+['d19full.txt'] improved to 4 via State(inv=[15, 20, 2, 0], bots=[2, 4, 2, 1], minutes=20, trace='O2C1C1C1O1C0O3O3G')
+['d19full.txt'] improved to 5 via State(inv=[17, 39, 4, 3], bots=[2, 6, 3, 2], minutes=23, trace='O2C1O1C0C0C0C0C0O2O2O1G2G')
+['d19full.txt'] improved to 6 via State(inv=[17, 54, 3, 4], bots=[2, 7, 3, 2], minutes=23, trace='O2O1C0C0C0C0C0C0C0O1O4G0O2G')
+['d19full.txt'] improved to 7 via State(inv=[15, 47, 3, 3], bots=[2, 7, 3, 2], minutes=22, trace='O2O1C0C0C0C0C0C0C0O1O2O1G2G')
+['d19full.txt'] iter 116611, |Q|=54696
+['d19full.txt'] iter 222559, |Q|=100766
+['d19full.txt'] improved to 8 via State(inv=[7, 37, 4, 2], bots=[2, 9, 4, 2], minutes=21, trace='O2O1C0C0C0C0C0C0C0O0C0O0C0O1O0G1G')
+['d19full.txt'] improved to 9 via State(inv=[7, 38, 5, 6], bots=[2, 9, 5, 3], minutes=23, trace='O2O1C0C0C0C0C0C0C0O0C0O0C0O1O0G0O0G1G')
+['d19full.txt'] iter 323965, |Q|=145078
+['d19full.txt'] iter 415424, |Q|=186981
+['d19full.txt'] iter 518450, |Q|=207453
+['d19full.txt'] iter 613526, |Q|=228468
+['d19full.txt'] iter 711562, |Q|=262571
+['d19full.txt'] iter 827029, |Q|=263617
+['d19full.txt'] iter 943133, |Q|=264196
+['d19full.txt'] iter 1047384, |Q|=261183
+['d19full.txt'] iter 1156707, |Q|=258458
+['d19full.txt'] iter 1264510, |Q|=256733
+['d19full.txt'] iter 1374440, |Q|=253943
+['d19full.txt'] iter 1485240, |Q|=251805
+['d19full.txt'] iter 1596913, |Q|=249551
+['d19full.txt'] iter 1706433, |Q|=248364
+['d19full.txt'] iter 1817768, |Q|=246043
+['d19full.txt'] iter 1928805, |Q|=244222
+['d19full.txt'] iter 2038993, |Q|=242519
+['d19full.txt'] iter 2140997, |Q|=241842
+['d19full.txt'] iter 2254616, |Q|=240557
+['d19full.txt'] iter 2363761, |Q|=241613
+['d19full.txt'] iter 2477504, |Q|=238795
+['d19full.txt'] iter 2586780, |Q|=237675
+['d19full.txt'] iter 2696336, |Q|=235919
+['d19full.txt'] iter 2807305, |Q|=233523
+['d19full.txt'] iter 2917562, |Q|=231081
+['d19full.txt'] iter 3017179, |Q|=229495
+['d19full.txt'] iter 3127725, |Q|=228480
+['d19full.txt'] iter 3237605, |Q|=224688
+['d19full.txt'] iter 3348163, |Q|=219665
+['d19full.txt'] iter 3458719, |Q|=215031
+['d19full.txt'] iter 3565871, |Q|=210725
+['d19full.txt'] iter 3673878, |Q|=206526
+['d19full.txt'] iter 3782364, |Q|=201630
+['d19full.txt'] iter 3881705, |Q|=198081
+['d19full.txt'] iter 3990555, |Q|=197138
+['d19full.txt'] iter 4103680, |Q|=194054
+['d19full.txt'] iter 4215988, |Q|=190722
+['d19full.txt'] iter 4329112, |Q|=189406
+['d19full.txt'] iter 4431836, |Q|=188528
+['d19full.txt'] iter 4544349, |Q|=185889
+['d19full.txt'] iter 4656528, |Q|=180221
+['d19full.txt'] iter 4768687, |Q|=178831
+['d19full.txt'] iter 4881242, |Q|=176464
+['d19full.txt'] iter 4995292, |Q|=173196
+['d19full.txt'] iter 5108427, |Q|=169004
+['d19full.txt'] iter 5212867, |Q|=164472
+['d19full.txt'] iter 5323552, |Q|=162692
+['d19full.txt'] iter 5435531, |Q|=159875
+['d19full.txt'] iter 5545378, |Q|=157153
+['d19full.txt'] iter 5658210, |Q|=154391
+['d19full.txt'] iter 5761015, |Q|=152169
+['d19full.txt'] iter 5876999, |Q|=149008
+['d19full.txt'] iter 5988482, |Q|=145578
+['d19full.txt'] iter 6102022, |Q|=143236
+['d19full.txt'] iter 6217336, |Q|=138328
+['d19full.txt'] iter 6342173, |Q|=92305
+['d19full.txt'] Done in 6473614 iters, best = 9
+['d19full.txt'] blueprint 2 can get 9 geodes
+['d19full.txt'] improved to 1 via State(inv=[13, 36, 5, 0], bots=[3, 9, 4, 1], minutes=23, trace='O2O1C1C0O0C0C0C0C0C0O0C0O0C0O1O2G')
+['d19full.txt'] iter 74916, |Q|=113175
+['d19full.txt'] iter 144641, |Q|=199292
+['d19full.txt'] iter 213213, |Q|=278398
+['d19full.txt'] iter 288603, |Q|=346760
+['d19full.txt'] iter 362225, |Q|=412889
+['d19full.txt'] iter 432793, |Q|=480596
+['d19full.txt'] iter 501917, |Q|=538337
+['d19full.txt'] iter 595282, |Q|=573910
+['d19full.txt'] iter 665184, |Q|=609690
+['d19full.txt'] iter 749316, |Q|=674402
+['d19full.txt'] iter 814741, |Q|=716526
+['d19full.txt'] iter 899099, |Q|=777512
+['d19full.txt'] iter 967560, |Q|=806581
+['d19full.txt'] iter 1053738, |Q|=858468
+['d19full.txt'] iter 1136967, |Q|=924142
+['d19full.txt'] iter 1191943, |Q|=963397
+['d19full.txt'] iter 1274717, |Q|=1030517
+['d19full.txt'] iter 1368444, |Q|=1054999
+['d19full.txt'] iter 1473607, |Q|=1050880
+['d19full.txt'] iter 1531341, |Q|=1057994
+['d19full.txt'] iter 1632272, |Q|=1062263
+['d19full.txt'] iter 1733718, |Q|=1061577
+['d19full.txt'] iter 1834635, |Q|=1060322
+['d19full.txt'] iter 1937780, |Q|=1053226
+['d19full.txt'] iter 2031946, |Q|=1071262
+['d19full.txt'] iter 2136436, |Q|=1064050
+['d19full.txt'] iter 2232481, |Q|=1074911
+['d19full.txt'] iter 2318144, |Q|=1081935
+['d19full.txt'] iter 2416345, |Q|=1090024
+['d19full.txt'] iter 2519268, |Q|=1071806
+['d19full.txt'] iter 2623160, |Q|=1060955
+['d19full.txt'] iter 2725540, |Q|=1059204
+['d19full.txt'] iter 2825666, |Q|=1064477
+['d19full.txt'] iter 2931290, |Q|=1054051
+['d19full.txt'] iter 3033291, |Q|=1052141
+['d19full.txt'] iter 3128647, |Q|=1068496
+['d19full.txt'] iter 3232307, |Q|=1059778
+['d19full.txt'] iter 3281410, |Q|=1056470
+['d19full.txt'] iter 3386718, |Q|=1048824
+['d19full.txt'] iter 3476744, |Q|=1082228
+['d19full.txt'] iter 3571663, |Q|=1097230
+['d19full.txt'] iter 3674727, |Q|=1088586
+['d19full.txt'] iter 3776691, |Q|=1088477
+['d19full.txt'] iter 3881644, |Q|=1073888
+['d19full.txt'] iter 3988597, |Q|=1055622
+['d19full.txt'] iter 4092225, |Q|=1049623
+['d19full.txt'] iter 4141975, |Q|=1055024
+['d19full.txt'] iter 4244689, |Q|=1055084
+['d19full.txt'] iter 4343945, |Q|=1060060
+['d19full.txt'] iter 4449187, |Q|=1049076
+['d19full.txt'] iter 4549969, |Q|=1049679
+['d19full.txt'] iter 4653353, |Q|=1049614
+['d19full.txt'] iter 4756939, |Q|=1047821
+['d19full.txt'] iter 4856371, |Q|=1044578
+['d19full.txt'] iter 4956129, |Q|=1050404
+['d19full.txt'] iter 5059622, |Q|=1043858
+['d19full.txt'] iter 5157367, |Q|=1046819
+['d19full.txt'] iter 5196186, |Q|=1055804
+['d19full.txt'] iter 5297560, |Q|=1047369
+['d19full.txt'] iter 5394041, |Q|=1045952
+['d19full.txt'] iter 5491930, |Q|=1049859
+['d19full.txt'] iter 5591026, |Q|=1043809
+['d19full.txt'] iter 5691635, |Q|=1038200
+['d19full.txt'] iter 5787138, |Q|=1047372
+['d19full.txt'] iter 5886850, |Q|=1046278
+['d19full.txt'] iter 5986285, |Q|=1040707
+['d19full.txt'] iter 6084863, |Q|=1040064
+['d19full.txt'] iter 6122230, |Q|=1039422
+['d19full.txt'] iter 6220745, |Q|=1038447
+['d19full.txt'] iter 6320046, |Q|=1033984
+['d19full.txt'] iter 6417661, |Q|=1038352
+['d19full.txt'] iter 6519410, |Q|=1031912
+['d19full.txt'] iter 6619788, |Q|=1026123
+['d19full.txt'] iter 6720477, |Q|=1023677
+['d19full.txt'] iter 6819343, |Q|=1024378
+['d19full.txt'] iter 6920752, |Q|=1020570
+['d19full.txt'] iter 7016710, |Q|=1032156
+['d19full.txt'] iter 7105095, |Q|=1020138
+['d19full.txt'] iter 7204875, |Q|=1017858
+['d19full.txt'] iter 7301189, |Q|=1024834
+['d19full.txt'] iter 7400565, |Q|=1029030
+['d19full.txt'] iter 7501263, |Q|=1025394
+['d19full.txt'] iter 7602276, |Q|=1017022
+['d19full.txt'] iter 7706184, |Q|=1011360
+['d19full.txt'] iter 7806682, |Q|=1007125
+['d19full.txt'] iter 7908267, |Q|=999880
+['d19full.txt'] iter 8007553, |Q|=996950
+['d19full.txt'] iter 8108618, |Q|=989949
+['d19full.txt'] iter 8144017, |Q|=985637
+['d19full.txt'] iter 8240615, |Q|=992535
+['d19full.txt'] iter 8336626, |Q|=990471
+['d19full.txt'] iter 8434271, |Q|=998994
+['d19full.txt'] iter 8537962, |Q|=984336
+['d19full.txt'] iter 8635537, |Q|=983020
+['d19full.txt'] iter 8734510, |Q|=986095
+['d19full.txt'] iter 8835041, |Q|=981287
+['d19full.txt'] iter 8932644, |Q|=982716
+['d19full.txt'] iter 9014094, |Q|=976575
+['d19full.txt'] iter 9108103, |Q|=991151
+['d19full.txt'] iter 9205864, |Q|=991858
+['d19full.txt'] iter 9309465, |Q|=974912
+['d19full.txt'] iter 9405072, |Q|=981862
+['d19full.txt'] iter 9508639, |Q|=969188
+['d19full.txt'] iter 9613807, |Q|=967288
+['d19full.txt'] iter 9715600, |Q|=958533
+['d19full.txt'] iter 9817176, |Q|=952217
+['d19full.txt'] iter 9918980, |Q|=947640
+['d19full.txt'] iter 10022623, |Q|=943819
+['d19full.txt'] iter 10053167, |Q|=941941
+['d19full.txt'] iter 10156262, |Q|=934036
+['d19full.txt'] iter 10253836, |Q|=941311
+['d19full.txt'] iter 10356985, |Q|=930040
+['d19full.txt'] iter 10457087, |Q|=928985
+['d19full.txt'] iter 10558142, |Q|=923018
+['d19full.txt'] iter 10660180, |Q|=919162
+['d19full.txt'] iter 10759512, |Q|=918753
+['d19full.txt'] iter 10856250, |Q|=922370
+['d19full.txt'] iter 10955732, |Q|=918463
+['d19full.txt'] iter 11017801, |Q|=918423
+['d19full.txt'] iter 11119425, |Q|=918244
+['d19full.txt'] iter 11220302, |Q|=915974
+['d19full.txt'] iter 11321856, |Q|=909568
+['d19full.txt'] iter 11425671, |Q|=901101
+['d19full.txt'] iter 11526340, |Q|=901034
+['d19full.txt'] iter 11624808, |Q|=901263
+['d19full.txt'] iter 11725614, |Q|=899580
+['d19full.txt'] iter 11827976, |Q|=892887
+['d19full.txt'] iter 11929650, |Q|=885952
+['d19full.txt'] iter 12031045, |Q|=882689
+['d19full.txt'] iter 12097699, |Q|=880798
+['d19full.txt'] iter 12199176, |Q|=877576
+['d19full.txt'] iter 12301308, |Q|=872363
+['d19full.txt'] iter 12404961, |Q|=869476
+['d19full.txt'] iter 12509737, |Q|=861362
+['d19full.txt'] iter 12615800, |Q|=854229
+['d19full.txt'] iter 12718773, |Q|=851965
+['d19full.txt'] iter 12822207, |Q|=851496
+['d19full.txt'] iter 12927318, |Q|=845261
+['d19full.txt'] iter 13029820, |Q|=841708
+['d19full.txt'] iter 13132804, |Q|=835744
+['d19full.txt'] iter 13240322, |Q|=824025
+['d19full.txt'] iter 13344651, |Q|=817065
+['d19full.txt'] iter 13448151, |Q|=811126
+['d19full.txt'] iter 13556558, |Q|=795543
+['d19full.txt'] iter 13659695, |Q|=790588
+['d19full.txt'] iter 13761141, |Q|=789407
+['d19full.txt'] iter 13862216, |Q|=786490
+['d19full.txt'] iter 13962387, |Q|=786283
+['d19full.txt'] iter 14061981, |Q|=786242
+['d19full.txt'] iter 14165427, |Q|=776931
+['d19full.txt'] iter 14192655, |Q|=779558
+['d19full.txt'] iter 14292516, |Q|=774393
+['d19full.txt'] iter 14391576, |Q|=770236
+['d19full.txt'] iter 14489760, |Q|=769378
+['d19full.txt'] iter 14593509, |Q|=759373
+['d19full.txt'] iter 14696341, |Q|=754466
+['d19full.txt'] iter 14797890, |Q|=756209
+['d19full.txt'] iter 14899822, |Q|=757064
+['d19full.txt'] iter 15004099, |Q|=749419
+['d19full.txt'] iter 15065807, |Q|=744476
+['d19full.txt'] iter 15169993, |Q|=739288
+['d19full.txt'] iter 15278696, |Q|=723515
+['d19full.txt'] iter 15383060, |Q|=723010
+['d19full.txt'] iter 15488081, |Q|=715767
+['d19full.txt'] iter 15593075, |Q|=708735
+['d19full.txt'] iter 15701102, |Q|=696522
+['d19full.txt'] iter 15810442, |Q|=684276
+['d19full.txt'] iter 15923518, |Q|=662115
+['d19full.txt'] iter 16030135, |Q|=654756
+['d19full.txt'] iter 16134197, |Q|=646734
+['d19full.txt'] iter 16191229, |Q|=639097
+['d19full.txt'] iter 16297120, |Q|=627717
+['d19full.txt'] iter 16406658, |Q|=613447
+['d19full.txt'] iter 16518610, |Q|=592956
+['d19full.txt'] iter 16623934, |Q|=590085
+['d19full.txt'] iter 16731777, |Q|=584839
+['d19full.txt'] iter 16837535, |Q|=582386
+['d19full.txt'] iter 16941889, |Q|=577734
+['d19full.txt'] iter 17057440, |Q|=544747
+['d19full.txt'] iter 17180997, |Q|=478712
+['d19full.txt'] iter 17309698, |Q|=406235
+['d19full.txt'] iter 17441632, |Q|=333051
+['d19full.txt'] iter 17609051, |Q|=168370
+['d19full.txt'] Done in 17777421 iters, best = 1
+['d19full.txt'] blueprint 3 can get 1 geodes
+['d19full.txt'] iter 97434, |Q|=45675
+['d19full.txt'] iter 207604, |Q|=34276
+['d19full.txt'] iter 318708, |Q|=28869
+['d19full.txt'] Done in 383326 iters, best = 0
+['d19full.txt'] blueprint 4 can get 0 geodes
+['d19full.txt'] improved to 1 via State(inv=[2, 12, 3, 0], bots=[1, 3, 3, 1], minutes=23, trace='O4C3C3C1O1O2O2G')
+['d19full.txt'] iter 97879, |Q|=79256
+['d19full.txt'] iter 215304, |Q|=79611
+['d19full.txt'] iter 350190, |Q|=50301
+['d19full.txt'] Done in 432102 iters, best = 1
+['d19full.txt'] blueprint 5 can get 1 geodes
+['d19full.txt'] improved to 1 via State(inv=[6, 18, 2, 0], bots=[1, 3, 2, 1], minutes=23, trace='O3C2C2C2O4O4G')
+['d19full.txt'] iter 99211, |Q|=66051
+['d19full.txt'] iter 215705, |Q|=66021
+['d19full.txt'] iter 339422, |Q|=55259
+['d19full.txt'] iter 461935, |Q|=44061
+['d19full.txt'] Done in 539123 iters, best = 1
+['d19full.txt'] blueprint 6 can get 1 geodes
+['d19full.txt'] improved to 1 via State(inv=[8, 21, 1, 0], bots=[1, 2, 1, 1], minutes=23, trace='O4C3C4O8G')
+['d19full.txt'] improved to 2 via State(inv=[35, 31, 1, 0], bots=[3, 3, 1, 1], minutes=22, trace='O2O1O1C0C0C3O8G')
+['d19full.txt'] improved to 3 via State(inv=[14, 14, 2, 0], bots=[3, 3, 2, 1], minutes=21, trace='O4C1O2C1C1O0O2O2G')
+['d19full.txt'] improved to 4 via State(inv=[21, 20, 3, 0], bots=[4, 4, 2, 1], minutes=20, trace='O2O2C1C1C0O0O0O0C1O3G')
+['d19full.txt'] improved to 5 via State(inv=[26, 21, 3, 3], bots=[4, 4, 3, 2], minutes=23, trace='O2O2C1C1C0O0O0O0C1O3G0O1G')
+['d19full.txt'] improved to 6 via State(inv=[52, 36, 2, 4], bots=[5, 4, 2, 2], minutes=23, trace='O2O1O0O0C0C0C0C0O1O1O3G3G')
+['d19full.txt'] improved to 7 via State(inv=[23, 37, 5, 3], bots=[4, 6, 3, 2], minutes=22, trace='O2O1O1C0C0O0C0C0C0O0C0O1O1G2G')
+['d19full.txt'] improved to 8 via State(inv=[16, 21, 5, 5], bots=[4, 6, 5, 3], minutes=23, trace='O2O1O1C0C0O0C0C0C0O0C0O1O1G0O0O0G0G')
+['d19full.txt'] improved to 9 via State(inv=[19, 46, 4, 6], bots=[4, 7, 4, 3], minutes=23, trace='O2O1O0O0C0C0C0C0C0C0O0C0O0O2G0O0G1G')
+['d19full.txt'] iter 127513, |Q|=45679
+['d19full.txt'] iter 244747, |Q|=75340
+['d19full.txt'] iter 352485, |Q|=110587
+['d19full.txt'] iter 468097, |Q|=134232
+['d19full.txt'] iter 591057, |Q|=131387
+['d19full.txt'] iter 719986, |Q|=131019
+['d19full.txt'] iter 837933, |Q|=127675
+['d19full.txt'] iter 958508, |Q|=125044
+['d19full.txt'] iter 1081122, |Q|=122779
+['d19full.txt'] iter 1197896, |Q|=121302
+['d19full.txt'] iter 1320974, |Q|=117828
+['d19full.txt'] iter 1443682, |Q|=115570
+['d19full.txt'] iter 1571721, |Q|=113756
+['d19full.txt'] iter 1700970, |Q|=112453
+['d19full.txt'] iter 1820579, |Q|=109936
+['d19full.txt'] iter 1943734, |Q|=105733
+['d19full.txt'] iter 2067449, |Q|=100195
+['d19full.txt'] iter 2180317, |Q|=98695
+['d19full.txt'] iter 2302699, |Q|=98585
+['d19full.txt'] iter 2419504, |Q|=94612
+['d19full.txt'] iter 2546721, |Q|=94482
+['d19full.txt'] iter 2665407, |Q|=90061
+['d19full.txt'] iter 2788754, |Q|=83068
+['d19full.txt'] iter 2918225, |Q|=68135
+['d19full.txt'] Done in 3015832 iters, best = 9
+['d19full.txt'] blueprint 7 can get 9 geodes
+['d19full.txt'] iter 94446, |Q|=60414
+['d19full.txt'] iter 199446, |Q|=53281
+['d19full.txt'] iter 307974, |Q|=50509
+['d19full.txt'] iter 420887, |Q|=32759
+['d19full.txt'] Done in 470371 iters, best = 0
+['d19full.txt'] blueprint 8 can get 0 geodes
+['d19full.txt'] improved to 1 via State(inv=[6, 27, 1, 0], bots=[1, 3, 1, 1], minutes=23, trace='O4C3C3C1O7G')
+['d19full.txt'] improved to 2 via State(inv=[23, 17, 3, 0], bots=[3, 4, 2, 1], minutes=22, trace='O3O2C1C0O1C0C1O3O2G')
+['d19full.txt'] improved to 3 via State(inv=[18, 20, 2, 0], bots=[3, 5, 2, 1], minutes=21, trace='O3O2C0O1C0C1C0C0O2O2G')
+['d19full.txt'] iter 110305, |Q|=49694
+['d19full.txt'] iter 228310, |Q|=53255
+['d19full.txt'] iter 349383, |Q|=48417
+['d19full.txt'] iter 468017, |Q|=44626
+['d19full.txt'] iter 592571, |Q|=38274
+['d19full.txt'] iter 722040, |Q|=18680
+['d19full.txt'] Done in 748912 iters, best = 3
+['d19full.txt'] blueprint 9 can get 3 geodes
+['d19full.txt'] improved to 1 via State(inv=[38, 35, 2, 0], bots=[4, 5, 2, 1], minutes=23, trace='O2O1O1C0C0O0C0C0C1O2O5G')
+['d19full.txt'] improved to 2 via State(inv=[29, 24, 3, 0], bots=[4, 6, 3, 1], minutes=22, trace='O2O1O0O0C0C0C0C0C2O0C1O1O2G')
+['d19full.txt'] iter 83172, |Q|=97620
+['d19full.txt'] iter 157398, |Q|=166530
+['d19full.txt'] iter 234311, |Q|=231876
+['d19full.txt'] iter 317300, |Q|=288585
+['d19full.txt'] iter 399983, |Q|=336639
+['d19full.txt'] iter 480066, |Q|=384151
+['d19full.txt'] iter 557393, |Q|=430791
+['d19full.txt'] iter 648544, |Q|=484645
+['d19full.txt'] iter 723180, |Q|=527976
+['d19full.txt'] iter 822876, |Q|=551494
+['d19full.txt'] iter 902586, |Q|=562898
+['d19full.txt'] iter 999397, |Q|=585947
+['d19full.txt'] iter 1100674, |Q|=596838
+['d19full.txt'] iter 1179950, |Q|=595420
+['d19full.txt'] iter 1283487, |Q|=594774
+['d19full.txt'] iter 1390344, |Q|=590478
+['d19full.txt'] iter 1495269, |Q|=589811
+['d19full.txt'] iter 1596436, |Q|=597545
+['d19full.txt'] iter 1671809, |Q|=594271
+['d19full.txt'] iter 1778153, |Q|=587196
+['d19full.txt'] iter 1885557, |Q|=575228
+['d19full.txt'] iter 1989797, |Q|=578029
+['d19full.txt'] iter 2099008, |Q|=568377
+['d19full.txt'] iter 2212350, |Q|=544806
+['d19full.txt'] iter 2325133, |Q|=525733
+['d19full.txt'] iter 2400072, |Q|=531160
+['d19full.txt'] iter 2503411, |Q|=539827
+['d19full.txt'] iter 2606823, |Q|=542702
+['d19full.txt'] iter 2718851, |Q|=528205
+['d19full.txt'] iter 2824139, |Q|=534011
+['d19full.txt'] iter 2901289, |Q|=524696
+['d19full.txt'] iter 3007232, |Q|=531131
+['d19full.txt'] iter 3114141, |Q|=529039
+['d19full.txt'] iter 3224995, |Q|=524392
+['d19full.txt'] iter 3333275, |Q|=522220
+['d19full.txt'] iter 3433170, |Q|=522556
+['d19full.txt'] iter 3544106, |Q|=520483
+['d19full.txt'] iter 3654422, |Q|=519486
+['d19full.txt'] iter 3761457, |Q|=516705
+['d19full.txt'] iter 3868359, |Q|=510152
+['d19full.txt'] iter 3964524, |Q|=510652
+['d19full.txt'] iter 4072678, |Q|=509032
+['d19full.txt'] iter 4181907, |Q|=501701
+['d19full.txt'] iter 4290766, |Q|=492991
+['d19full.txt'] iter 4394222, |Q|=495732
+['d19full.txt'] iter 4497028, |Q|=495890
+['d19full.txt'] iter 4602841, |Q|=495973
+['d19full.txt'] iter 4709130, |Q|=488174
+['d19full.txt'] iter 4814420, |Q|=487743
+['d19full.txt'] iter 4925455, |Q|=475720
+['d19full.txt'] iter 5034944, |Q|=472586
+['d19full.txt'] iter 5123715, |Q|=461694
+['d19full.txt'] iter 5229857, |Q|=464740
+['d19full.txt'] iter 5339985, |Q|=461443
+['d19full.txt'] iter 5448849, |Q|=458913
+['d19full.txt'] iter 5514609, |Q|=474508
+['d19full.txt'] iter 5628038, |Q|=459352
+['d19full.txt'] iter 5737118, |Q|=454559
+['d19full.txt'] iter 5844577, |Q|=450460
+['d19full.txt'] iter 5953399, |Q|=442525
+['d19full.txt'] iter 6062940, |Q|=434977
+['d19full.txt'] iter 6137896, |Q|=426781
+['d19full.txt'] iter 6248480, |Q|=425400
+['d19full.txt'] iter 6362897, |Q|=411634
+['d19full.txt'] iter 6477358, |Q|=398924
+['d19full.txt'] iter 6584125, |Q|=406445
+['d19full.txt'] iter 6660863, |Q|=395121
+['d19full.txt'] iter 6765437, |Q|=399333
+['d19full.txt'] iter 6875889, |Q|=396660
+['d19full.txt'] iter 6954764, |Q|=398001
+['d19full.txt'] iter 7064424, |Q|=394810
+['d19full.txt'] iter 7176170, |Q|=386705
+['d19full.txt'] iter 7281609, |Q|=396826
+['d19full.txt'] iter 7371725, |Q|=385180
+['d19full.txt'] iter 7484216, |Q|=375772
+['d19full.txt'] iter 7597187, |Q|=361638
+['d19full.txt'] iter 7709239, |Q|=355194
+['d19full.txt'] iter 7821657, |Q|=349097
+['d19full.txt'] iter 7930038, |Q|=332547
+['d19full.txt'] iter 8043657, |Q|=330532
+['d19full.txt'] iter 8154898, |Q|=325520
+['d19full.txt'] iter 8263255, |Q|=321795
+['d19full.txt'] iter 8340186, |Q|=321165
+['d19full.txt'] iter 8452233, |Q|=313319
+['d19full.txt'] iter 8564334, |Q|=311654
+['d19full.txt'] iter 8685069, |Q|=283347
+['d19full.txt'] iter 8818436, |Q|=202735
+['d19full.txt'] iter 8971442, |Q|=84908
+['d19full.txt'] Done in 9056350 iters, best = 2
+['d19full.txt'] blueprint 10 can get 2 geodes
+['d19full.txt'] improved to 1 via State(inv=[50, 23, 2, 0], bots=[5, 4, 2, 1], minutes=23, trace='O2O1O1C0C0C0O0C0O1O4O3G')
+['d19full.txt'] improved to 2 via State(inv=[25, 58, 2, 0], bots=[4, 8, 2, 1], minutes=22, trace='O2O1O0O0C0C0C0C0C0C0C0C0O0O5G')
+['d19full.txt'] improved to 3 via State(inv=[13, 37, 3, 0], bots=[4, 9, 3, 1], minutes=21, trace='O2O1O0O0C0C0C0C0C0C0C0C0O0O0C0O2G')
+['d19full.txt'] iter 95944, |Q|=70758
+['d19full.txt'] iter 192635, |Q|=98655
+['d19full.txt'] iter 291700, |Q|=112449
+['d19full.txt'] iter 394865, |Q|=125165
+['d19full.txt'] iter 503378, |Q|=131292
+['d19full.txt'] iter 613691, |Q|=127175
+['d19full.txt'] iter 721383, |Q|=125083
+['d19full.txt'] iter 825206, |Q|=122080
+['d19full.txt'] iter 934213, |Q|=114817
+['d19full.txt'] iter 1042744, |Q|=111618
+['d19full.txt'] iter 1152522, |Q|=109699
+['d19full.txt'] iter 1257465, |Q|=106867
+['d19full.txt'] iter 1366398, |Q|=106222
+['d19full.txt'] iter 1475804, |Q|=100295
+['d19full.txt'] iter 1578351, |Q|=98840
+['d19full.txt'] iter 1684531, |Q|=98460
+['d19full.txt'] iter 1788989, |Q|=97951
+['d19full.txt'] iter 1891367, |Q|=98874
+['d19full.txt'] iter 2001404, |Q|=94314
+['d19full.txt'] iter 2107037, |Q|=91948
+['d19full.txt'] iter 2221888, |Q|=90367
+['d19full.txt'] iter 2336509, |Q|=86934
+['d19full.txt'] iter 2441373, |Q|=83634
+['d19full.txt'] iter 2551764, |Q|=81782
+['d19full.txt'] iter 2665515, |Q|=79345
+['d19full.txt'] iter 2775655, |Q|=73735
+['d19full.txt'] iter 2898213, |Q|=44259
+['d19full.txt'] Done in 2974929 iters, best = 3
+['d19full.txt'] blueprint 11 can get 3 geodes
+['d19full.txt'] improved to 2 via State(inv=[26, 36, 2, 0], bots=[3, 4, 2, 1], minutes=22, trace='O2O1C1C0C1C1O0O0O7G')
+['d19full.txt'] improved to 3 via State(inv=[19, 29, 4, 0], bots=[3, 5, 3, 1], minutes=21, trace='O2O1C1C0C1C0O0O0C0O2O3G')
+['d19full.txt'] improved to 4 via State(inv=[24, 36, 3, 0], bots=[4, 6, 3, 1], minutes=20, trace='O2O1O0C0C0C0C0C0C0O0O0O0O4G')
+['d19full.txt'] improved to 5 via State(inv=[29, 32, 5, 3], bots=[4, 6, 5, 2], minutes=23, trace='O2O1O0C0C0C0C0C0C0O0O0O0O1O1O0G2G')
+['d19full.txt'] iter 96148, |Q|=88111
+['d19full.txt'] iter 181455, |Q|=157102
+['d19full.txt'] iter 266496, |Q|=220840
+['d19full.txt'] iter 358551, |Q|=279948
+['d19full.txt'] iter 443578, |Q|=344738
+['d19full.txt'] iter 529998, |Q|=393610
+['d19full.txt'] iter 614348, |Q|=422967
+['d19full.txt'] iter 710976, |Q|=485630
+['d19full.txt'] iter 793779, |Q|=531419
+['d19full.txt'] iter 875736, |Q|=581963
+['d19full.txt'] iter 978104, |Q|=600991
+['d19full.txt'] iter 1078703, |Q|=623064
+['d19full.txt'] iter 1152105, |Q|=662472
+['d19full.txt'] iter 1250972, |Q|=692482
+['d19full.txt'] iter 1349262, |Q|=729639
+['d19full.txt'] iter 1454328, |Q|=728332
+['d19full.txt'] iter 1560306, |Q|=736258
+['d19full.txt'] iter 1661477, |Q|=754654
+['d19full.txt'] iter 1767419, |Q|=757612
+['d19full.txt'] iter 1877170, |Q|=748656
+['d19full.txt'] iter 1989345, |Q|=733988
+['d19full.txt'] iter 2099918, |Q|=721109
+['d19full.txt'] iter 2207431, |Q|=722760
+['d19full.txt'] iter 2283742, |Q|=716996
+['d19full.txt'] iter 2394522, |Q|=713223
+['d19full.txt'] iter 2499475, |Q|=722628
+['d19full.txt'] iter 2607846, |Q|=712794
+['d19full.txt'] iter 2718080, |Q|=709378
+['d19full.txt'] iter 2826701, |Q|=701552
+['d19full.txt'] iter 2936344, |Q|=693402
+['d19full.txt'] iter 3045931, |Q|=689806
+['d19full.txt'] iter 3120063, |Q|=686922
+['d19full.txt'] iter 3229870, |Q|=683071
+['d19full.txt'] iter 3340753, |Q|=672739
+['d19full.txt'] iter 3451097, |Q|=663999
+['d19full.txt'] iter 3559471, |Q|=656762
+['d19full.txt'] iter 3668119, |Q|=653033
+['d19full.txt'] iter 3779142, |Q|=649529
+['d19full.txt'] iter 3887489, |Q|=646064
+['d19full.txt'] iter 3984577, |Q|=639132
+['d19full.txt'] iter 4091635, |Q|=637176
+['d19full.txt'] iter 4198669, |Q|=630241
+['d19full.txt'] iter 4307585, |Q|=622464
+['d19full.txt'] iter 4420786, |Q|=611298
+['d19full.txt'] iter 4534760, |Q|=593396
+['d19full.txt'] iter 4640497, |Q|=591069
+['d19full.txt'] iter 4751712, |Q|=585683
+['d19full.txt'] iter 4860892, |Q|=581843
+['d19full.txt'] iter 4936659, |Q|=578155
+['d19full.txt'] iter 5044311, |Q|=578175
+['d19full.txt'] iter 5156646, |Q|=565857
+['d19full.txt'] iter 5271170, |Q|=557022
+['d19full.txt'] iter 5383192, |Q|=549204
+['d19full.txt'] iter 5496330, |Q|=541690
+['d19full.txt'] iter 5611109, |Q|=537520
+['d19full.txt'] iter 5697574, |Q|=524852
+['d19full.txt'] iter 5811249, |Q|=537865
+['d19full.txt'] iter 5930641, |Q|=529707
+['d19full.txt'] iter 6038566, |Q|=558793
+['d19full.txt'] iter 6121564, |Q|=540983
+['d19full.txt'] iter 6238628, |Q|=528739
+['d19full.txt'] iter 6353978, |Q|=526079
+['d19full.txt'] iter 6466599, |Q|=532522
+['d19full.txt'] iter 6565217, |Q|=544254
+['d19full.txt'] iter 6682546, |Q|=531017
+['d19full.txt'] iter 6790300, |Q|=559397
+['d19full.txt'] iter 6902853, |Q|=547497
+['d19full.txt'] iter 7022400, |Q|=525704
+['d19full.txt'] iter 7100116, |Q|=540671
+['d19full.txt'] iter 7211377, |Q|=556928
+['d19full.txt'] iter 7330858, |Q|=532466
+['d19full.txt'] iter 7448829, |Q|=526491
+['d19full.txt'] iter 7526440, |Q|=534598
+['d19full.txt'] iter 7642758, |Q|=529037
+['d19full.txt'] iter 7762046, |Q|=524289
+['d19full.txt'] iter 7877788, |Q|=522869
+['d19full.txt'] iter 7994825, |Q|=522871
+['d19full.txt'] iter 8094613, |Q|=525796
+['d19full.txt'] iter 8210016, |Q|=522979
+['d19full.txt'] iter 8327654, |Q|=520686
+['d19full.txt'] iter 8440790, |Q|=518641
+['d19full.txt'] iter 8554909, |Q|=520903
+['d19full.txt'] iter 8669338, |Q|=518192
+['d19full.txt'] iter 8768830, |Q|=517055
+['d19full.txt'] iter 8880334, |Q|=517987
+['d19full.txt'] iter 8990127, |Q|=516929
+['d19full.txt'] iter 9100943, |Q|=515336
+['d19full.txt'] iter 9210724, |Q|=517083
+['d19full.txt'] iter 9287593, |Q|=515158
+['d19full.txt'] iter 9401012, |Q|=512638
+['d19full.txt'] iter 9512254, |Q|=510653
+['d19full.txt'] iter 9624336, |Q|=508746
+['d19full.txt'] iter 9728429, |Q|=516846
+['d19full.txt'] iter 9838162, |Q|=508402
+['d19full.txt'] iter 9907357, |Q|=513501
+['d19full.txt'] iter 10015815, |Q|=509357
+['d19full.txt'] iter 10120807, |Q|=514124
+['d19full.txt'] iter 10228625, |Q|=512830
+['d19full.txt'] iter 10334184, |Q|=513127
+['d19full.txt'] iter 10404853, |Q|=513887
+['d19full.txt'] iter 10511078, |Q|=508123
+['d19full.txt'] iter 10615192, |Q|=540388
+['d19full.txt'] iter 10729851, |Q|=523830
+['d19full.txt'] iter 10842398, |Q|=508096
+['d19full.txt'] iter 10951364, |Q|=510982
+['d19full.txt'] iter 11061212, |Q|=508402
+['d19full.txt'] iter 11168354, |Q|=506051
+['d19full.txt'] iter 11277219, |Q|=505379
+['d19full.txt'] iter 11351772, |Q|=514231
+['d19full.txt'] iter 11458535, |Q|=507957
+['d19full.txt'] iter 11566865, |Q|=505030
+['d19full.txt'] iter 11675067, |Q|=503502
+['d19full.txt'] iter 11776720, |Q|=502104
+['d19full.txt'] iter 11866225, |Q|=507766
+['d19full.txt'] iter 11935273, |Q|=508899
+['d19full.txt'] iter 12052138, |Q|=502979
+['d19full.txt'] iter 12166922, |Q|=505980
+['d19full.txt'] iter 12285237, |Q|=498255
+['d19full.txt'] iter 12403832, |Q|=496237
+['d19full.txt'] iter 12518092, |Q|=495625
+['d19full.txt'] iter 12594132, |Q|=500742
+['d19full.txt'] iter 12709328, |Q|=495021
+['d19full.txt'] iter 12824340, |Q|=493686
+['d19full.txt'] iter 12932585, |Q|=510351
+['d19full.txt'] iter 13044688, |Q|=492303
+['d19full.txt'] iter 13150108, |Q|=492470
+['d19full.txt'] iter 13222522, |Q|=502394
+['d19full.txt'] iter 13331279, |Q|=490708
+['d19full.txt'] iter 13437233, |Q|=490903
+['d19full.txt'] iter 13544614, |Q|=487111
+['d19full.txt'] iter 13652644, |Q|=488350
+['d19full.txt'] iter 13762508, |Q|=481722
+['d19full.txt'] iter 13840147, |Q|=480206
+['d19full.txt'] iter 13951186, |Q|=476168
+['d19full.txt'] iter 14062519, |Q|=475341
+['d19full.txt'] iter 14175312, |Q|=471696
+['d19full.txt'] iter 14288027, |Q|=467147
+['d19full.txt'] iter 14378536, |Q|=462038
+['d19full.txt'] iter 14482181, |Q|=458901
+['d19full.txt'] iter 14574969, |Q|=459054
+['d19full.txt'] iter 14685557, |Q|=455394
+['d19full.txt'] iter 14796670, |Q|=450732
+['d19full.txt'] iter 14906017, |Q|=448494
+['d19full.txt'] iter 15019265, |Q|=443328
+['d19full.txt'] iter 15129314, |Q|=438276
+['d19full.txt'] iter 15237221, |Q|=435015
+['d19full.txt'] iter 15314190, |Q|=431082
+['d19full.txt'] iter 15427141, |Q|=427274
+['d19full.txt'] iter 15537681, |Q|=426892
+['d19full.txt'] iter 15646278, |Q|=428219
+['d19full.txt'] iter 15759359, |Q|=421448
+['d19full.txt'] iter 15866904, |Q|=418554
+['d19full.txt'] iter 15943845, |Q|=415673
+['d19full.txt'] iter 16052400, |Q|=409682
+['d19full.txt'] iter 16161970, |Q|=406907
+['d19full.txt'] iter 16270979, |Q|=399267
+['d19full.txt'] iter 16378159, |Q|=396002
+['d19full.txt'] iter 16471505, |Q|=396046
+['d19full.txt'] iter 16585911, |Q|=398507
+['d19full.txt'] iter 16699192, |Q|=393374
+['d19full.txt'] iter 16807458, |Q|=392093
+['d19full.txt'] iter 16888054, |Q|=390654
+['d19full.txt'] iter 17004026, |Q|=390739
+['d19full.txt'] iter 17120771, |Q|=388225
+['d19full.txt'] iter 17235890, |Q|=387220
+['d19full.txt'] iter 17346888, |Q|=385395
+['d19full.txt'] iter 17468443, |Q|=346509
+['d19full.txt'] iter 17589199, |Q|=292999
+^CTraceback (most recent call last):
+  File "/Users/stevenan/advent/d19.py", line 209, in <module>
+    main('d19full.txt')
+  File "/Users/stevenan/advent/d19.py", line 189, in main
+    best = best_num_geodes(bp)
+  File "/Users/stevenan/advent/d19.py", line 118, in best_num_geodes
+    state:State = pop()
+  File "/Users/stevenan/advent/d19.py", line 105, in pop
+    return heapq.heappop(Q)[-1]
+  File "/Users/stevenan/advent/d19.py", line 91, in __lt__
+    or sum(self.inv) < sum(nxt.inv) \
+KeyboardInterrupt
+
+py d19.py split 24 30
+doing 24
+['d19full.txt'] improved to 4 via State(inv=[8, 10, 1, 0], bots=[1, 1, 1, 1], minutes=20, trace='O4C5O8G')
+['d19full.txt'] improved to 5 via State(inv=[3, 4, 3, 0], bots=[1, 1, 2, 1], minutes=19, trace='O4C5O4O2G')
+['d19full.txt'] improved to 6 via State(inv=[3, 8, 3, 4], bots=[1, 1, 2, 2], minutes=23, trace='O4C5O4O2G3G')
+['d19full.txt'] improved to 7 via State(inv=[27, 22, 3, 3], bots=[4, 3, 3, 2], minutes=22, trace='O3O1O1C0C0O1C0O0O4G0O1G')
+['d19full.txt'] improved to 8 via State(inv=[22, 18, 2, 4], bots=[3, 2, 2, 2], minutes=22, trace='O3O2C1C0O1O1O3G3G')
+['d19full.txt'] improved to 9 via State(inv=[16, 29, 4, 6], bots=[4, 4, 4, 3], minutes=23, trace='O3O2C0O1C0O0C0O0C0O0O2G0O0G1G')
+['d19full.txt'] improved to 10 via State(inv=[17, 19, 6, 7], bots=[4, 3, 4, 3], minutes=23, trace='O3O2C0O1C1O0C0O0O0O1G0O1G1G')
+['d19full.txt'] improved to 12 via State(inv=[8, 18, 4, 6], bots=[3, 3, 4, 3], minutes=22, trace='O3O2C0O1C0C1O0O1O0O0G1G1G')
+['d19full.txt'] improved to 13 via State(inv=[7, 18, 6, 9], bots=[4, 4, 6, 4], minutes=23, trace='O3O1O1C0C0O1O0C0C0O0O0O0G0O0G0O0G0G')
+['d19full.txt'] iter 145867, |Q|=30234
+['d19full.txt'] iter 266398, |Q|=64315
+['d19full.txt'] iter 394122, |Q|=66229
+['d19full.txt'] iter 528622, |Q|=53681
+['d19full.txt'] iter 669699, |Q|=41999
+['d19full.txt'] Done in 748341 iters, best = 13
+['d19full.txt'] blueprint 24 can get 13 geodes
+doing 25
+['d19full.txt'] iter 94136, |Q|=35491
+['d19full.txt'] iter 200244, |Q|=21609
+['d19full.txt'] Done in 240349 iters, best = 0
+['d19full.txt'] blueprint 25 can get 0 geodes
+doing 26
+['d19full.txt'] iter 103858, |Q|=16921
+['d19full.txt'] Done in 136430 iters, best = 0
+['d19full.txt'] blueprint 26 can get 0 geodes
+doing 27
+['d19full.txt'] improved to 2 via State(inv=[1, 15, 3, 0], bots=[1, 3, 2, 1], minutes=22, trace='O3C2C2C3O3O3G')
+['d19full.txt'] iter 91392, |Q|=65472
+['d19full.txt'] iter 198607, |Q|=65967
+['d19full.txt'] iter 310830, |Q|=58169
+['d19full.txt'] iter 427518, |Q|=46550
+['d19full.txt'] Done in 536042 iters, best = 2
+['d19full.txt'] blueprint 27 can get 2 geodes
+['d19full.txt'] blueprint 28 can get 3 geodes
+['d19full.txt'] blueprint 29 can get 0 geodes
+['d19full.txt'] blueprint 30 can get 0 geodes
+
+
+py d19.py split 22 23
+doing 22
+['d19full.txt'] improved to 3 via State(inv=[9, 22, 1, 0], bots=[1, 2, 1, 1], minutes=21, trace='O3C2C3O9G')
+['d19full.txt'] improved to 5 via State(inv=[1, 15, 2, 0], bots=[1, 3, 2, 1], minutes=19, trace='O3C2C3O1C2O2G')
+['d19full.txt'] improved to 6 via State(inv=[2, 8, 4, 4], bots=[1, 2, 3, 2], minutes=23, trace='O3C2C3O4O2G0O2G')
+['d19full.txt'] improved to 8 via State(inv=[15, 40, 2, 4], bots=[2, 4, 2, 2], minutes=22, trace='O2O1C1C0C1C0O1O4G3G')
+['d19full.txt'] improved to 9 via State(inv=[10, 25, 4, 3], bots=[2, 4, 3, 2], minutes=21, trace='O2O1C1C0C2O0C1O1O1G2G')
+['d19full.txt'] improved to 10 via State(inv=[8, 24, 5, 7], bots=[2, 4, 4, 3], minutes=23, trace='O2O1C1C0C2O0C1O1O1G0O1G1G')
+['d19full.txt'] improved to 11 via State(inv=[30, 31, 3, 3], bots=[5, 5, 3, 2], minutes=20, trace='O2O1O0C0C0C0C0O0O0C0O0O0O1G2G')
+['d19full.txt'] improved to 12 via State(inv=[42, 46, 3, 9], bots=[5, 5, 3, 3], minutes=23, trace='O2O1O0C0C0C0C0O0O0C0O0O0O1G2G2G')
+['d19full.txt'] improved to 13 via State(inv=[34, 32, 4, 7], bots=[5, 5, 4, 3], minutes=22, trace='O2O1O0C0C0C0C0O0O0C0O0O0O1G0O1G1G')
+['d19full.txt'] improved to 14 via State(inv=[14, 29, 5, 5], bots=[4, 6, 5, 3], minutes=21, trace='O2O1O0C0C0C0C0C0O0C0O0O0O0O0G0O1G0G')
+['d19full.txt'] improved to 15 via State(inv=[19, 41, 6, 11], bots=[4, 6, 5, 4], minutes=23, trace='O2O1O0C0C0C0C0C0O0C0O0O0O0O0G0O1G0G1G')
+['d19full.txt'] iter 120439, |Q|=20156
+['d19full.txt'] iter 216262, |Q|=43579
+['d19full.txt'] iter 311233, |Q|=65710
+['d19full.txt'] iter 399304, |Q|=87701
+['d19full.txt'] iter 489132, |Q|=98633
+['d19full.txt'] iter 584911, |Q|=95244
+['d19full.txt'] iter 679563, |Q|=89927
+['d19full.txt'] iter 774919, |Q|=85075
+['d19full.txt'] iter 869011, |Q|=79949
+['d19full.txt'] iter 964781, |Q|=67653
+['d19full.txt'] iter 1058394, |Q|=64534
+['d19full.txt'] iter 1150999, |Q|=62996
+['d19full.txt'] iter 1250436, |Q|=62037
+['d19full.txt'] iter 1346363, |Q|=57983
+['d19full.txt'] iter 1443372, |Q|=54724
+['d19full.txt'] iter 1541190, |Q|=50617
+['d19full.txt'] Done in 1605248 iters, best = 15
+['d19full.txt'] blueprint 22 can get 15 geodes
+doing 23
+['d19full.txt'] iter 74257, |Q|=24829
+['d19full.txt'] Done in 160465 iters, best = 0
+['d19full.txt'] blueprint 23 can get 0 geodes
+
+py d19.py split 21 23
+doing 21
+['d19full.txt'] improved to 1 via State(inv=[35, 44, 3, 0], bots=[4, 6, 3, 1], minutes=23, trace='O2O1C0O1C0C0C0C0C0O0O0O1O5G')
+['d19full.txt'] improved to 2 via State(inv=[25, 42, 4, 0], bots=[3, 6, 3, 1], minutes=22, trace='O2O1O0C0C0C0C0C0C0O1O1O5G')
+['d19full.txt'] improved to 3 via State(inv=[22, 29, 4, 0], bots=[4, 7, 4, 1], minutes=21, trace='O2O1O0C0C0C0C0C0C0O0O0O0C0O1O2G')
+['d19full.txt'] iter 84421, |Q|=31387
+['d19full.txt'] iter 156968, |Q|=87109
+['d19full.txt'] iter 221582, |Q|=150724
+['d19full.txt'] iter 286751, |Q|=194743
+['d19full.txt'] iter 363801, |Q|=204228
+['d19full.txt'] iter 425159, |Q|=218004
+['d19full.txt'] iter 491406, |Q|=237767
+['d19full.txt'] iter 549564, |Q|=267133
+['d19full.txt'] iter 603427, |Q|=302878
+['d19full.txt'] iter 661121, |Q|=324696
+['d19full.txt'] iter 710375, |Q|=327761
+['d19full.txt'] iter 765961, |Q|=352606
+['d19full.txt'] iter 822411, |Q|=372254
+['d19full.txt'] iter 869814, |Q|=390562
+['d19full.txt'] iter 932103, |Q|=393169
+['d19full.txt'] iter 996824, |Q|=394484
+['d19full.txt'] iter 1068992, |Q|=393075
+['d19full.txt'] iter 1141710, |Q|=396222
+['d19full.txt'] iter 1203074, |Q|=393284
+['d19full.txt'] iter 1279562, |Q|=391677
+['d19full.txt'] iter 1357525, |Q|=390223
+['d19full.txt'] iter 1431447, |Q|=398226
+['d19full.txt'] iter 1507629, |Q|=392046
+['d19full.txt'] iter 1586629, |Q|=385188
+['d19full.txt'] iter 1663358, |Q|=384795
+['d19full.txt'] iter 1728171, |Q|=380573
+['d19full.txt'] iter 1807298, |Q|=377823
+['d19full.txt'] iter 1885153, |Q|=374340
+['d19full.txt'] iter 1962884, |Q|=373981
+['d19full.txt'] iter 2038514, |Q|=379997
+['d19full.txt'] iter 2116651, |Q|=371763
+['d19full.txt'] iter 2191957, |Q|=368560
+['d19full.txt'] iter 2257804, |Q|=363392
+['d19full.txt'] iter 2333378, |Q|=358835
+['d19full.txt'] iter 2408736, |Q|=356116
+['d19full.txt'] iter 2487043, |Q|=352949
+['d19full.txt'] iter 2560904, |Q|=348765
+['d19full.txt'] iter 2633311, |Q|=348154
+['d19full.txt'] iter 2709125, |Q|=345336
+['d19full.txt'] iter 2781975, |Q|=344790
+['d19full.txt'] iter 2840468, |Q|=344121
+['d19full.txt'] iter 2915413, |Q|=342756
+['d19full.txt'] iter 2992041, |Q|=337322
+['d19full.txt'] iter 3065168, |Q|=334257
+['d19full.txt'] iter 3143243, |Q|=329666
+['d19full.txt'] iter 3215441, |Q|=329087
+['d19full.txt'] iter 3285424, |Q|=331018
+['d19full.txt'] iter 3340781, |Q|=328004
+['d19full.txt'] iter 3410079, |Q|=331187
+['d19full.txt'] iter 3483700, |Q|=328166
+['d19full.txt'] iter 3558524, |Q|=325872
+['d19full.txt'] iter 3632487, |Q|=324098
+['d19full.txt'] iter 3692923, |Q|=324349
+['d19full.txt'] iter 3765958, |Q|=323820
+['d19full.txt'] iter 3841993, |Q|=320955
+['d19full.txt'] iter 3913905, |Q|=320951
+['d19full.txt'] iter 3986677, |Q|=319484
+['d19full.txt'] iter 4062376, |Q|=315446
+['d19full.txt'] iter 4133873, |Q|=316442
+['d19full.txt'] iter 4206490, |Q|=315617
+['d19full.txt'] iter 4280382, |Q|=315809
+['d19full.txt'] iter 4355540, |Q|=311740
+['d19full.txt'] iter 4430133, |Q|=310075
+['d19full.txt'] iter 4504711, |Q|=309195
+['d19full.txt'] iter 4568931, |Q|=308800
+['d19full.txt'] iter 4642882, |Q|=313014
+['d19full.txt'] iter 4720647, |Q|=307162
+['d19full.txt'] iter 4796738, |Q|=302030
+['d19full.txt'] iter 4870823, |Q|=300227
+['d19full.txt'] iter 4931373, |Q|=296473
+['d19full.txt'] iter 5005371, |Q|=298678
+['d19full.txt'] iter 5080764, |Q|=295128
+['d19full.txt'] iter 5158190, |Q|=289014
+['d19full.txt'] iter 5233449, |Q|=284854
+['d19full.txt'] iter 5298402, |Q|=281063
+['d19full.txt'] iter 5373405, |Q|=278546
+['d19full.txt'] iter 5451723, |Q|=275418
+['d19full.txt'] iter 5532446, |Q|=271588
+['d19full.txt'] iter 5612951, |Q|=265849
+['d19full.txt'] iter 5681390, |Q|=275425
+['d19full.txt'] iter 5762626, |Q|=266890
+['d19full.txt'] iter 5838063, |Q|=270984
+['d19full.txt'] iter 5898809, |Q|=290802
+['d19full.txt'] iter 5973216, |Q|=297104
+['d19full.txt'] iter 6035280, |Q|=295104
+['d19full.txt'] iter 6116069, |Q|=284200
+['d19full.txt'] iter 6198643, |Q|=269379
+['d19full.txt'] iter 6279206, |Q|=265848
+['d19full.txt'] iter 6342955, |Q|=270940
+['d19full.txt'] iter 6424485, |Q|=265010
+['d19full.txt'] iter 6504098, |Q|=263031
+['d19full.txt'] iter 6568454, |Q|=266746
+['d19full.txt'] iter 6648500, |Q|=264924
+['d19full.txt'] iter 6728346, |Q|=262694
+['d19full.txt'] iter 6811075, |Q|=261956
+['d19full.txt'] iter 6878274, |Q|=260081
+['d19full.txt'] iter 6954419, |Q|=264294
+['d19full.txt'] iter 7033721, |Q|=258690
+['d19full.txt'] iter 7112777, |Q|=258184
+['d19full.txt'] iter 7183602, |Q|=262144
+['d19full.txt'] iter 7266708, |Q|=258173
+['d19full.txt'] iter 7345152, |Q|=258533
+['d19full.txt'] iter 7429133, |Q|=256449
+['d19full.txt'] iter 7510115, |Q|=255597
+['d19full.txt'] iter 7575594, |Q|=255378
+['d19full.txt'] iter 7657994, |Q|=252793
+['d19full.txt'] iter 7737078, |Q|=252493
+['d19full.txt'] iter 7817287, |Q|=251421
+['d19full.txt'] iter 7880067, |Q|=250758
+['d19full.txt'] iter 7959548, |Q|=249314
+['d19full.txt'] iter 8039878, |Q|=249741
+['d19full.txt'] iter 8120907, |Q|=249128
+['d19full.txt'] iter 8200614, |Q|=246992
+['d19full.txt'] iter 8282360, |Q|=246871
+['d19full.txt'] iter 8363043, |Q|=246608
+['d19full.txt'] iter 8441623, |Q|=255623
+['d19full.txt'] iter 8512985, |Q|=247799
+['d19full.txt'] iter 8596783, |Q|=244812
+['d19full.txt'] iter 8681063, |Q|=242400
+['d19full.txt'] iter 8763652, |Q|=241928
+['d19full.txt'] iter 8853348, |Q|=240378
+['d19full.txt'] iter 8924695, |Q|=243851
+['d19full.txt'] iter 9010715, |Q|=238156
+['d19full.txt'] iter 9089508, |Q|=240624
+['d19full.txt'] iter 9175362, |Q|=237668
+['d19full.txt'] iter 9261298, |Q|=236074
+['d19full.txt'] iter 9328148, |Q|=235962
+['d19full.txt'] iter 9407114, |Q|=234932
+['d19full.txt'] iter 9490247, |Q|=234762
+['d19full.txt'] iter 9571142, |Q|=232242
+['d19full.txt'] iter 9653577, |Q|=230210
+['d19full.txt'] iter 9721682, |Q|=232648
+['d19full.txt'] iter 9801874, |Q|=231645
+['d19full.txt'] iter 9866763, |Q|=240599
+['d19full.txt'] iter 9951053, |Q|=234372
+['d19full.txt'] iter 10032603, |Q|=232054
+['d19full.txt'] iter 10102776, |Q|=230641
+['d19full.txt'] iter 10186368, |Q|=227523
+['d19full.txt'] iter 10268456, |Q|=224897
+['d19full.txt'] iter 10352194, |Q|=221839
+['d19full.txt'] iter 10421785, |Q|=221884
+['d19full.txt'] iter 10506051, |Q|=220843
+['d19full.txt'] iter 10590972, |Q|=218528
+['d19full.txt'] iter 10672243, |Q|=218574
+['d19full.txt'] iter 10743226, |Q|=217265
+['d19full.txt'] iter 10829594, |Q|=214981
+['d19full.txt'] iter 10913524, |Q|=214895
+['d19full.txt'] iter 10984215, |Q|=213614
+['d19full.txt'] iter 11066134, |Q|=216008
+['d19full.txt'] iter 11150681, |Q|=211500
+['d19full.txt'] iter 11226324, |Q|=212260
+['d19full.txt'] iter 11310605, |Q|=209298
+['d19full.txt'] iter 11393880, |Q|=208065
+['d19full.txt'] iter 11477133, |Q|=204800
+['d19full.txt'] iter 11563614, |Q|=200764
+['d19full.txt'] iter 11639826, |Q|=182383
+['d19full.txt'] iter 11727229, |Q|=162293
+['d19full.txt'] iter 11825936, |Q|=117963
+['d19full.txt'] iter 11927149, |Q|=73680
+['d19full.txt'] Done in 12026170 iters, best = 3
+['d19full.txt'] blueprint 21 can get 3 geodes
+doing 22
+['d19full.txt'] improved to 3 via State(inv=[9, 22, 1, 0], bots=[1, 2, 1, 1], minutes=21, trace='O3C2C3O9G')
+['d19full.txt'] improved to 5 via State(inv=[1, 15, 2, 0], bots=[1, 3, 2, 1], minutes=19, trace='O3C2C3O1C2O2G')
+['d19full.txt'] improved to 6 via State(inv=[2, 8, 4, 4], bots=[1, 2, 3, 2], minutes=23, trace='O3C2C3O4O2G0O2G')
+['d19full.txt'] improved to 8 via State(inv=[15, 40, 2, 4], bots=[2, 4, 2, 2], minutes=22, trace='O2O1C1C0C1C0O1O4G3G')
+['d19full.txt'] improved to 9 via State(inv=[10, 25, 4, 3], bots=[2, 4, 3, 2], minutes=21, trace='O2O1C1C0C2O0C1O1O1G2G')
+['d19full.txt'] improved to 10 via State(inv=[8, 24, 5, 7], bots=[2, 4, 4, 3], minutes=23, trace='O2O1C1C0C2O0C1O1O1G0O1G1G')
+['d19full.txt'] improved to 11 via State(inv=[30, 31, 3, 3], bots=[5, 5, 3, 2], minutes=20, trace='O2O1O0C0C0C0C0O0O0C0O0O0O1G2G')
+['d19full.txt'] improved to 12 via State(inv=[42, 46, 3, 9], bots=[5, 5, 3, 3], minutes=23, trace='O2O1O0C0C0C0C0O0O0C0O0O0O1G2G2G')
+['d19full.txt'] improved to 13 via State(inv=[34, 32, 4, 7], bots=[5, 5, 4, 3], minutes=22, trace='O2O1O0C0C0C0C0O0O0C0O0O0O1G0O1G1G')
+['d19full.txt'] improved to 14 via State(inv=[14, 29, 5, 5], bots=[4, 6, 5, 3], minutes=21, trace='O2O1O0C0C0C0C0C0O0C0O0O0O0O0G0O1G0G')
+['d19full.txt'] improved to 15 via State(inv=[19, 41, 6, 11], bots=[4, 6, 5, 4], minutes=23, trace='O2O1O0C0C0C0C0C0O0C0O0O0O0O0G0O1G0G1G')
+['d19full.txt'] iter 128037, |Q|=21787
+['d19full.txt'] iter 244613, |Q|=48200
+['d19full.txt'] iter 354278, |Q|=73855
+['d19full.txt'] iter 459811, |Q|=99497
+['d19full.txt'] iter 573182, |Q|=95767
+['d19full.txt'] iter 698578, |Q|=88604
+['d19full.txt'] iter 809629, |Q|=82430
+['d19full.txt'] iter 926165, |Q|=73332
+['d19full.txt'] iter 1040048, |Q|=65498
+['d19full.txt'] iter 1154279, |Q|=62503
+['d19full.txt'] iter 1271135, |Q|=60588
+^CTraceback (most recent call last):
+  File "/Users/stevenan/advent/d19.py", line 206, in <module>
+    first = int(sys.argv[2])
+  File "/Users/stevenan/advent/d19.py", line 193, in main
+    print(f'doing {bp.id}')
+  File "/Users/stevenan/advent/d19.py", line 122, in best_num_geodes
+    if idle_score > best_score:
+KeyboardInterrupt
+py d19.py split 15 17
+doing 15
+['d19full.txt'] iter 57724, |Q|=59347
+['d19full.txt'] iter 115983, |Q|=92767
+['d19full.txt'] iter 176478, |Q|=117106
+['d19full.txt'] iter 237599, |Q|=135184
+['d19full.txt'] iter 296980, |Q|=136742
+['d19full.txt'] iter 353251, |Q|=135086
+['d19full.txt'] iter 413478, |Q|=132992
+['d19full.txt'] iter 474990, |Q|=131046
+['d19full.txt'] iter 530199, |Q|=127551
+['d19full.txt'] iter 590859, |Q|=122875
+['d19full.txt'] iter 659925, |Q|=114544
+['d19full.txt'] iter 734611, |Q|=107543
+['d19full.txt'] iter 813358, |Q|=99042
+['d19full.txt'] iter 889134, |Q|=95719
+['d19full.txt'] iter 965202, |Q|=88145
+['d19full.txt'] iter 1045556, |Q|=64547
+['d19full.txt'] Done in 1141929 iters, best = 0
+['d19full.txt'] blueprint 15 can get 0 geodes
+doing 16
+['d19full.txt'] iter 58688, |Q|=79581
+['d19full.txt'] improved to 1 via State(inv=[16, 41, 4, 0], bots=[4, 10, 4, 1], minutes=23, trace='O2O1O0O0C0C0C0C0C0C0C0O0C0O0C0O0C0O2G')
+['d19full.txt'] iter 111313, |Q|=140946
+['d19full.txt'] iter 166832, |Q|=195498
+['d19full.txt'] iter 224739, |Q|=252772
+['d19full.txt'] iter 286066, |Q|=294828
+['d19full.txt'] iter 346414, |Q|=330917
+['d19full.txt'] iter 404775, |Q|=366192
+['d19full.txt'] iter 460727, |Q|=400911
+['d19full.txt'] iter 527829, |Q|=443430
+['d19full.txt'] iter 579319, |Q|=476648
+['d19full.txt'] iter 644016, |Q|=509489
+['d19full.txt'] iter 696687, |Q|=527944
+['d19full.txt'] iter 770702, |Q|=542371
+['d19full.txt'] iter 845327, |Q|=553438
+['d19full.txt'] iter 917718, |Q|=563933
+['d19full.txt'] iter 978183, |Q|=575510
+['d19full.txt'] iter 1050560, |Q|=589856
+['d19full.txt'] iter 1124977, |Q|=585277
+['d19full.txt'] iter 1201067, |Q|=579543
+['d19full.txt'] iter 1275605, |Q|=577401
+['d19full.txt'] iter 1349801, |Q|=579756
+['d19full.txt'] iter 1423480, |Q|=574769
+['d19full.txt'] iter 1473799, |Q|=578184
+['d19full.txt'] iter 1547646, |Q|=582222
+['d19full.txt'] iter 1616139, |Q|=594910
+['d19full.txt'] iter 1681964, |Q|=607824
+['d19full.txt'] iter 1748253, |Q|=626887
+['d19full.txt'] iter 1792714, |Q|=634573
+['d19full.txt'] iter 1865709, |Q|=639933
+['d19full.txt'] iter 1942079, |Q|=630753
+['d19full.txt'] iter 2017743, |Q|=623516
+['d19full.txt'] iter 2092822, |Q|=623644
+['d19full.txt'] iter 2169217, |Q|=622778
+['d19full.txt'] iter 2241390, |Q|=625284
+['d19full.txt'] iter 2297169, |Q|=623656
+['d19full.txt'] iter 2374913, |Q|=614778
+['d19full.txt'] iter 2448111, |Q|=614600
+['d19full.txt'] iter 2525091, |Q|=604590
+['d19full.txt'] iter 2603586, |Q|=596219
+['d19full.txt'] iter 2681765, |Q|=584754
+['d19full.txt'] iter 2757960, |Q|=579434
+['d19full.txt'] iter 2832756, |Q|=573495
+['d19full.txt'] iter 2911156, |Q|=566384
+['d19full.txt'] iter 2958371, |Q|=561759
+['d19full.txt'] iter 3038965, |Q|=539593
+['d19full.txt'] iter 3117053, |Q|=530185
+['d19full.txt'] iter 3191955, |Q|=527446
+['d19full.txt'] iter 3264417, |Q|=532355
+['d19full.txt'] iter 3342844, |Q|=524832
+['d19full.txt'] iter 3419223, |Q|=524519
+['d19full.txt'] iter 3494458, |Q|=525344
+['d19full.txt'] iter 3537542, |Q|=524309
+['d19full.txt'] iter 3612818, |Q|=526326
+['d19full.txt'] iter 3689555, |Q|=523198
+['d19full.txt'] iter 3763267, |Q|=521173
+['d19full.txt'] iter 3838789, |Q|=515064
+['d19full.txt'] iter 3914187, |Q|=515655
+['d19full.txt'] iter 3995982, |Q|=504816
+['d19full.txt'] iter 4073053, |Q|=497152
+['d19full.txt'] iter 4127718, |Q|=504722
+['d19full.txt'] iter 4206508, |Q|=491554
+['d19full.txt'] iter 4279084, |Q|=495774
+['d19full.txt'] iter 4354463, |Q|=492419
+['d19full.txt'] iter 4424797, |Q|=502676
+['d19full.txt'] iter 4502606, |Q|=492913
+['d19full.txt'] iter 4575417, |Q|=495352
+['d19full.txt'] iter 4614137, |Q|=492280
+['d19full.txt'] iter 4686651, |Q|=491168
+['d19full.txt'] iter 4759236, |Q|=486891
+['d19full.txt'] iter 4833181, |Q|=487275
+['d19full.txt'] iter 4907402, |Q|=484965
+['d19full.txt'] iter 4983961, |Q|=475135
+['d19full.txt'] iter 5060326, |Q|=470505
+['d19full.txt'] iter 5139428, |Q|=459938
+['d19full.txt'] iter 5183079, |Q|=459615
+['d19full.txt'] iter 5256085, |Q|=460195
+['d19full.txt'] iter 5338025, |Q|=456677
+['d19full.txt'] iter 5419134, |Q|=451589
+['d19full.txt'] iter 5500406, |Q|=446848
+['d19full.txt'] iter 5580751, |Q|=442255
+['d19full.txt'] iter 5660510, |Q|=440344
+['d19full.txt'] iter 5718589, |Q|=434356
+['d19full.txt'] iter 5800518, |Q|=431711
+['d19full.txt'] iter 5884146, |Q|=422360
+['d19full.txt'] iter 5965148, |Q|=414272
+['d19full.txt'] iter 6047210, |Q|=405106
+['d19full.txt'] iter 6126939, |Q|=402616
+['d19full.txt'] iter 6175296, |Q|=399752
+['d19full.txt'] iter 6255776, |Q|=395408
+['d19full.txt'] iter 6335885, |Q|=397081
+['d19full.txt'] iter 6417411, |Q|=395595
+['d19full.txt'] iter 6498044, |Q|=393386
+['d19full.txt'] iter 6561913, |Q|=394547
+['d19full.txt'] iter 6643268, |Q|=390008
+['d19full.txt'] iter 6725474, |Q|=387025
+['d19full.txt'] iter 6808431, |Q|=387372
+['d19full.txt'] iter 6892557, |Q|=381578
+['d19full.txt'] iter 6973188, |Q|=380016
+['d19full.txt'] iter 7059446, |Q|=375927
+['d19full.txt'] iter 7146282, |Q|=371068
+['d19full.txt'] iter 7231767, |Q|=362316
+['d19full.txt'] iter 7319930, |Q|=352476
+['d19full.txt'] iter 7408665, |Q|=334678
+['d19full.txt'] iter 7501681, |Q|=297190
+['d19full.txt'] iter 7600748, |Q|=240913
+['d19full.txt'] iter 7703086, |Q|=186767
+['d19full.txt'] iter 7823289, |Q|=94450
+['d19full.txt'] Done in 7917745 iters, best = 1
+['d19full.txt'] blueprint 16 can get 1 geodes
+doing 17
+['d19full.txt'] improved to 2 via State(inv=[12, 20, 2, 0], bots=[3, 5, 2, 1], minutes=22, trace='O2O2C1C1C1C2O0C0O1O2G')
+['d19full.txt'] improved to 3 via State(inv=[22, 42, 3, 0], bots=[4, 8, 2, 1], minutes=21, trace='O2O1O0O0C0C0C0C0C0C1O0C0C0O3G')
+['d19full.txt'] iter 74941, |Q|=57343
+['d19full.txt'] improved to 4 via State(inv=[19, 49, 3, 2], bots=[4, 9, 3, 2], minutes=23, trace='O2O1O0O0C0C0C0C0C0C0C0O0C0C0O1O1G1G')
+['d19full.txt'] iter 152627, |Q|=87651
+['d19full.txt'] iter 224827, |Q|=112548
+['d19full.txt'] iter 301160, |Q|=134504
+['d19full.txt'] iter 393155, |Q|=131752
+['d19full.txt'] iter 483247, |Q|=129689
+['d19full.txt'] iter 564691, |Q|=127293
+['d19full.txt'] iter 650443, |Q|=123001
+['d19full.txt'] iter 735500, |Q|=120842
+['d19full.txt'] iter 820986, |Q|=118974
+['d19full.txt'] iter 909298, |Q|=116868
+['d19full.txt'] iter 993873, |Q|=114406
+['d19full.txt'] iter 1079072, |Q|=110621
+['d19full.txt'] iter 1158938, |Q|=109632
+['d19full.txt'] iter 1243418, |Q|=108239
+['d19full.txt'] iter 1327442, |Q|=104755
+['d19full.txt'] iter 1415018, |Q|=98322
+['d19full.txt'] iter 1496129, |Q|=97183
+['d19full.txt'] iter 1583238, |Q|=93813
+['d19full.txt'] iter 1667656, |Q|=90627
+['d19full.txt'] iter 1754726, |Q|=86361
+['d19full.txt'] iter 1842454, |Q|=84218
+['d19full.txt'] iter 1926589, |Q|=83579
+['d19full.txt'] iter 2023937, |Q|=82757
+['d19full.txt'] iter 2113865, |Q|=82167
+['d19full.txt'] iter 2198583, |Q|=80893
+['d19full.txt'] iter 2290531, |Q|=79919
+['d19full.txt'] iter 2383347, |Q|=75965
+['d19full.txt'] iter 2471688, |Q|=71994
+['d19full.txt'] iter 2564635, |Q|=51514
+['d19full.txt'] Done in 2654127 iters, best = 4
+['d19full.txt'] blueprint 17 can get 4 geodes
+
+py d19.py split 12 17
+doing 12
+['d19full.txt'] improved to 2 via State(inv=[26, 36, 2, 0], bots=[3, 4, 2, 1], minutes=22, trace='O2O1C1C0C1C1O0O0O7G')
+['d19full.txt'] improved to 3 via State(inv=[19, 29, 4, 0], bots=[3, 5, 3, 1], minutes=21, trace='O2O1C1C0C1C0O0O0C0O2O3G')
+['d19full.txt'] improved to 4 via State(inv=[24, 36, 3, 0], bots=[4, 6, 3, 1], minutes=20, trace='O2O1O0C0C0C0C0C0C0O0O0O0O4G')
+['d19full.txt'] improved to 5 via State(inv=[29, 32, 5, 3], bots=[4, 6, 5, 2], minutes=23, trace='O2O1O0C0C0C0C0C0C0O0O0O0O1O1O0G2G')
+['d19full.txt'] iter 96778, |Q|=88792
+['d19full.txt'] iter 184262, |Q|=159858
+['d19full.txt'] iter 271458, |Q|=224499
+['d19full.txt'] iter 364901, |Q|=285166
+['d19full.txt'] iter 451196, |Q|=350438
+['d19full.txt'] iter 539155, |Q|=394442
+['d19full.txt'] iter 632879, |Q|=433774
+['d19full.txt'] iter 726751, |Q|=494993
+['d19full.txt'] iter 808914, |Q|=540579
+['d19full.txt'] iter 903274, |Q|=592566
+['d19full.txt'] iter 981834, |Q|=601777
+['d19full.txt'] iter 1076017, |Q|=622449
+['d19full.txt'] iter 1166349, |Q|=667430
+['d19full.txt'] iter 1238252, |Q|=689064
+['d19full.txt'] iter 1330389, |Q|=723048
+['d19full.txt'] iter 1427645, |Q|=729728
+['d19full.txt'] iter 1526716, |Q|=737312
+['d19full.txt'] iter 1597718, |Q|=741517
+['d19full.txt'] iter 1692866, |Q|=759246
+['d19full.txt'] iter 1792798, |Q|=756379
+['d19full.txt'] iter 1897128, |Q|=747044
+['d19full.txt'] iter 2003070, |Q|=729242
+['d19full.txt'] iter 2103825, |Q|=720989
+['d19full.txt'] iter 2203402, |Q|=722507
+['d19full.txt'] iter 2302301, |Q|=717301
+['d19full.txt'] iter 2403861, |Q|=713809
+['d19full.txt'] iter 2470340, |Q|=726482
+['d19full.txt'] iter 2569323, |Q|=719099
+['d19full.txt'] iter 2665443, |Q|=712901
+['d19full.txt'] iter 2764298, |Q|=704604
+['d19full.txt'] iter 2861029, |Q|=697993
+['d19full.txt'] iter 2956649, |Q|=691714
+['d19full.txt'] iter 3051996, |Q|=688115
+['d19full.txt'] iter 3142971, |Q|=685899
+['d19full.txt'] iter 3224799, |Q|=683755
+['d19full.txt'] iter 3293276, |Q|=678877
+['d19full.txt'] iter 3387667, |Q|=669772
+['d19full.txt'] iter 3480719, |Q|=661257
+['d19full.txt'] iter 3571807, |Q|=657025
+['d19full.txt'] iter 3665797, |Q|=653124
+['d19full.txt'] iter 3758285, |Q|=651256
+['d19full.txt'] iter 3850541, |Q|=647380
+['d19full.txt'] iter 3943612, |Q|=643171
+['d19full.txt'] iter 4028107, |Q|=639646
+['d19full.txt'] iter 4113616, |Q|=634866
+['d19full.txt'] iter 4168647, |Q|=631046
+['d19full.txt'] iter 4253797, |Q|=625188
+['d19full.txt'] iter 4341125, |Q|=618540
+['d19full.txt'] iter 4419776, |Q|=611952
+['d19full.txt'] iter 4495702, |Q|=603129
+['d19full.txt'] iter 4570720, |Q|=590076
+['d19full.txt'] iter 4639595, |Q|=591190
+['d19full.txt'] iter 4709684, |Q|=587658
+['d19full.txt'] iter 4776467, |Q|=583842
+['d19full.txt'] iter 4843748, |Q|=582590
+['d19full.txt'] iter 4907590, |Q|=580596
+['d19full.txt'] iter 4972917, |Q|=578434
+['d19full.txt'] iter 5026509, |Q|=575825
+['d19full.txt'] iter 5098281, |Q|=571531
+['d19full.txt'] iter 5180811, |Q|=563923
+['d19full.txt'] iter 5266407, |Q|=557625
+['d19full.txt'] iter 5351114, |Q|=551198
+['d19full.txt'] iter 5433431, |Q|=548091
+['d19full.txt'] iter 5519058, |Q|=542602
+['d19full.txt'] iter 5603947, |Q|=537460
+['d19full.txt'] iter 5692773, |Q|=525787
+['d19full.txt'] iter 5749103, |Q|=529985
+['d19full.txt'] iter 5834696, |Q|=530887
+['d19full.txt'] iter 5920780, |Q|=531419
+['d19full.txt'] iter 6002034, |Q|=550015
+['d19full.txt'] iter 6086297, |Q|=546216
+['d19full.txt'] iter 6171546, |Q|=533973
+['d19full.txt'] iter 6232552, |Q|=525341
+['d19full.txt'] iter 6312947, |Q|=534812
+['d19full.txt'] iter 6394740, |Q|=533523
+['d19full.txt'] iter 6473740, |Q|=532522
+['d19full.txt'] iter 6556367, |Q|=540184
+['d19full.txt'] iter 6607570, |Q|=549891
+['d19full.txt'] iter 6698315, |Q|=525903
+['d19full.txt'] iter 6776616, |Q|=548116
+['d19full.txt'] iter 6853572, |Q|=555515
+['d19full.txt'] iter 6937877, |Q|=541229
+['d19full.txt'] iter 7022556, |Q|=525570
+['d19full.txt'] iter 7084501, |Q|=541813
+['d19full.txt'] iter 7171880, |Q|=529757
+['d19full.txt'] iter 7249381, |Q|=548921
+['d19full.txt'] iter 7331833, |Q|=531992
+['d19full.txt'] iter 7416961, |Q|=532548
+['d19full.txt'] iter 7501815, |Q|=529236
+['d19full.txt'] iter 7547675, |Q|=530366
+['d19full.txt'] iter 7627078, |Q|=525253
+['d19full.txt'] iter 7707025, |Q|=525430
+['d19full.txt'] iter 7789915, |Q|=526123
+['d19full.txt'] iter 7872678, |Q|=523513
+['d19full.txt'] iter 7955567, |Q|=526116
+['d19full.txt'] iter 8040065, |Q|=521186
+['d19full.txt'] iter 8120774, |Q|=529573
+['d19full.txt'] iter 8173350, |Q|=527757
+['d19full.txt'] iter 8256688, |Q|=524654
+['d19full.txt'] iter 8339642, |Q|=520148
+['d19full.txt'] iter 8420549, |Q|=518876
+['d19full.txt'] iter 8502899, |Q|=526341
+['d19full.txt'] iter 8586219, |Q|=518661
+['d19full.txt'] iter 8666707, |Q|=518113
+['d19full.txt'] iter 8746867, |Q|=519143
+['d19full.txt'] iter 8827219, |Q|=516238
+['d19full.txt'] iter 8875941, |Q|=518019
+['d19full.txt'] iter 8954173, |Q|=519166
+['d19full.txt'] iter 9032611, |Q|=516722
+['d19full.txt'] iter 9112827, |Q|=515041
+['d19full.txt'] iter 9189210, |Q|=520644
+['d19full.txt'] iter 9268828, |Q|=515083
+['d19full.txt'] iter 9346247, |Q|=513144
+['d19full.txt'] iter 9397992, |Q|=512560
+['d19full.txt'] iter 9477904, |Q|=510533
+['d19full.txt'] iter 9555256, |Q|=510083
+['d19full.txt'] iter 9632163, |Q|=508763
+['d19full.txt'] iter 9704248, |Q|=519893
+['d19full.txt'] iter 9781816, |Q|=512449
+['d19full.txt'] iter 9856264, |Q|=515386
+['d19full.txt'] iter 9931358, |Q|=510687
+['d19full.txt'] iter 9979935, |Q|=512212
+['d19full.txt'] iter 10061057, |Q|=511465
+['d19full.txt'] iter 10135889, |Q|=512746
+['d19full.txt'] iter 10210639, |Q|=512742
+['d19full.txt'] iter 10285995, |Q|=512912
+['d19full.txt'] iter 10363171, |Q|=508531
+['d19full.txt'] iter 10428523, |Q|=511105
+['d19full.txt'] iter 10503802, |Q|=508932
+['d19full.txt'] iter 10576345, |Q|=533338
+['d19full.txt'] iter 10654255, |Q|=538782
+['d19full.txt'] iter 10734898, |Q|=523887
+['d19full.txt'] iter 10814087, |Q|=513265
+['d19full.txt'] iter 10863322, |Q|=511941
+['d19full.txt'] iter 10940786, |Q|=508010
+['d19full.txt'] iter 11019547, |Q|=508428
+['d19full.txt'] iter 11093738, |Q|=510805
+['d19full.txt'] iter 11170737, |Q|=506335
+['d19full.txt'] iter 11249024, |Q|=505005
+['d19full.txt'] iter 11324395, |Q|=509056
+['d19full.txt'] iter 11398944, |Q|=511134
+['d19full.txt'] iter 11451572, |Q|=507685
+['d19full.txt'] iter 11535175, |Q|=504398
+['d19full.txt'] iter 11616305, |Q|=507883
+['d19full.txt'] iter 11696731, |Q|=502350
+['d19full.txt'] iter 11772746, |Q|=501258
+['d19full.txt'] iter 11853544, |Q|=506572
+['d19full.txt'] iter 11938690, |Q|=508241
+['d19full.txt'] iter 12028041, |Q|=500770
+['d19full.txt'] iter 12080569, |Q|=501849
+['d19full.txt'] iter 12166109, |Q|=505851
+['d19full.txt'] iter 12251167, |Q|=499568
+['d19full.txt'] iter 12341232, |Q|=499703
+['d19full.txt'] iter 12424675, |Q|=500032
+['d19full.txt'] iter 12510882, |Q|=497639
+['d19full.txt'] iter 12593293, |Q|=500997
+['d19full.txt'] iter 12650842, |Q|=496669
+['d19full.txt'] iter 12735513, |Q|=495584
+['d19full.txt'] iter 12820462, |Q|=494144
+['d19full.txt'] iter 12906436, |Q|=491643
+['d19full.txt'] iter 12984484, |Q|=503493
+['d19full.txt'] iter 13069147, |Q|=492397
+['d19full.txt'] iter 13149227, |Q|=492696
+['d19full.txt'] iter 13197407, |Q|=506054
+['d19full.txt'] iter 13282997, |Q|=491903
+['d19full.txt'] iter 13365033, |Q|=490784
+['d19full.txt'] iter 13443561, |Q|=491889
+['d19full.txt'] iter 13524221, |Q|=487748
+['d19full.txt'] iter 13608114, |Q|=484199
+['d19full.txt'] iter 13689345, |Q|=483854
+['d19full.txt'] iter 13771254, |Q|=481217
+['d19full.txt'] iter 13827387, |Q|=480108
+['d19full.txt'] iter 13911086, |Q|=476269
+['d19full.txt'] iter 13995091, |Q|=475250
+['d19full.txt'] iter 14081455, |Q|=473591
+['d19full.txt'] iter 14167624, |Q|=471296
+['d19full.txt'] iter 14253099, |Q|=470334
+['d19full.txt'] iter 14339748, |Q|=464951
+['d19full.txt'] iter 14427872, |Q|=460355
+['d19full.txt'] iter 14513042, |Q|=458809
+['d19full.txt'] iter 14584076, |Q|=459600
+['d19full.txt'] iter 14668684, |Q|=456311
+['d19full.txt'] iter 14752622, |Q|=453887
+['d19full.txt'] iter 14838179, |Q|=450723
+['d19full.txt'] iter 14922122, |Q|=446956
+['d19full.txt'] iter 15007543, |Q|=442628
+['d19full.txt'] iter 15091034, |Q|=438327
+['d19full.txt'] iter 15172579, |Q|=437653
+['d19full.txt'] iter 15257453, |Q|=434506
+['d19full.txt'] iter 15315145, |Q|=431304
+['d19full.txt'] iter 15401640, |Q|=428009
+['d19full.txt'] iter 15486289, |Q|=426121
+['d19full.txt'] iter 15568317, |Q|=427460
+['d19full.txt'] iter 15650810, |Q|=428806
+['d19full.txt'] iter 15738828, |Q|=422479
+['d19full.txt'] iter 15821839, |Q|=419525
+['d19full.txt'] iter 15903042, |Q|=417635
+['d19full.txt'] iter 15989333, |Q|=412757
+['d19full.txt'] iter 16072589, |Q|=409517
+['d19full.txt'] iter 16156880, |Q|=407737
+['d19full.txt'] iter 16240837, |Q|=401493
+['d19full.txt'] iter 16324089, |Q|=396555
+['d19full.txt'] iter 16404090, |Q|=398816
+['d19full.txt'] iter 16492888, |Q|=394716
+['d19full.txt'] iter 16560934, |Q|=391887
+['d19full.txt'] iter 16661922, |Q|=391425
+['d19full.txt'] iter 16753965, |Q|=393705
+['d19full.txt'] iter 16850118, |Q|=390744
+['d19full.txt'] iter 16921300, |Q|=392254
+['d19full.txt'] iter 17025178, |Q|=391442
+['d19full.txt'] iter 17124720, |Q|=387136
+['d19full.txt'] iter 17220167, |Q|=387463
+['d19full.txt'] iter 17325397, |Q|=385064
+['d19full.txt'] iter 17423163, |Q|=371966
+['d19full.txt'] iter 17538142, |Q|=308715
+['d19full.txt'] iter 17627343, |Q|=274287
+['d19full.txt'] iter 17747217, |Q|=208113
+['d19full.txt'] iter 17875132, |Q|=118625
+['d19full.txt'] Done in 18013633 iters, best = 5
+['d19full.txt'] blueprint 12 can get 5 geodes
+doing 13
+['d19full.txt'] improved to 1 via State(inv=[11, 25, 1, 0], bots=[1, 2, 1, 1], minutes=23, trace='O3C2C4O10G')
+['d19full.txt'] improved to 4 via State(inv=[2, 16, 2, 0], bots=[1, 3, 2, 1], minutes=20, trace='O3C2C4O0C2O3G')
+['d19full.txt'] improved to 5 via State(inv=[4, 22, 4, 3], bots=[2, 5, 4, 2], minutes=23, trace='O4O1C1C0C1C0O1C0O1O1G0O1G')
+['d19full.txt'] iter 120302, |Q|=33300
+['d19full.txt'] iter 240851, |Q|=26895
+['d19full.txt'] iter 364048, |Q|=20467
+['d19full.txt'] Done in 425441 iters, best = 5
+['d19full.txt'] blueprint 13 can get 5 geodes
+doing 14
+['d19full.txt'] improved to 1 via State(inv=[1, 8, 3, 0], bots=[1, 2, 3, 1], minutes=23, trace='O4C3C3O3O3O1G')
+['d19full.txt'] iter 88545, |Q|=84289
+['d19full.txt'] iter 197010, |Q|=104728
+['d19full.txt'] iter 309479, |Q|=95619
+['d19full.txt'] iter 437733, |Q|=63592
+['d19full.txt'] Done in 573488 iters, best = 1
+['d19full.txt'] blueprint 14 can get 1 geodes
+doing 15
+['d19full.txt'] iter 85231, |Q|=76001
+['d19full.txt'] iter 167404, |Q|=112953
+['d19full.txt'] iter 255735, |Q|=136117
+['d19full.txt'] iter 346549, |Q|=133783
+['d19full.txt'] iter 443802, |Q|=131454
+['d19full.txt'] iter 542525, |Q|=126939
+['d19full.txt'] iter 641297, |Q|=117835
+['d19full.txt'] iter 731055, |Q|=107878
+['d19full.txt'] iter 831306, |Q|=98615
+['d19full.txt'] iter 929803, |Q|=93277
+['d19full.txt'] iter 1037859, |Q|=66052
+['d19full.txt'] Done in 1141929 iters, best = 0
+['d19full.txt'] blueprint 15 can get 0 geodes
+doing 16
+['d19full.txt'] iter 72617, |Q|=96827
+['d19full.txt'] improved to 1 via State(inv=[16, 41, 4, 0], bots=[4, 10, 4, 1], minutes=23, trace='O2O1O0O0C0C0C0C0C0C0C0O0C0O0C0O0C0O2G')
+['d19full.txt'] iter 144648, |Q|=172319
+['d19full.txt'] iter 216490, |Q|=246155
+['d19full.txt'] iter 297696, |Q|=301657
+['d19full.txt'] iter 376591, |Q|=352052
+['d19full.txt'] iter 454869, |Q|=397007
+['d19full.txt'] iter 529663, |Q|=444521
+['d19full.txt'] iter 602055, |Q|=488565
+['d19full.txt'] iter 693519, |Q|=525537
+['d19full.txt'] iter 770520, |Q|=542419
+['d19full.txt'] iter 871661, |Q|=552277
+['d19full.txt'] iter 968669, |Q|=575494
+^CTraceback (most recent call last):
+  File "/Users/stevenan/advent/d19.py", line 206, in <module>
+    first = int(sys.argv[2])
+  File "/Users/stevenan/advent/d19.py", line 193, in main
+    print(f'doing {bp.id}')
+  File "/Users/stevenan/advent/d19.py", line 147, in best_num_geodes
+    new_state = state.clone()
+  File "/Users/stevenan/advent/d19.py", line 42, in clone
+    bots=list(self.bots), \
+KeyboardInterrupt
+
+
+py d19.py split 19 19
+doing 19
+['d19full.txt', 19] improved to 4 via State(inv=[12, 9, 1, 0], bots=[1, 1, 1, 1], minutes=20, trace='O3C7O7G')
+['d19full.txt', 19] improved to 6 via State(inv=[7, 18, 1, 0], bots=[1, 2, 1, 1], minutes=18, trace='O3C2C2O7G')
+['d19full.txt', 19] improved to 7 via State(inv=[7, 21, 3, 5], bots=[1, 2, 2, 2], minutes=23, trace='O3C2C2O7G0O3G')
+['d19full.txt', 19] improved to 8 via State(inv=[3, 12, 3, 4], bots=[1, 2, 3, 2], minutes=22, trace='O3C2C2O7G0O0O1G')
+['d19full.txt', 19] improved to 9 via State(inv=[2, 25, 2, 3], bots=[1, 3, 2, 2], minutes=21, trace='O3C2C2O2C2O1G2G')
+['d19full.txt', 19] improved to 10 via State(inv=[7, 14, 5, 7], bots=[2, 3, 4, 3], minutes=23, trace='O3C3O1C1O0C1O2G0O0O0G1G')
+['d19full.txt', 19] improved to 11 via State(inv=[4, 15, 2, 3], bots=[1, 2, 2, 2], minutes=20, trace='O3C2C2O3O2G2G')
+['d19full.txt', 19] improved to 12 via State(inv=[2, 14, 3, 9], bots=[1, 2, 3, 3], minutes=23, trace='O3C2C2O3O2G2G0O1G')
+['d19full.txt', 19] improved to 13 via State(inv=[1, 12, 3, 7], bots=[1, 2, 3, 3], minutes=22, trace='O3C2C2O3O2G0O1G1G')
+['d19full.txt', 19] Done in 124131 iters, best = 13
+['d19full.txt', 19] blueprint 19 can get 13 geodes
+
+py d19.py split 19 19
+doing 19
+['d19full.txt', 19] improved to 4 via State(inv=[12, 9, 1, 0], bots=[1, 1, 1, 1], minutes=20, trace='O3C7O7G')
+['d19full.txt', 19] improved to 6 via State(inv=[7, 18, 1, 0], bots=[1, 2, 1, 1], minutes=18, trace='O3C2C2O7G')
+['d19full.txt', 19] improved to 7 via State(inv=[7, 21, 3, 5], bots=[1, 2, 2, 2], minutes=23, trace='O3C2C2O7G0O3G')
+['d19full.txt', 19] improved to 8 via State(inv=[3, 12, 3, 4], bots=[1, 2, 3, 2], minutes=22, trace='O3C2C2O7G0O0O1G')
+['d19full.txt', 19] improved to 9 via State(inv=[2, 25, 2, 3], bots=[1, 3, 2, 2], minutes=21, trace='O3C2C2O2C2O1G2G')
+['d19full.txt', 19] improved to 10 via State(inv=[7, 14, 5, 7], bots=[2, 3, 4, 3], minutes=23, trace='O3C3O1C1O0C1O2G0O0O0G1G')
+['d19full.txt', 19] improved to 11 via State(inv=[4, 15, 2, 3], bots=[1, 2, 2, 2], minutes=20, trace='O3C2C2O3O2G2G')
+['d19full.txt', 19] improved to 12 via State(inv=[2, 14, 3, 9], bots=[1, 2, 3, 3], minutes=23, trace='O3C2C2O3O2G2G0O1G')
+['d19full.txt', 19] improved to 13 via State(inv=[1, 12, 3, 7], bots=[1, 2, 3, 3], minutes=22, trace='O3C2C2O3O2G0O1G1G')
+['d19full.txt', 19] Done in 124131 iters, best = 13
+['d19full.txt', 19] blueprint 19 can get 13 geodes
+
+py d19.py split 20 20
+doing 20
+['d19full.txt', 20] improved to 1 via State(inv=[13, 22, 1, 0], bots=[1, 2, 1, 1], minutes=23, trace='O3C2C5O9G')
+['d19full.txt', 20] improved to 2 via State(inv=[10, 7, 2, 0], bots=[1, 2, 2, 1], minutes=22, trace='O3C2C5O6O1G')
+['d19full.txt', 20] improved to 3 via State(inv=[6, 12, 2, 0], bots=[1, 3, 2, 1], minutes=21, trace='O3C2C5O0C3O2G')
+['d19full.txt', 20] iter 116213, |Q|=30484
+['d19full.txt', 20] iter 241688, |Q|=19386
+['d19full.txt', 20] Done in 291108 iters, best = 3
+['d19full.txt', 20] blueprint 20 can get 3 geodes
+
+py d19.py split 18 18
+doing 18
+['d19full.txt', 18] improved to 2 via State(inv=[13, 9, 1, 0], bots=[1, 1, 1, 1], minutes=22, trace='O3C9O7G')
+['d19full.txt', 18] improved to 5 via State(inv=[7, 18, 1, 0], bots=[1, 2, 1, 1], minutes=19, trace='O3C2C3O7G')
+['d19full.txt', 18] improved to 6 via State(inv=[2, 8, 3, 4], bots=[1, 2, 3, 2], minutes=23, trace='O3C2C3O7G0O0O1G')
+['d19full.txt', 18] improved to 7 via State(inv=[7, 16, 3, 3], bots=[2, 3, 3, 2], minutes=22, trace='O3C2C2O1C1O0O3G0O1G')
+['d19full.txt', 18] improved to 8 via State(inv=[27, 25, 3, 4], bots=[4, 3, 2, 2], minutes=22, trace='O3O1C1C0C2O0O0O0O2G3G')
+['d19full.txt', 18] improved to 9 via State(inv=[20, 13, 3, 3], bots=[4, 3, 3, 2], minutes=21, trace='O3O1C1C0C2O0O0O0O2G0O1G')
+['d19full.txt', 18] improved to 10 via State(inv=[9, 31, 3, 7], bots=[2, 4, 3, 3], minutes=23, trace='O3O1C1C0C1C0O1O3G0O1G1G')
+['d19full.txt', 18] improved to 11 via State(inv=[4, 16, 4, 5], bots=[2, 4, 4, 3], minutes=22, trace='O3O1C1C0C2O0C1O1O0G0O1G0G')
+['d19full.txt', 18] improved to 12 via State(inv=[4, 18, 5, 6], bots=[2, 4, 4, 3], minutes=22, trace='O3O1C1C0C1C0O1O2O0G0O0G1G')
+['d19full.txt', 18] iter 141644, |Q|=36051
+['d19full.txt', 18] iter 267474, |Q|=66079
+['d19full.txt', 18] iter 401843, |Q|=53800
+['d19full.txt', 18] iter 544092, |Q|=43083
+['d19full.txt', 18] iter 696918, |Q|=834
+['d19full.txt', 18] Done in 697764 iters, best = 12
+['d19full.txt', 18] blueprint 18 can get 12 geodes

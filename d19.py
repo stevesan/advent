@@ -151,10 +151,10 @@ def best_num_geodes(bp:Blueprint):
 
     # If we could immediately build all bots, there's no point in idling.
 
-  print(f'{LOGPRE} Done in {iters} iters')
+  print(f'{LOGPRE} Done in {iters} iters, best = {best_score}')
   return best_score
 
-def main(filep):
+def main(filep, first=None, last=None):
   blueprints: list[Blueprint] = []
   LOGPRE.append(filep)
   with open(filep, 'r') as f:
@@ -185,24 +185,37 @@ def main(filep):
       blueprints.append(bp)
 
   total_qual = 0
-  for bp in blueprints:
+  todo = blueprints
+  if first is not None:
+    todo = blueprints[first-1:last-1+1]
+  for bp in todo:
+    LOGPRE.append(bp.id)
+    print(f'doing {bp.id}')
     best = best_num_geodes(bp)
     qual = best * bp.id
     total_qual += qual
     print(f'{LOGPRE} blueprint {bp.id} can get {best} geodes')
+    LOGPRE.pop(-1)
 
   LOGPRE.pop(-1)
   return total_qual
 
 if len(sys.argv) > 1:
-  VERBOSE = True
-  MAX_MINUTES = int(sys.argv[1])
-  assert main(sys.argv[2]) == int(sys.argv[3])
+  if sys.argv[1] == 'split':
+    f = 'd19full.txt'
+    first = int(sys.argv[2])
+    last = int(sys.argv[3])
+    main(f, first, last)
+  else:
+    VERBOSE = True
+    MAX_MINUTES = int(sys.argv[1])
+    assert main(sys.argv[2]) == int(sys.argv[3])
 else:
   assert main('d19tiny.txt') == 253
   assert main('d19tiny2.txt') == 253
   assert main('d19lastminute.txt') == 0
   assert main('d19lastminute1.txt') == 1
-  assert main('d19sample-bp1only.txt') == 9
-  assert main('d19sample-bp2only.txt') == 12
-  assert main('d19sample.txt') == 33
+  # assert main('d19sample-bp1only.txt') == 9
+  # assert main('d19sample-bp2only.txt') == 12
+  # assert main('d19sample.txt') == 33
+  main('d19full.txt')
