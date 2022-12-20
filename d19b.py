@@ -112,7 +112,7 @@ def best_num_geodes(bp:Blueprint):
     t1 = time.time()
     if t1 - t0 > 2:
       t0 = t1
-      print(f'{LOGPRE} iter {iters:,}, |Q|={len(Q)}')
+      print(f'{LOGPRE} iter {iters:,}, |Q|={len(Q)}, best={best_score}')
 
     iters += 1
     state:State = pop()
