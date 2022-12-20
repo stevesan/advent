@@ -91,6 +91,7 @@ class State:
 
 def best_num_geodes(bp:Blueprint):
   t0 = time.time()
+  last_log_time = time.time()
 
   init_state = State(inv=[0, 0, 0, 0], bots=[1, 0, 0, 0], minutes=0, trace='O')
   Q:list[State] = []
@@ -103,39 +104,40 @@ def best_num_geodes(bp:Blueprint):
     return heapq.heappop(Q)[-1]
 
   push(init_state)
-
+  aprunes = 0
   best_score = 0
-  best_state = None
   iters = 0
   while Q:
     t1 = time.time()
-    if t1 - t0 > 2:
-      t0 = t1
-      print(f'{LOGPRE} iter {iters:,}, |Q|={len(Q)}, best={best_score}')
+    if t1 - last_log_time > 2:
+      last_log_time = t1
+      elapsed = t1 - t0
+      print(f'{LOGPRE} {elapsed:.2f}s, iter {iters:,}, |Q|={len(Q)}, best={best_score}, Ap={aprunes:,}')
 
     iters += 1
     state:State = pop()
+
+    if VERBOSE: print(f'Visiting {state}')
 
     # Assess the idle-value of this state. Ie. just idling here, how much geode would we get?
     idle_score = state.inv[GEODE] + (MAX_MINUTES-state.minutes) * state.bots[GEODE]
     if idle_score > best_score:
       best_score = idle_score
-      best_state = state
       print(f'{LOGPRE} improved to {best_score} via {state}')
 
     if (MAX_MINUTES - state.minutes) < 2:
       # Need at least 2 minutes to build a new bot and mine. So, anything less, the idle score is the best we can do
       continue
 
-    # Prune: let's generously assume you can build 1 geode bot every turn for the remaining minutes..even then, would you do better than the best? if not, we can prune
+    # A Prune: let's generously assume you can build 1 geode bot every turn for the remaining minutes..even then, would you do better than the best? if not, we can prune
+    # This helps a lot. Even with tiny2!!
     remain = MAX_MINUTES - state.minutes
     generous_addl_geodes = remain * (remain+1) / 2
     existing_bot_geodes = remain * state.bots[GEODE]
     if state.inv[GEODE] + generous_addl_geodes + existing_bot_geodes <= best_score:
-      if VERBOSE: print(f'Pruned {state}')
+      if VERBOSE: print(f'A-pruned {state}')
+      aprunes += 1
       continue
-
-    if VERBOSE: print(f'Expanding {state}')
 
     # fast forward to..which bot should we build next?
     # Favor building geode bots first..to improve potential pruning
@@ -153,7 +155,8 @@ def best_num_geodes(bp:Blueprint):
 
     # If we could immediately build all bots, there's no point in idling.
 
-  print(f'{LOGPRE} Done in {iters:,} iters, best = {best_score}')
+  dt = time.time() - t0
+  print(f'{LOGPRE} Done in {iters:,} iters, {dt:.2f}s, best = {best_score}')
   return best_score
 
 def main(filep, first=None, last=None):
