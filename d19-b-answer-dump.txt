@@ -1,0 +1,12 @@
+['d19full.txt', 1] iter 19442025, |Q|=204234
+['d19full.txt', 1] iter 19519807, |Q|=202959
+['d19full.txt', 1] iter 19602474, |Q|=159094
+['d19full.txt', 1] iter 19689392, |Q|=98449
+['d19full.txt', 1] iter 19792616, |Q|=10809
+['d19full.txt', 1] Done in 19803623 iters, best = 30
+['d19full.txt', 1] blueprint 1 can get 30 geodes
+
+
+
+
+['d19sample-bp1only.txt', 1] Done in 3 248 012 iters, best = 56
