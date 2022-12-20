@@ -136,33 +136,18 @@ def best_num_geodes(bp:Blueprint):
 
     if VERBOSE: print(f'Expanding {state}')
 
-    idle_actions = []
+    # fast forward to..which bot should we build next?
     # Favor building geode bots first..to improve potential pruning
     for bottype in [Res.GEODE, Res.OBSIDIAN, Res.CLAY, Res.ORE]:
       costs = bp.bot2costs[bottype.value]
       time_to_afford = state.time_to_afford_bot(costs)
-      if time_to_afford is None:
+      if time_to_afford is None or state.minutes + time_to_afford + 1 >= MAX_MINUTES:
         continue
-      if time_to_afford <= 0:
-        # Build it now
-        assert state.can_afford(costs)
-        new_state = state.clone()
-        new_state.tick(bottype, costs)
-        push(new_state)
-      else:
-        # idle to the time it takes
-        idle_actions.append((bottype, time_to_afford))
-
-    if idle_actions:
-      # idle to the soonest bot
-      min_time = min([t[1] for t in idle_actions])
-      if min_time + state.minutes >= MAX_MINUTES:
-        # Even waiting for the soonest bot exceeds max minutes - done here.
-        continue
-      # ONLY idle if we cannot afford some bot. Otherwise, there is never any point to idling and we should've built.
-      idle_state = state.clone()
-      idle_state.idle_for(min_time)
-      push(idle_state)
+      # idle for time to afford, then build it
+      new_state = state.clone()
+      new_state.idle_for(time_to_afford)
+      new_state.tick(bottype, costs)
+      push(new_state)
 
     # If we could immediately build all bots, there's no point in idling.
 
@@ -216,6 +201,8 @@ if len(sys.argv) > 1:
 else:
   assert main('d19tiny.txt') == 253
   assert main('d19tiny2.txt') == 253
+  assert main('d19lastminute.txt') == 0
+  assert main('d19lastminute1.txt') == 1
   assert main('d19sample-bp1only.txt') == 9
   assert main('d19sample-bp2only.txt') == 12
   assert main('d19sample.txt') == 33
