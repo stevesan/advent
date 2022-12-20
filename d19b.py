@@ -216,7 +216,6 @@ else:
   assert main('d19tiny2.txt') == 465
   assert main('d19b-lastminute.txt') == 0
   assert main('d19b-lastminute1.txt') == 1
-  # assert main('d19sample-bp1only.txt') == 9
-  # assert main('d19sample-bp2only.txt') == 12
-  # assert main('d19sample.txt') == 33
+  assert main('d19sample-bp1only.txt') == 56
+  assert main('d19sample-bp2only.txt') == 62
   # main('d19full.txt')
