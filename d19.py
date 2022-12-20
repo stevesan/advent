@@ -15,6 +15,10 @@ class Res(Enum):
   CLAY = 1
   OBSIDIAN = 2
   GEODE = 3
+ORE = 0
+CLAY = 1
+OBSIDIAN = 2
+GEODE = 3
 
 @dataclass
 class Blueprint:
@@ -101,13 +105,19 @@ def best_num_geodes(bp:Blueprint):
     if VERBOSE: print(state)
 
     # Assess the idle-value of this state. Ie. just idling here, how much geode would we get?
-    idle_score = state.inv[Res.GEODE.value] + (MAX_MINUTES-state.minutes) * state.bots[Res.GEODE.value]
+    idle_score = state.inv[GEODE] + (MAX_MINUTES-state.minutes) * state.bots[GEODE]
     if idle_score > best_score:
       best_score = idle_score
       print(f'{LOGPRE} improved to {best_score}')
 
     if state.minutes == MAX_MINUTES:
       continue
+
+    # Prune: let's generously assume you can build 1 geode bot every turn for the remaining minutes..even then, would you do better than the best? if not, we can prune
+    remain = MAX_MINUTES - state.minutes
+    generous_addl_geodes = remain * (remain+1) / 2
+    existing_bot_geodes = remain * state.bots[GEODE]
+    if state.inv[GEODE] + generous_addl_geodes + existing_bot_geodes <= best_score: continue
 
     idle_actions = []
     for bottype in Res:
@@ -138,6 +148,7 @@ def best_num_geodes(bp:Blueprint):
 
     # If we could immediately build all bots, there's no point in idling.
 
+  print(f'{LOGPRE} Done in {iters} iters')
   return best_score
 
 def main(filep):
