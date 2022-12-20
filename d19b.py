@@ -121,7 +121,8 @@ def best_num_geodes(bp:Blueprint):
       best_score = idle_score
       print(f'{LOGPRE} improved to {best_score} via {state}')
 
-    if state.minutes == MAX_MINUTES:
+    if (MAX_MINUTES - state.minutes) < 2:
+      # Need at least 2 minutes to build a new bot and mine. So, anything less, the idle score is the best we can do
       continue
 
     # Prune: let's generously assume you can build 1 geode bot every turn for the remaining minutes..even then, would you do better than the best? if not, we can prune
