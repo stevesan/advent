@@ -217,4 +217,6 @@ if len(sys.argv) > 1:
 else:
   assert main('d19tiny.txt') == 253
   assert main('d19tiny2.txt') == 253
+  assert main('d19sample-bp1only.txt') == 9
+  assert main('d19sample-bp2only.txt') == 12
   assert main('d19sample.txt') == 33
