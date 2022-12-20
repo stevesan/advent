@@ -99,7 +99,7 @@ def best_num_geodes(bp:Blueprint):
 
   def push(state:State):
     # Order by number of geode bots...the number of geodes..
-    heapq.heappush(Q, (MAX_MINUTES - state.bots[GEODE], MAX_MINUTES - state.inv[GEODE], state))
+    heapq.heappush(Q, (-state.bots[GEODE], -state.inv[GEODE], state))
 
   def pop():
     return heapq.heappop(Q)[-1]
