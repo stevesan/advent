@@ -83,8 +83,7 @@ class State:
   def idle_for(self, minutes:int):
     self.minutes += minutes
     for i in range(len(self.bots)):
-      self.inv[i] += self.bots[i]
-
+      self.inv[i] += self.bots[i] * minutes
     self.trace += str(minutes)
 
   def __lt__(self, nxt):
