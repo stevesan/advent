@@ -112,7 +112,7 @@ def best_num_geodes(bp:Blueprint):
     t1 = time.time()
     if t1 - t0 > 2:
       t0 = t1
-      print(f'{LOGPRE} iter {iters}, |Q|={len(Q)}')
+      print(f'{LOGPRE} iter {iters:,}, |Q|={len(Q)}')
 
     iters += 1
     state:State = pop()
@@ -152,7 +152,7 @@ def best_num_geodes(bp:Blueprint):
 
     # If we could immediately build all bots, there's no point in idling.
 
-  print(f'{LOGPRE} Done in {iters} iters, best = {best_score}')
+  print(f'{LOGPRE} Done in {iters:,} iters, best = {best_score}')
   return best_score
 
 def main(filep, first=None, last=None):
