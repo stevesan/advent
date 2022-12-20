@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import time
 from math import ceil
 import sys
+import heapq
 
 LOGPRE = []
 
@@ -86,21 +87,36 @@ class State:
 
     self.trace += str(minutes)
 
+  def __lt__(self, nxt):
+    return sum(self.bots) < sum(nxt.bots) \
+      or sum(self.inv) < sum(nxt.inv) \
+      or self.minutes < nxt.minutes
+
 def best_num_geodes(bp:Blueprint):
   t0 = time.time()
 
   init_state = State(inv=[0, 0, 0, 0], bots=[1, 0, 0, 0], minutes=0, trace='O')
-  stack:list[State] = [init_state]
+  Q:list[State] = []
+
+  def push(state:State):
+    # Order by number of geode bots...the number of geodes..
+    heapq.heappush(Q, (MAX_MINUTES - state.bots[GEODE], MAX_MINUTES - state.inv[GEODE], state))
+
+  def pop():
+    return heapq.heappop(Q)[-1]
+
+  push(init_state)
+
   best_score = 0
   iters = 0
-  while stack:
+  while Q:
     t1 = time.time()
     if t1 - t0 > 2:
       t0 = t1
-      print(f'{LOGPRE} iter {iters}, #stack={len(stack)}')
+      print(f'{LOGPRE} iter {iters}, |Q|={len(Q)}')
 
     iters += 1
-    state = stack.pop(0)
+    state:State = pop()
 
     # Assess the idle-value of this state. Ie. just idling here, how much geode would we get?
     idle_score = state.inv[GEODE] + (MAX_MINUTES-state.minutes) * state.bots[GEODE]
@@ -115,7 +131,9 @@ def best_num_geodes(bp:Blueprint):
     remain = MAX_MINUTES - state.minutes
     generous_addl_geodes = remain * (remain+1) / 2
     existing_bot_geodes = remain * state.bots[GEODE]
-    if state.inv[GEODE] + generous_addl_geodes + existing_bot_geodes <= best_score: continue
+    if state.inv[GEODE] + generous_addl_geodes + existing_bot_geodes <= best_score:
+      if VERBOSE: print(f'Pruned {state}')
+      continue
 
     if VERBOSE: print(f'Expanding {state}')
 
@@ -131,7 +149,7 @@ def best_num_geodes(bp:Blueprint):
         assert state.can_afford(costs)
         new_state = state.clone()
         new_state.tick(bottype, costs)
-        stack.append(new_state)
+        push(new_state)
       else:
         # idle to the time it takes
         idle_actions.append((bottype, time_to_afford))
@@ -145,7 +163,7 @@ def best_num_geodes(bp:Blueprint):
       # ONLY idle if we cannot afford some bot. Otherwise, there is never any point to idling and we should've built.
       idle_state = state.clone()
       idle_state.idle_for(min_time)
-      stack.append(idle_state)
+      push(idle_state)
 
     # If we could immediately build all bots, there's no point in idling.
 
