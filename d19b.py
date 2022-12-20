@@ -105,6 +105,7 @@ def best_num_geodes(bp:Blueprint):
   push(init_state)
 
   best_score = 0
+  best_state = None
   iters = 0
   while Q:
     t1 = time.time()
@@ -119,6 +120,7 @@ def best_num_geodes(bp:Blueprint):
     idle_score = state.inv[GEODE] + (MAX_MINUTES-state.minutes) * state.bots[GEODE]
     if idle_score > best_score:
       best_score = idle_score
+      best_state = state
       print(f'{LOGPRE} improved to {best_score} via {state}')
 
     if (MAX_MINUTES - state.minutes) < 2:
