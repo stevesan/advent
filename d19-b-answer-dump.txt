@@ -6,6 +6,23 @@
 ['d19full.txt', 1] Done in 19803623 iters, best = 30
 ['d19full.txt', 1] blueprint 1 can get 30 geodes
 
+*****
+
+xt', 2] iter 312,036,074, |Q|=7236
+['d19full.txt', 2] iter 312,256,625, |Q|=7293
+['d19full.txt', 2] iter 312,471,418, |Q|=7296
+['d19full.txt', 2] iter 312,691,730, |Q|=7316
+['d19full.txt', 2] iter 312,917,153, |Q|=7221
+['d19full.txt', 2] Done in 312,959,971 iters, best = 54
+['d19full.txt', 2] blueprint 2 can get 54 geodes
+
+****** 
+['d19full.txt', 3] iter 31,429,336, |Q|=6005, best=14, Ap=1,733,607, Bp=20,036,096
+['d19full.txt', 3] iter 31,662,463, |Q|=5978, best=14, Ap=1,739,271, Bp=20,196,689
+['d19full.txt', 3] iter 31,904,208, |Q|=6030, best=14, Ap=1,742,477, Bp=20,355,999
+['d19full.txt', 3] improved to 15 via State(inv=[43, 54, 7, 9], bots=[4, 10, 7, 3], minutes=30, trace='O2O1OOCCCCCCCCCOOO1OCO1GO1GO1G')
+*****
+
 ['d19sample-bp1only.txt', 1] iter 2,873,176, |Q|=41082
 ['d19sample-bp1only.txt', 1] iter 3,020,236, |Q|=39955
 ['d19sample-bp1only.txt', 1] iter 3,147,940, |Q|=36381
