@@ -87,9 +87,7 @@ class State:
     self.trace += str(minutes)
 
   def __lt__(self, nxt):
-    return sum(self.bots) < sum(nxt.bots) \
-      or sum(self.inv) < sum(nxt.inv) \
-      or self.minutes < nxt.minutes
+    return False
 
 def best_num_geodes(bp:Blueprint):
   t0 = time.time()
