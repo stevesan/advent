@@ -55,19 +55,19 @@ class State:
 
 
 def best_num_geodes(bp:Blueprint):
-  MAX_MINUTES = 24
+  MAX_MINUTES = 26
   init_state = State(res2count=[0, 0, 0, 0], bot2count=[1, 0, 0, 0], minutes=0)
   stack:list[State] = [init_state]
   best_score = 0
   iters = 0
   while stack:
-    print(iters)
     iters += 1
     state = stack.pop(0)
 
     if state.minutes == MAX_MINUTES:
-      if state.res2count[Res.GEODE] > best_score:
-        best_score = state.res2count[Res.GEODE]
+      if state.res2count[Res.GEODE.value] > best_score:
+        best_score = state.res2count[Res.GEODE.value]
+        print(f'improved to {best_score}')
       continue
 
     # We can always just idle
@@ -78,7 +78,6 @@ def best_num_geodes(bp:Blueprint):
     # We can also build bots we can afford..
     for bottype in Res:
       if state.can_afford(bp.bot2costs[bottype.value]):
-        print(f'building {bottype}')
         new_state = state.clone()
         new_state.tick(bottype, bp.bot2costs[bottype.value])
         stack.append(new_state)
@@ -104,7 +103,6 @@ def main(filep):
         botres = Res[bottype.upper()]
         costs = [0] * 3
         for res_cost in res_costs.split(' and '):
-          print(res_cost)
           count, resstr = res_cost.strip().split(' ')
           count = int(count)
           res = Res[resstr.upper()]
@@ -120,8 +118,9 @@ def main(filep):
     best = best_num_geodes(bp)
     qual = best * bp.id
     total_qual += qual
+    print(f'blueprint {bp.id} can get {best} geodes')
 
   return total_qual
 
 assert main('d19tiny.txt') == 276
-assert main('d19sample.txt') == 33
+# assert main('d19sample.txt') == 33
