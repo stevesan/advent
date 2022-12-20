@@ -102,13 +102,11 @@ def best_num_geodes(bp:Blueprint):
     iters += 1
     state = stack.pop(0)
 
-    if VERBOSE: print(state)
-
     # Assess the idle-value of this state. Ie. just idling here, how much geode would we get?
     idle_score = state.inv[GEODE] + (MAX_MINUTES-state.minutes) * state.bots[GEODE]
     if idle_score > best_score:
       best_score = idle_score
-      print(f'{LOGPRE} improved to {best_score}')
+      print(f'{LOGPRE} improved to {best_score} via {state}')
 
     if state.minutes == MAX_MINUTES:
       continue
@@ -119,8 +117,11 @@ def best_num_geodes(bp:Blueprint):
     existing_bot_geodes = remain * state.bots[GEODE]
     if state.inv[GEODE] + generous_addl_geodes + existing_bot_geodes <= best_score: continue
 
+    if VERBOSE: print(f'Expanding {state}')
+
     idle_actions = []
-    for bottype in Res:
+    # Favor building geode bots first..to improve potential pruning
+    for bottype in [Res.GEODE, Res.OBSIDIAN, Res.CLAY, Res.ORE]:
       costs = bp.bot2costs[bottype.value]
       time_to_afford = state.time_to_afford_bot(costs)
       if time_to_afford is None:
@@ -186,7 +187,7 @@ def main(filep):
     best = best_num_geodes(bp)
     qual = best * bp.id
     total_qual += qual
-    print(f'blueprint {bp.id} can get {best} geodes')
+    print(f'{LOGPRE} blueprint {bp.id} can get {best} geodes')
 
   LOGPRE.pop(-1)
   return total_qual
