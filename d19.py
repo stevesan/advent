@@ -1,5 +1,7 @@
 from enum import Enum
 from dataclasses import dataclass
+import time
+from math import ceil
 
 class Res(Enum):
   ORE = 0
@@ -18,21 +20,30 @@ class Blueprint:
 
 @dataclass
 class State:
-  res2count:list[int]
-  bot2count:list[int]
+  inv:list[int]
+  bots:list[int]
   minutes:int
+
   def clone(self):
-    return State(res2count=list(self.res2count), \
-      bot2count=list(self.bot2count), \
+    return State(inv=list(self.inv), \
+      bots=list(self.bots), \
       minutes=self.minutes)
 
-  def can_afford(self, res2need:list[int]):
-    assert len(res2need) == 3
-    assert len(self.res2count) == 4
-    for i in range(len(res2need)):
-      if res2need[i] > self.res2count[i]:
-        return False
-    return True
+  def can_afford(self, costs:list[int]):
+    assert len(costs) == 3
+    assert len(self.inv) == 4
+    return costs[0] <= self.inv[0] and costs[1] <= self.inv[1] and costs[2] <= self.inv[2]
+
+  def time_to_afford_bot(self, costs:list[int]):
+    max_time = 0
+    for i in range(3):
+      if costs[i] == 0: continue
+      if self.bots[i] == 0 and costs[i] > 0:
+        # Can never afford just idling
+        return None
+      time = ceil((costs[i] - self.inv[i]) / self.bots[i])
+      max_time = max(max_time, time)
+    return max_time
 
   def tick(self, bot_to_build:Res, bot_res2need:list[int]):
     # We can only build bots we can afford at start of frame
@@ -43,44 +54,75 @@ class State:
     self.minutes += 1
 
     # Current bots collect
-    for i in range(len(self.bot2count)):
-      self.res2count[i] += self.bot2count[i]
+    for i in range(len(self.bots)):
+      self.inv[i] += self.bots[i]
 
     if bot_to_build is not None:
       # Spend resources to build
       for i in range(3):
-        self.res2count[i] -= bot_res2need[i]
+        self.inv[i] -= bot_res2need[i]
       # Build it
-      self.bot2count[bot_to_build.value] += 1
+      self.bots[bot_to_build.value] += 1
 
+  def idle_for(self, minutes:int):
+    self.minutes += minutes
+    for i in range(len(self.bots)):
+      self.inv[i] += self.bots[i]
 
 def best_num_geodes(bp:Blueprint):
-  MAX_MINUTES = 26
-  init_state = State(res2count=[0, 0, 0, 0], bot2count=[1, 0, 0, 0], minutes=0)
+  t0 = time.time()
+
+  MAX_MINUTES = 20
+  init_state = State(inv=[0, 0, 0, 0], bots=[1, 0, 0, 0], minutes=0)
   stack:list[State] = [init_state]
   best_score = 0
   iters = 0
   while stack:
+    t1 = time.time()
+    if t1 - t0 > 2:
+      t0 = t1
+      print(f'iter {iters}, #stack={len(stack)}')
+
     iters += 1
     state = stack.pop(0)
 
+    # Assess the idle-value of this state. Ie. just idling here, how much geode would we get?
+    idle_score = state.inv[Res.GEODE.value] + (MAX_MINUTES-state.minutes) * state.bots[Res.GEODE.value]
+    if idle_score > best_score:
+      best_score = idle_score
+      print(f'improved to {best_score}')
+
     if state.minutes == MAX_MINUTES:
-      if state.res2count[Res.GEODE.value] > best_score:
-        best_score = state.res2count[Res.GEODE.value]
-        print(f'improved to {best_score}')
       continue
 
-    # We can always just idle
-    idle_state = state.clone()
-    idle_state.tick(None, None)
-    stack.append(idle_state)
-
-    # We can also build bots we can afford..
+    idle_actions = []
     for bottype in Res:
-      if state.can_afford(bp.bot2costs[bottype.value]):
+      costs = bp.bot2costs[bottype.value]
+      time_to_afford = state.time_to_afford_bot(costs)
+      if time_to_afford is None:
+        continue
+      if time_to_afford <= 0:
+        # Build it now
+        assert state.can_afford(costs)
         new_state = state.clone()
-        new_state.tick(bottype, bp.bot2costs[bottype.value])
+        new_state.tick(bottype, costs)
         stack.append(new_state)
+      else:
+        # idle to the time it takes
+        idle_actions.append((bottype, time_to_afford))
+
+    if idle_actions:
+      # idle to the soonest bot
+      min_time = min([t[1] for t in idle_actions])
+      if min_time + state.minutes >= MAX_MINUTES:
+        # Even waiting for the soonest bot exceeds max minutes - done here.
+        continue
+      # ONLY idle if we cannot afford some bot. Otherwise, there is never any point to idling and we should've built.
+      idle_state = state.clone()
+      idle_state.idle_for(min_time)
+      stack.append(idle_state)
+
+    # If we could immediately build all bots, there's no point in idling.
 
   return best_score
 
