@@ -26,7 +26,6 @@ hmm nah, it's not necessarily true that you need to open 15 valves for max relea
 class SearchState:
   opened: set[Node]
   my_node: Node
-  last_open: Node
   actions: list[str]
   pressure_released:int = 0
   time:int = 0
@@ -40,12 +39,13 @@ class SearchState:
       pressure_released=self.pressure_released,
       time=self.time,
       total_rate=self.total_rate,
-      last_open=self.last_open,
       )
 
   def __str__(self):
-    return ';'.join(self.actions) + ' opened=[' + ",".join(self.opened_names()) + "] t=" + str(self.time) + " p=" + str(self.pressure_released)  \
-    + f' r={self.total_rate}'
+    return f'@{self.my_node.name}. actions=' \
+      + ';'.join(self.actions) \
+      + ' opened=[' + ",".join(self.opened_names()) + "] t=" + str(self.time) + " p=" + str(self.pressure_released)  \
+      + f' r={self.total_rate}'
 
   def opened_names(self):
     return [node.name for node in self.opened]
@@ -70,7 +70,7 @@ def ordpair(a:str, b:str):
 
 def find_max_release(name2node:dict[str, Node], timing_csvf):
   init_node = name2node['AA']
-  init_state = SearchState(opened=set(), my_node=init_node, actions=[], time=0, last_open=None)
+  init_state = SearchState(opened=set(), my_node=init_node, actions=[], time=0)
   states_to_explore:list[SearchState] = [init_state]
 
   nonzero_valve_names = [node.name for node in name2node.values() if node.rate > 0]
@@ -88,6 +88,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
   while states_to_explore:
     iters += 1
     state:SearchState = states_to_explore.pop(0)
+    print(f'** doing {state}')
 
     if iters % 10000 == 0:
       elapsed = time.time() - t0
@@ -114,7 +115,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
       # print(f'comparing to {other}')
       total_compares += 1
       if state_is_worse_or_equal(state, other):
-        # print(f'pruned!')
+        print(f'pruned:\n  {state}\n  <=\n  {other}')
         is_pruned = True
         break
     if is_pruned:
@@ -149,7 +150,7 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
     my_node = state.my_node
     my_actions = [(MOVE, nbor) for nbor in my_node.nbors]
     if my_node.rate > 0 and my_node not in state.opened:
-      my_actions.append((OPEN, None))
+      my_actions.insert(0, (OPEN, None))
 
     for my_action in my_actions:
       # Ok, for this action pair, create the resulting state and push it
@@ -157,17 +158,15 @@ def find_max_release(name2node:dict[str, Node], timing_csvf):
       # Important to do this before a update total_rate after applying open actions, since while opening, we can't use that rate yet!
       new_state.pressure_released += new_state.total_rate
       new_state.time += 1
-      new_state.actions.append(f'score={new_state.pressure_released}')
+      # new_state.actions.append(f'score={new_state.pressure_released}')
 
       if my_action[0] == OPEN:
-        new_state.last_open = my_node
         new_state.opened.add(my_node)
         new_state.total_rate += my_node.rate
-        new_state.actions.append(f'open {my_node.name}/{my_node.rate}')
+        new_state.actions.append(f'open {my_node.name}')
       else:
-        new_state.last_open = None
         new_state.my_node = my_action[1]
-        new_state.actions.append(f'goto {my_action[1].name}')
+        new_state.actions.append(f'{my_action[1].name}')
 
       states_to_explore.append(new_state)
         
@@ -214,16 +213,12 @@ def main(inputf):
     return find_max_release(name2node, f)
 
 
-assert main('d16tiny.txt') == 29
-assert main('d16-leftright.txt') == 28 + 25
-assert main('d16-example-where-opening-BB-first-is-worse.txt') == 565
-assert main('d16-chain.txt') == 520
-assert main('d16test.txt') == 1651
-assert main('d16real.txt') == 2059
-
-
-import cProfile
-# cProfile.run('assert main("d16test.txt") == 1707')
-
 if len(sys.argv) > 1:
   main(sys.argv[1])
+else:
+  assert main('d16tiny.txt') == 29
+  assert main('d16-leftright.txt') == 28 + 25
+  assert main('d16-example-where-opening-BB-first-is-worse.txt') == 565
+  assert main('d16-chain.txt') == 520
+  assert main('d16test.txt') == 1651
+  assert main('d16real.txt') == 2059

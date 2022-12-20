@@ -1,0 +1,30 @@
+suppose there was a case where A <= B, but actually A could go on to be better than B.
+
+we know they're at the position X
+
+
+(1) if A's valves are a strict subset of B's, then any valve A can newly open, B can also newly open by trivially following the same steps as A. And because start conditions are the same, B will definitely be >= then A on all numbers.
+  or if A opens a valve that B already has open, B gains even more advantage because it already has it opened.
+
+(2) What if A's valves are NOT a subset?
+
+  let U be the intersection of A's and B's valves.
+  let P be A's valves - U
+  let Q be B's valves - U
+  
+  rate(A) = rate(P) + rate(U)
+  rate(B) = rate(Q) + rate(U)
+  we know:
+  rate(P) + rate(U) <= rate(Q) + rate(U)
+  thusL
+  rate(P) <= rate(Q)
+
+WLOG we can assume that A took the optimal route to turn on its valves.
+
+  it's now possible for A to open up valves in Q to gain rate...ok, and if it kept doing that, eventually it'd exceed B's rate..
+  but B doesn't just sit still here.. B can start opening valves in P now too...
+
+  because of symmetry of paths, we know that from the current spot X, time(P+U) >= time(Q+U)
+  let's assume time(P) >= time(Q) (pretty sure this is fine if A and B are optimal for their valves)
+
+  so it may take more time for B to open P than for A to open rest of Q...but in that time, B was accumulating pressure at a higher rate.
