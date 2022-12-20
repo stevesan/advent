@@ -145,7 +145,8 @@ def best_num_geodes(bp:Blueprint):
         continue
       # idle for time to afford, then build it
       new_state = state.clone()
-      new_state.idle_for(time_to_afford)
+      if time_to_afford > 0:
+        new_state.idle_for(time_to_afford)
       new_state.build_bot(bottype, costs)
       push(new_state)
 
@@ -211,8 +212,8 @@ if len(sys.argv) > 1:
     MAX_MINUTES = int(sys.argv[1])
     assert main(sys.argv[2]) == int(sys.argv[3])
 else:
-  # assert main('d19tiny.txt') == 253
-  # assert main('d19tiny2.txt') == 253
+  assert main('d19tiny.txt') == 465
+  assert main('d19tiny2.txt') == 465
   assert main('d19b-lastminute.txt') == 0
   assert main('d19b-lastminute1.txt') == 1
   # assert main('d19sample-bp1only.txt') == 9
