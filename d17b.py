@@ -4,7 +4,7 @@ tu = tuple
 ar = np.array
 
 input = '>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>'
-with open('d17real.txt', 'r') as f: input = f.read()
+# with open('d17real.txt', 'r') as f: input = f.read()
 # input = '>'
 
 print(f'jet pattern len: {len(input)}')
@@ -50,6 +50,17 @@ for shape_lines in shapes_lines:
 for shape in shapes:
   print(shape)
 
+def is_symmetric(s):
+  S = len(s)
+  if S % 2 != 0: return False
+  A = s[0:S//2]
+  B = s[S//2:]
+  # print(max_y_set, A, B)
+  return A == B
+
+assert is_symmetric('foobarfoobar')
+assert not is_symmetric('foobarfoobaz')
+
 grid = set()
 def gget(p): return tuple(p) in grid
 def gset(p): grid.add(tuple(p))
@@ -69,7 +80,7 @@ t0 = time.time()
 t00 = t0
 pushindex = 0
 max_y_set = -1
-statestr = ''
+s = ''
 milestones = []
 BIGN = 1000000000000
 for rocknum in range(2022):
@@ -103,7 +114,6 @@ for rocknum in range(2022):
         any_blocked = True
         break
     if not any_blocked:
-      # print(f'pushed {pushdir[0]}')
       pos = tu(ar(pos) + ar(pushdir))
 
     # fall
@@ -116,7 +126,6 @@ for rocknum in range(2022):
         any_blocked = True
         break
     if not any_blocked:
-      # print(f'fell one')
       pos = tu(ar(pos) + ar(DOWN))
     else:
       # done - rasterize this shape into the grid
@@ -127,27 +136,5 @@ for rocknum in range(2022):
         max_y_set = max(max_y_set, bpos[1])
       break
 
-  if False:
-    if max_y_set > prev_max_y:
-      # add to our string..
-      for y in range(prev_max_y+1, max_y_set+1):
-        for x in range(WIDTH):
-          p = (x, y)
-          statestr += '#' if gget(p) else '.'
-        statestr += '\n'
-
-      # check for symmetry..
-      S = len(statestr)
-      if S % 2 == 0:
-        A = statestr[0:S//2]
-        B = statestr[S//2:]
-        # print(max_y_set, A, B)
-        if A == B:
-          print('detected symmetry!')
-          print(A)
-          print(B)
-          break
-
 print(get_height())
-
 print(np.diff(milestones))
