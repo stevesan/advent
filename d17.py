@@ -3,7 +3,7 @@ tu = tuple
 ar = np.array
 
 input = '>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>'
-# with open('d17real.txt', 'r') as f: input = f.read()
+with open('d17real.txt', 'r') as f: input = f.read()
 
 WIDTH = 7
 shapestext = '''####
@@ -46,10 +46,13 @@ for shape_lines in shapes_lines:
 for shape in shapes:
   print(shape)
 
+grid = set()
+def gget(p): return tuple(p) in grid
+def gset(p): grid.add(tuple(p))
 
-grid = {}
-def gget(p): return grid[tuple(p)]
-def gset(p, val): grid[tuple(p)] = val
+def get_height():
+  if len(grid) == 0: return 0
+  return max(p[1] for p in grid) + 1
 
 LEFT = (-1, 0)
 RIGHT = (1, 0)
@@ -58,11 +61,48 @@ DOWN = (0, -1)
 
 JET2DIR = {'<':LEFT, '>':RIGHT}
 
-dirs = [ar(d) for d in [
-  (1, 0, 0),
-  (-1, 0, 0),
-  (0, 1, 0),
-  (0, -1, 0),
-  (0, 0, 1),
-  (0, 0, -1),
-]]
+pushindex = 0
+for iter in range(2022):
+  shape = shapes[iter % len(shapes)]
+  height = get_height()
+  pos = (2, height + 3)
+
+  jetindex = 0
+  for falliter in range(height + 10):
+    pushdir = JET2DIR[input[pushindex % len(input)]]
+    pushindex += 1
+
+    # push
+    any_blocked = False
+    for bpos in shape:
+      bpos = ar(bpos) + ar(pos)
+      bpos = bpos + ar(pushdir)
+      x = bpos[0]
+      if x < 0 or x >= WIDTH or gget(bpos):
+        any_blocked = True
+        break
+    if not any_blocked:
+      # print(f'pushed {pushdir[0]}')
+      pos = tu(ar(pos) + ar(pushdir))
+
+    # fall
+    any_blocked = False
+    for bpos in shape:
+      bpos = ar(bpos) + ar(pos)
+      bpos = bpos + ar(DOWN)
+      y = bpos[1]
+      if y < 0 or gget(bpos):
+        any_blocked = True
+        break
+    if not any_blocked:
+      # print(f'fell one')
+      pos = tu(ar(pos) + ar(DOWN))
+    else:
+      # done - rasterize this shape into the grid
+      for bpos in shape:
+        bpos = ar(bpos) + ar(pos)
+        # print(f'setting {bpos}')
+        gset(bpos)
+      break
+
+print(get_height())
