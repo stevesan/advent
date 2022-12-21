@@ -4,7 +4,10 @@ tu = tuple
 ar = np.array
 
 input = '>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>'
-# with open('d17real.txt', 'r') as f: input = f.read()
+with open('d17real.txt', 'r') as f: input = f.read()
+# input = '>'
+
+print(f'jet pattern len: {len(input)}')
 
 WIDTH = 7
 shapestext = '''####
@@ -63,17 +66,26 @@ DOWN = (0, -1)
 JET2DIR = {'<':LEFT, '>':RIGHT}
 
 t0 = time.time()
+t00 = t0
 pushindex = 0
 max_y_set = -1
 statestr = ''
-for rocknum in range(1000000000000):
+milestones = []
+BIGN = 1000000000000
+for rocknum in range(2022):
   prev_max_y = max_y_set
   t1 = time.time()
   if t1 - t0 > 1:
     t0 = t1
-    print(f'iter {rocknum}')
+    rate = (t1 - t00) / (rocknum/1000)
+    print(f'iter {rocknum:,}, t={t1-t00:.2f}, {rate} s/krock')
+
+  if rocknum % len(shapes) == 0 and pushindex % len(input) == 0:
+    milestones.append(get_height())
+    print(f'milestones: {milestones}')
+
   shape = shapes[rocknum % len(shapes)]
-  height = get_height()
+  height = max_y_set + 1
   pos = (2, height + 3)
 
   jetindex = 0
@@ -114,21 +126,28 @@ for rocknum in range(1000000000000):
         gset(bpos)
         max_y_set = max(max_y_set, bpos[1])
       break
-  
-  if max_y_set > prev_max_y:
-    # add to our string..
-    for y in range(prev_max_y+1, max_y_set+1):
-      for x in range(WIDTH):
-        p = (x, y)
-        statestr += '#' if gget(p) else '.'
 
-    # check for symmetry..
-    S = len(statestr)
-    if S % 2 == 0:
-      A = statestr[0:S]
-      B = statestr[S:]
-      if A == B:
-        print('detected symmetry!')
-        break
+  if False:
+    if max_y_set > prev_max_y:
+      # add to our string..
+      for y in range(prev_max_y+1, max_y_set+1):
+        for x in range(WIDTH):
+          p = (x, y)
+          statestr += '#' if gget(p) else '.'
+        statestr += '\n'
+
+      # check for symmetry..
+      S = len(statestr)
+      if S % 2 == 0:
+        A = statestr[0:S//2]
+        B = statestr[S//2:]
+        # print(max_y_set, A, B)
+        if A == B:
+          print('detected symmetry!')
+          print(A)
+          print(B)
+          break
 
 print(get_height())
+
+print(np.diff(milestones))
