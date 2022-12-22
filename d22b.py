@@ -57,6 +57,8 @@ height = 200
 def get_cube_face(p:Int2):
   cx = p.x // S
   cy = p.y // S
+  if cx < 0 or cy < 0 or cx >= 3 or cy >= 4:
+    return None
   return real_faces[cy][cx]
 
 def get_face_botleft(face):
@@ -90,12 +92,14 @@ assert get_face_nbor(2, DOWN) == (4, 0)
 assert get_face_nbor(2, UP) == (0, 0)
 assert get_face_nbor(2, LEFT) == (3, 1)
 
+assert get_cube_face(Int2(50,199)) == 0
+assert get_cube_face(Int2(51,199)) == 0
+
 def do_move(p, dir):
   start_face = get_cube_face(p)
   assert start_face is not None
   q = p + cw_dirs[dir]
-  q = q.mod(S)
-  if get_cube_face(q) == start_face:
+  if get_cube_face(q) is not None:
     # same face - normal
     return q, dir
   
@@ -105,19 +109,20 @@ def do_move(p, dir):
 
   # print('q', q.mod(S).rot90cw(turns))
   xformed_ofs = ((q.mod(S)*2+1).rot90cw(-turns)-1)//2
-  print('debug', (q.mod(S)))
+  # print('debug', (q.mod(S)))
   new_face_ofs = xformed_ofs.mod(S)
   new_bot_left = get_face_botleft(new_face)
-  print('new ofs', new_face_ofs, 'botleft', new_bot_left)
-  print('new face', new_face)
-  print('turns', turns)
+  # print('new ofs', new_face_ofs, 'botleft', new_bot_left)
+  # print('new face', new_face)
+  # print('turns', turns)
   newpos = new_bot_left + new_face_ofs
   assert get_cube_face(newpos) == new_face
   newdir = (dir - turns) % 4
-  print('new pos', newpos)
-  print('new dir', newdir)
+  # print('new pos', newpos)
+  # print('new dir', newdir)
   return (newpos, newdir)
 
+assert do_move(Int2(50,199), RIGHT) == (Int2(51, 199), RIGHT)
 assert do_move(get_face_botleft(4)+(S-1, 2), RIGHT) == (get_face_botleft(1) + (S-1, S-3), LEFT)
 assert do_move(get_face_botleft(3)+(S-1, 2), RIGHT) == (get_face_botleft(4) + (0, 2), RIGHT)
 assert do_move(get_face_botleft(4)+(0, 2), LEFT) == (get_face_botleft(3) + (S-1, 2), LEFT)
@@ -180,23 +185,26 @@ def solve():
 
   dir = 0
   p = Int2(startx, starty)
-  print('start at', p)
+  print('*** start at', p)
   i = 0
   for move in moves:
+    print('-------')
     i += 1
     if move == 'R':
       dir = (dir + 1) % 4
     elif move == 'L':
       dir = (dir - 1) % 4
     else:
+      print(f'from {p}, moving {dir} x {move}')
       for i in range(int(move)):
         q, new_dir = do_move(p, dir)
         if grid[q] == False:
           break
         else:
-          assert get_cube_face(p) is not None
+          assert get_cube_face(q) is not None
           p = q
           dir = new_dir
+      print(f'  end at {p}, {dir}')
   print('final pos', p, dir)
   print('pass', get_pass(p.x, p.y, dir, height))
   return p, dir
