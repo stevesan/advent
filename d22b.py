@@ -94,6 +94,7 @@ def do_move(p, dir):
   start_face = get_cube_face(p)
   assert start_face is not None
   q = p + cw_dirs[dir]
+  q = q.mod(S)
   if get_cube_face(q) == start_face:
     # same face - normal
     return q, dir
@@ -102,10 +103,7 @@ def do_move(p, dir):
   new_face, turns = get_face_nbor(start_face, dir)
   assert new_face is not None
 
-  print('q', q.mod(S).rot90cw(turns))
-  ones = Int2(1, 1)
-  onesrot = ones.rot90cw(turns)
-  print('ones rot', onesrot)
+  # print('q', q.mod(S).rot90cw(turns))
   xformed_ofs = ((q.mod(S)*2+1).rot90cw(turns)-1)//2
   new_face_ofs = xformed_ofs.mod(S)
   new_bot_left = get_face_botleft(new_face)
@@ -119,18 +117,20 @@ def do_move(p, dir):
   print('new dir', newdir)
   return (newpos, newdir)
 
-print('exected pos for this one:', get_face_botleft(1) + (S-1, S-3))
 assert do_move(get_face_botleft(4)+(S-1, 2), RIGHT) == (get_face_botleft(1) + (S-1, S-3), LEFT)
+assert do_move(get_face_botleft(3)+(S-1, 2), RIGHT) == (get_face_botleft(4) + (0, 2), RIGHT)
+assert do_move(get_face_botleft(4)+(0, 2), LEFT) == (get_face_botleft(3) + (S-1, 2), LEFT)
+
+print('---- expected pos for this one:', get_face_botleft(5) + (S-1, S-11))
+assert do_move(get_face_botleft(4)+(10, 0), DOWN) == (get_face_botleft(5) + (S-1, S-11), LEFT)
 
 def solve():
   inputf = 'd22real.txt'
-  num_lines = 0
   last_line = None
   with open(inputf, 'r') as f:
     for line in f:
       last_line = line
   movesline = last_line
-  assert num_lines == 202
 
   print('w/h', width, height)
   # True means open, False means wall
@@ -173,13 +173,10 @@ def solve():
         else:
           moves[-1] = moves[-1] + letter
 
-      
-
   dir = 0
   p = Int2(startx, starty)
   print('start at', p)
   i = 0
-  print(moves)
   for move in moves:
     i += 1
     if move == 'R':
@@ -188,12 +185,15 @@ def solve():
       dir = (dir - 1) % 4
     else:
       for i in range(int(move)):
-        q, dir = do_move(p, dir)
+        q, new_dir = do_move(p, dir)
         if grid[q] == False:
           break
         else:
+          assert get_cube_face(p) is not None
           p = q
+          dir = new_dir
   print('final pos', p, dir)
   print('pass', get_pass(p.x, p.y, dir, height))
   return p, dir
-solve('d22real.txt')
+
+solve()
