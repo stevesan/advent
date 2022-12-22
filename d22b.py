@@ -74,13 +74,18 @@ assert get_face_botleft(4) == Int2(50, 50)
 def get_face_nbor(face, dir):
   for edge in edges:
     if edge.start == face and edge.dir == dir:
-      return edge.end, edge.turns
+      return edge.end, edge.turns % 4
     # going over the other way?
-    if edge.end == face and edge.dir == opposite(dir):
+    if edge.end == face and edge.dir == opposite(dir + edge.turns):
       return edge.start, (-edge.turns) % 4
 
 assert get_face_nbor(1, RIGHT) == (4, 2)
+assert get_face_nbor(4, UP) == (2, 0)
+assert get_face_nbor(4, LEFT) == (3, 0)
+assert get_face_nbor(4, DOWN) == (5, 3)
 assert get_face_nbor(4, RIGHT) == (1, 2)
+assert get_face_nbor(1, DOWN) == (2, 3)
+assert get_face_nbor(2, RIGHT) == (1, 1)
 
 def do_move(p, dir):
   start_face = get_cube_face(p)
