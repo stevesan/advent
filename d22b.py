@@ -102,11 +102,25 @@ def do_move(p, dir):
   new_face, turns = get_face_nbor(start_face, dir)
   assert new_face is not None
 
-  new_face_ofs = q.mod(S) # 0, 2
+  print('q', q.mod(S).rot90cw(turns))
+  ones = Int2(1, 1)
+  onesrot = ones.rot90cw(turns)
+  print('ones rot', onesrot)
+  xformed_ofs = ((q.mod(S)*2+1).rot90cw(turns)-1)//2
+  new_face_ofs = xformed_ofs.mod(S)
   new_bot_left = get_face_botleft(new_face)
+  print('new ofs', new_face_ofs, 'botleft', new_bot_left)
+  print('new face', new_face)
+  print('turns', turns)
+  newpos = new_bot_left + new_face_ofs
+  assert get_cube_face(newpos) == new_face
+  newdir = (dir + turns) % 4
+  print('new pos', newpos)
+  print('new dir', newdir)
+  return (newpos, newdir)
 
-assert do_move(get_face_botleft(4)+(S-1, 2), RIGHT) == \
-  get_face_botleft(1) + (S-1, S-3)
+print('exected pos for this one:', get_face_botleft(1) + (S-1, S-3))
+assert do_move(get_face_botleft(4)+(S-1, 2), RIGHT) == (get_face_botleft(1) + (S-1, S-3), LEFT)
 
 def solve():
   inputf = 'd22real.txt'

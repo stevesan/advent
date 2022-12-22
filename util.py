@@ -58,6 +58,10 @@ class Int2:
     assert type(v) == int
     return Int2(u.x * v, u.y * v)
 
+  def __floordiv__(u, v):
+    assert type(v) == int
+    return Int2(u.x // v, u.y // v)
+
   def all_lte(self, other):
     return self.x <= other.x and self.y <= other.y
 
