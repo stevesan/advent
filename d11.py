@@ -1,6 +1,7 @@
 
 import sys, os
 from dataclasses import dataclass
+from math import floor
 
 @dataclass
 class Monkey:
@@ -10,6 +11,8 @@ class Monkey:
   testdivisor:int
   true_throw_to:int
   false_throw_to:int
+
+  inspect_times:int = 0
 
   def test(self, val):
     return val % self.testdivisor == 0
@@ -22,7 +25,7 @@ class Monkey:
       return old + argval
     raise Exception(f'unknown op: {self.op}')
 
-def main(inputf):
+def parse_monkeys(inputf):
   with open(inputf, 'r') as f:
     lines = f.readlines()
 
@@ -63,10 +66,32 @@ def main(inputf):
     print(mon)
 
     i += 1
-  
-  return 1
 
-assert main('d11sample.txt')
-assert main('d11full.txt')
+  return monkeys
+
+def main(inputf, numrounds):
+  print('------')
+  monkeys:list[Monkey] = parse_monkeys(inputf)
+
+  for i in range(numrounds):
+    for mon in monkeys:
+      while mon.items:
+        item = mon.items.pop(0)
+        item = mon.apply_op(item)
+        mon.inspect_times += 1
+        item = int(floor(item / 3))
+        if mon.test(item):
+          monkeys[mon.true_throw_to].items.append(item)
+        else:
+          monkeys[mon.false_throw_to].items.append(item)
+  
+  print(f'After {numrounds} rounds:\n{monkeys}')
+
+  # Find top two 2 inspecting monkeys
+  monkeys.sort(key=lambda m: -m.inspect_times)
+  return monkeys[0].inspect_times * monkeys[1].inspect_times
+
+assert main('d11sample.txt', 20) == 10605
+assert main('d11full.txt', 1)
 
 # main(sys.argv[1])
