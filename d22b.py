@@ -86,6 +86,9 @@ assert get_face_nbor(4, DOWN) == (5, 3)
 assert get_face_nbor(4, RIGHT) == (1, 2)
 assert get_face_nbor(1, DOWN) == (2, 3)
 assert get_face_nbor(2, RIGHT) == (1, 1)
+assert get_face_nbor(2, DOWN) == (4, 0)
+assert get_face_nbor(2, UP) == (0, 0)
+assert get_face_nbor(2, LEFT) == (3, 1)
 
 def do_move(p, dir):
   start_face = get_cube_face(p)
