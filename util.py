@@ -25,6 +25,18 @@ class Int2:
   def mandist(self, other):
     return (self - other).abs().sum()
 
+  def rot90ccw(self, N):
+    """ rotate by 90 degrees, counter-clockwise, N-times """
+    sine = [0, 1, 0, -1][N % 4]
+    cosine = [1, 0, -1, 0][N % 4]
+    x = cosine * self.x - sine * self.y
+    y = sine * self.x + cosine * self.y
+    return Int2(x, y)
+
+  def rot90cw(self, N):
+    """ rotate by 90 degrees, clockwise, N-times """
+    return self.rot90ccw(-N)
+
   def __add__(u,v):
     if type(v) == int:
       return Int2(u.x + v, u.y + v)
@@ -60,6 +72,9 @@ class Int2:
   def __str__(self):
     return self.__repr__()
 
+  def mod(self, n):
+    return Int2(self.x % n, self.y % n)
+
   @staticmethod
   def min(a, b):
     """ Component-wise min """
@@ -72,3 +87,11 @@ class Int2:
 
   def astuple(self):
     return (self.x, self.y)
+
+
+assert Int2(1, 0).rot90cw(2) == Int2(-1, 0)
+assert Int2(1, 0).rot90cw(6) == Int2(-1, 0)
+assert Int2(1, 0).rot90ccw(1) == Int2(0, 1)
+assert Int2(1, 0).rot90ccw(2) == Int2(-1, 0)
+assert Int2(1, 0).rot90ccw(10) == Int2(-1, 0)
+assert Int2(5, 4).mod(3) == Int2(2, 1)
