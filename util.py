@@ -40,7 +40,12 @@ class Int2:
   def __add__(u,v):
     if type(v) == int:
       return Int2(u.x + v, u.y + v)
+    elif type(v) == tuple:
+      assert type(v[0]) == int
+      assert type(v[1]) == int
+      return Int2(u.x + v[0], u.y + v[1])
     else:
+      assert type(v) == Int2
       return Int2(u.x+v.x, u.y+v.y)
 
   def __sub__(u,v):
@@ -48,6 +53,10 @@ class Int2:
       return Int2(u.x-v, u.y-v)
     else:
       return Int2(u.x-v.x, u.y-v.y)
+
+  def __mul__(u, v):
+    assert type(v) == int
+    return Int2(u.x * v, u.y * v)
 
   def all_lte(self, other):
     return self.x <= other.x and self.y <= other.y

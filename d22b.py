@@ -18,21 +18,98 @@ def get_pass(x, y, dir, height):
 
 assert get_pass(7, 6, 0, 12) == 6032
 
-def solve(inputf):
-  width = 0
+S = 50
+
+X = None
+real_faces = [
+  [X, 0, 1],
+  [X, 2, X],
+  [3, 4, X],
+  [5, X, X],
+]
+real_faces.reverse()
+
+@dataclass
+class Edge:
+  start:int
+  end:int
+  dir:int
+  turns:int
+
+edges = [
+  Edge(3, 5, DOWN, 0),
+  Edge(0, 5, UP, -1),
+  Edge(1, 5, UP, 0),
+  Edge(4, 5, DOWN, -1),
+  Edge(4, 2, UP, 0),
+  Edge(1, 2, DOWN, -1),
+  Edge(0, 2, DOWN, 0),
+  Edge(3, 2, UP, -1),
+  Edge(3, 4, RIGHT, 0),
+  Edge(1, 4, RIGHT, 2),
+  Edge(0, 1, RIGHT, 0),
+  Edge(3, 0, LEFT, 2),
+]
+
+width = 150
+height = 200
+
+def get_cube_face(p:Int2):
+  cx = p.x // S
+  cy = p.y // S
+  return real_faces[cy][cx]
+
+def get_face_botleft(face):
+  for cy in range(4):
+    for cx in range(3):
+      if real_faces[cy][cx] == face:
+        return Int2(cx, cy) * S
+
+assert get_face_botleft(0) == Int2(50, 150)
+assert get_face_botleft(3) == Int2(0, 50)
+assert get_face_botleft(1) == Int2(100, 150)
+assert get_face_botleft(5) == Int2(0, 0)
+assert get_face_botleft(4) == Int2(50, 50)
+
+def get_face_nbor(face, dir):
+  for edge in edges:
+    if edge.start == face and edge.dir == dir:
+      return edge.end, edge.turns
+    # going over the other way?
+    if edge.end == face and edge.dir == opposite(dir):
+      return edge.start, (-edge.turns) % 4
+
+assert get_face_nbor(1, RIGHT) == (4, 2)
+assert get_face_nbor(4, RIGHT) == (1, 2)
+
+def do_move(p, dir):
+  start_face = get_cube_face(p)
+  assert start_face is not None
+  q = p + cw_dirs[dir]
+  if get_cube_face(q) == start_face:
+    # same face - normal
+    return q, dir
+  
+  # need to find the actual new face we're on..
+  new_face, turns = get_face_nbor(start_face, dir)
+  assert new_face is not None
+
+  new_face_ofs = q.mod(S) # 0, 2
+  new_bot_left = get_face_botleft(new_face)
+
+assert do_move(get_face_botleft(4)+(S-1, 2), RIGHT) == \
+  get_face_botleft(1) + (S-1, S-3)
+
+def solve():
+  inputf = 'd22real.txt'
   num_lines = 0
   last_line = None
   with open(inputf, 'r') as f:
     for line in f:
-      if line[-1] == '\n':
-        line = line[:-1]
-      width = max(width, len(line))
-      num_lines += 1
       last_line = line
-
   movesline = last_line
+  assert num_lines == 202
 
-  height = num_lines - 2
   print('w/h', width, height)
   # True means open, False means wall
   grid:dict[Int2, bool] = {}
@@ -74,14 +151,7 @@ def solve(inputf):
         else:
           moves[-1] = moves[-1] + letter
 
-  def find_next_valid(p, dir):
-    delta = cw_dirs[dir]
-    while True:
-      p += delta
-      p.x = p.x % width
-      p.y = p.y % height
-      if p in grid:
-        return p
+      
 
   dir = 0
   p = Int2(startx, starty)
@@ -96,7 +166,7 @@ def solve(inputf):
       dir = (dir - 1) % 4
     else:
       for i in range(int(move)):
-        q = find_next_valid(p, dir)
+        q, dir = do_move(p, dir)
         if grid[q] == False:
           break
         else:
@@ -104,37 +174,4 @@ def solve(inputf):
   print('final pos', p, dir)
   print('pass', get_pass(p.x, p.y, dir, height))
   return p, dir
-
-X = None
-real_faces = [
-  [X, 0, 1],
-  [X, 2, X],
-  [3, 4, X],
-  [5, X, X],
-]
-
-@dataclass
-class Edge:
-  start:int
-  end:int
-  dir:int
-  turns:int
-
-edges = [
-  Edge(3, 5, DOWN, 0),
-  Edge(0, 5, UP, -1),
-  Edge(1, 5, UP, 0),
-  Edge(4, 5, DOWN, -1),
-  Edge(4, 2, UP, 0),
-  Edge(1, 2, DOWN, -1),
-  Edge(0, 2, DOWN, 0),
-  Edge(3, 2, UP, -1),
-  Edge(3, 4, RIGHT, 0),
-  Edge(1, 4, RIGHT, 2),
-  Edge(0, 1, RIGHT, 0),
-  Edge(3, 0, LEFT, 2),
-]
-
-assert solve('d22t1.txt') == (Int2(8, 5), 3)
-solve('d22sample.txt') == (Int2(7, 6), 0)
 solve('d22real.txt')
