@@ -124,6 +124,10 @@ assert do_move(get_face_botleft(4)+(0, 2), LEFT) == (get_face_botleft(3) + (S-1,
 
 print('---- expected pos for this one:', get_face_botleft(5) + (S-1, S-11))
 assert do_move(get_face_botleft(4)+(10, 0), DOWN) == (get_face_botleft(5) + (S-1, S-11), LEFT)
+assert do_move(get_face_botleft(4)+(10, S-1), UP) == (get_face_botleft(2) + (10, 0), UP)
+
+assert do_move(get_face_botleft(2)+(10, 0), DOWN) == (get_face_botleft(4) + (10, S-1), DOWN)
+assert do_move(get_face_botleft(2)+(S-1, 10), RIGHT) == (get_face_botleft(1) + (S-11, 0), UP)
 
 def solve():
   inputf = 'd22real.txt'
