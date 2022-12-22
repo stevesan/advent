@@ -11,9 +11,9 @@ class Sensor:
   radius:int
 
   def get_intxs(self, y):
-    dy = self.pos.y - y
+    dy = abs(self.pos.y - y)
     if dy > self.radius: return None
-    dx = self.radius - abs(dy)
+    dx = self.radius - dy
     return (self.pos.x - dx, self.pos.x + dx)
 
 def main(inputf, query_y):
@@ -60,6 +60,7 @@ def main(inputf, query_y):
   for pair in pairs[1:]:
     sen = pair[0]
     x = pair[1]
+
     if len(overlaps) > 0:
       count += x - prev_x
 
@@ -70,6 +71,8 @@ def main(inputf, query_y):
       overlaps.remove(sen)
     else:
       overlaps.append(sen)
+      assert Int2(x, query_y).mandist(sen.pos) == sen.radius
+
     prev_x = x
 
   # for end of last one
