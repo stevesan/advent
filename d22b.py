@@ -4,6 +4,12 @@ from util import Int2
 
 # right is first
 cw_dirs = [Int2(1, 0), Int2(0, -1), Int2(-1, 0), Int2(0, 1)]
+RIGHT = 0
+DOWN = 1
+LEFT = 2
+UP = 3
+
+def opposite(dir): return (dir+2) % 4
 
 def get_pass(x, y, dir, height):
   col = x + 1
@@ -98,6 +104,36 @@ def solve(inputf):
   print('final pos', p, dir)
   print('pass', get_pass(p.x, p.y, dir, height))
   return p, dir
+
+X = None
+real_faces = [
+  [X, 0, 1],
+  [X, 2, X],
+  [3, 4, X],
+  [5, X, X],
+]
+
+@dataclass
+class Crossing:
+  start:int
+  end:int
+  dir:int
+  turns:int
+
+crossings = [
+Crossing(3, 5, DOWN, 0),
+Crossing(0, 5, UP, -1),
+Crossing(1, 5, UP, 0),
+Crossing(4, 5, DOWN, -1),
+Crossing(4, 2, UP, 0),
+Crossing(1, 2, DOWN, -1),
+Crossing(0, 2, DOWN, 0),
+Crossing(3, 2, UP, -1),
+Crossing(3, 4, RIGHT, 0),
+Crossing(1, 4, RIGHT, 2),
+Crossing(0, 1, RIGHT, 0),
+Crossing(3, 0, LEFT, 2),
+]
 
 assert solve('d22t1.txt') == (Int2(8, 5), 3)
 solve('d22sample.txt') == (Int2(7, 6), 0)
