@@ -1,13 +1,14 @@
 import numpy as np
+import sys
 import time
 tu = tuple
 ar = np.array
 
 input = '>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>'
-# with open('d17real.txt', 'r') as f: input = f.read()
+with open('d17real.txt', 'r') as f: input = f.read()
 # input = '>'
 
-print(f'jet pattern len: {len(input)}')
+# print(f'jet pattern len: {len(input)}')
 
 WIDTH = 7
 shapestext = '''####
@@ -29,7 +30,6 @@ shapestext = '''####
 ##'''
 
 shapes_lines = shapestext.split('\n\n')
-print(shapes_lines)
 assert len(shapes_lines) == 5
 shapes = []
 for shape_lines in shapes_lines:
@@ -47,8 +47,8 @@ for shape_lines in shapes_lines:
         assert val == '.'
   shapes.append(shape)
 
-for shape in shapes:
-  print(shape)
+# for shape in shapes:
+#   print(shape)
 
 def is_symmetric(s):
   S = len(s)
@@ -83,23 +83,25 @@ max_y_set = -1
 s = ''
 milestones = []
 BIGN = 1000000000000
-for rocknum in range(2022):
+dystr = ''
+
+if len(sys.argv) > 1:
+  numrocks = int(sys.argv[1])
+else:
+  numrocks = 10000
+for rocknum in range(numrocks):
   prev_max_y = max_y_set
   t1 = time.time()
   if t1 - t0 > 1:
     t0 = t1
     rate = (t1 - t00) / (rocknum/1000)
-    print(f'iter {rocknum:,}, t={t1-t00:.2f}, {rate} s/krock')
+    # print(f'iter {rocknum:,}, t={t1-t00:.2f}, {rate} s/krock')
 
-  if rocknum % len(shapes) == 0 and pushindex % len(input) == 0:
-    milestones.append(get_height())
-    print(f'milestones: {milestones}')
 
   shape = shapes[rocknum % len(shapes)]
   height = max_y_set + 1
   pos = (2, height + 3)
 
-  jetindex = 0
   for falliter in range(height + 10):
     pushdir = JET2DIR[input[pushindex % len(input)]]
     pushindex += 1
@@ -136,5 +138,12 @@ for rocknum in range(2022):
         max_y_set = max(max_y_set, bpos[1])
       break
 
-print(get_height())
-print(np.diff(milestones))
+  if rocknum % len(shapes) == 0:
+    milestones.append(max_y_set)
+    # print(max_y_set)
+
+
+print(f'ht after {numrocks} rocks: {get_height()}')
+
+diffs = np.diff(milestones)
+print(np.where(diffs == 13))
