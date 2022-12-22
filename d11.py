@@ -89,9 +89,11 @@ def main(inputf, numrounds):
 
   # Find top two 2 inspecting monkeys
   monkeys.sort(key=lambda m: -m.inspect_times)
-  return monkeys[0].inspect_times * monkeys[1].inspect_times
+  rv = monkeys[0].inspect_times * monkeys[1].inspect_times
+  print(rv)
+  return rv
 
 assert main('d11sample.txt', 20) == 10605
-assert main('d11full.txt', 1)
+assert main('d11full.txt', 20)
 
 # main(sys.argv[1])
