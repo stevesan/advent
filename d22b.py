@@ -114,25 +114,25 @@ real_faces = [
 ]
 
 @dataclass
-class Crossing:
+class Edge:
   start:int
   end:int
   dir:int
   turns:int
 
-crossings = [
-Crossing(3, 5, DOWN, 0),
-Crossing(0, 5, UP, -1),
-Crossing(1, 5, UP, 0),
-Crossing(4, 5, DOWN, -1),
-Crossing(4, 2, UP, 0),
-Crossing(1, 2, DOWN, -1),
-Crossing(0, 2, DOWN, 0),
-Crossing(3, 2, UP, -1),
-Crossing(3, 4, RIGHT, 0),
-Crossing(1, 4, RIGHT, 2),
-Crossing(0, 1, RIGHT, 0),
-Crossing(3, 0, LEFT, 2),
+edges = [
+  Edge(3, 5, DOWN, 0),
+  Edge(0, 5, UP, -1),
+  Edge(1, 5, UP, 0),
+  Edge(4, 5, DOWN, -1),
+  Edge(4, 2, UP, 0),
+  Edge(1, 2, DOWN, -1),
+  Edge(0, 2, DOWN, 0),
+  Edge(3, 2, UP, -1),
+  Edge(3, 4, RIGHT, 0),
+  Edge(1, 4, RIGHT, 2),
+  Edge(0, 1, RIGHT, 0),
+  Edge(3, 0, LEFT, 2),
 ]
 
 assert solve('d22t1.txt') == (Int2(8, 5), 3)
