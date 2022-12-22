@@ -120,7 +120,6 @@ assert do_move(get_face_botleft(4)+(S-1, 2), RIGHT) == (get_face_botleft(1) + (S
 assert do_move(get_face_botleft(3)+(S-1, 2), RIGHT) == (get_face_botleft(4) + (0, 2), RIGHT)
 assert do_move(get_face_botleft(4)+(0, 2), LEFT) == (get_face_botleft(3) + (S-1, 2), LEFT)
 
-print('---- expected pos for this one:', get_face_botleft(5) + (S-1, S-11))
 assert do_move(get_face_botleft(4)+(10, 0), DOWN) == (get_face_botleft(5) + (S-1, S-11), LEFT)
 assert do_move(get_face_botleft(4)+(10, S-1), UP) == (get_face_botleft(2) + (10, 0), UP)
 
