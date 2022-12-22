@@ -104,7 +104,8 @@ def do_move(p, dir):
   assert new_face is not None
 
   # print('q', q.mod(S).rot90cw(turns))
-  xformed_ofs = ((q.mod(S)*2+1).rot90cw(turns)-1)//2
+  xformed_ofs = ((q.mod(S)*2+1).rot90cw(-turns)-1)//2
+  print('debug', (q.mod(S)))
   new_face_ofs = xformed_ofs.mod(S)
   new_bot_left = get_face_botleft(new_face)
   print('new ofs', new_face_ofs, 'botleft', new_bot_left)
@@ -112,7 +113,7 @@ def do_move(p, dir):
   print('turns', turns)
   newpos = new_bot_left + new_face_ofs
   assert get_cube_face(newpos) == new_face
-  newdir = (dir + turns) % 4
+  newdir = (dir - turns) % 4
   print('new pos', newpos)
   print('new dir', newdir)
   return (newpos, newdir)
