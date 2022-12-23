@@ -12,13 +12,6 @@ DIR2OFS = {
 }
 _8NBORS = list(DIR2OFS.values())
 
-dirchecks = [
-  ['N', 'NE', 'NW'],
-  ['S', 'SE', 'SW'],
-  ['W', 'NW', 'SW'],
-  ['E', 'NE', 'SE'],
-]
-
 def print_elves(elves:set[Int2]):
   xx = [p.x for p in elves]
   yy = [p.y for p in elves]
@@ -36,6 +29,13 @@ def print_elves(elves:set[Int2]):
   return empties
 
 def solve(inputf, num_rounds):
+  dirchecks = [
+    ['N', 'NE', 'NW'],
+    ['S', 'SE', 'SW'],
+    ['W', 'NW', 'SW'],
+    ['E', 'NE', 'SE'],
+  ]
+
   with open(inputf, 'r') as f:
     lines = [l.strip() for l in f.readlines()]
   lines.reverse()
@@ -51,8 +51,6 @@ def solve(inputf, num_rounds):
   num_elves = len(elves)
 
   for round in range(num_rounds):
-    # print(f'round {round}:')
-    # print_elves(elves)
     elf2proposed = {}
     for elf in elves:
       if not any(elf + nbor in elves for nbor in _8NBORS):
@@ -88,6 +86,11 @@ def solve(inputf, num_rounds):
     first = dirchecks.pop(0)
     dirchecks.append(first)
 
+    print(f'after {round+1} rounds:')
+    print_elves(elves)
+
+
+  print(f'after {num_rounds} rounds:')
   return print_elves(elves)
 
 solve('d23small.txt', 3)
