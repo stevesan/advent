@@ -40,7 +40,7 @@ def solve(inputf, num_rounds):
     lines = [l.strip() for l in f.readlines()]
   lines.reverse()
 
-  elves = set()
+  elves:set[Int2] = set()
   for y in range(len(lines)):
     for x in range(len(lines[y])):
       c = lines[y][x]
@@ -51,8 +51,8 @@ def solve(inputf, num_rounds):
   num_elves = len(elves)
 
   for round in range(num_rounds):
-    print(f'round {round}:')
-    print_elves(elves)
+    # print(f'round {round}:')
+    # print_elves(elves)
     elf2proposed = {}
     for elf in elves:
       if not any(elf + nbor in elves for nbor in _8NBORS):
@@ -84,7 +84,12 @@ def solve(inputf, num_rounds):
         elves.add(prop)
     assert len(elves) == num_elves
 
+    # cycle direction consideration order..
+    first = dirchecks.pop(0)
+    dirchecks.append(first)
+
   return print_elves(elves)
 
+solve('d23small.txt', 3)
 assert solve('d23sample.txt', 10) == 110
-# print(solve('d23real.txt', 10))
+print(solve('d23real.txt', 10))
