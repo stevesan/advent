@@ -81,7 +81,6 @@ def main(inputf, numrounds):
         item = mon.items.pop(0)
         item = mon.apply_op(item)
         mon.inspect_times += 1
-        print(log10(item))
         if mon.test(item):
           nextmon = monkeys[mon.true_throw_to]
         else:
