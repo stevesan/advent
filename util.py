@@ -3,12 +3,18 @@ class Int2:
   y = 0
 
   def __init__(self, x, y=None):
-    assert type(x) == int
-    if y is None:
-      y = x
-    assert type(y) == int
-    self.x = x
-    self.y = y
+    if type(x) == int:
+      if y is None:
+        self.x = x
+        self.y = x
+      else:
+        assert type(y) == int
+        self.x = x
+        self.y = y
+    else:
+      assert type(x) == tuple
+      self.x = x[0]
+      self.y = x[1]
 
   def __eq__(self, other):
     return self.x == other.x and self.y == other.y
