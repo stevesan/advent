@@ -28,39 +28,32 @@ def make_frame():
 
 
 def shortest_path(frames, width, height):
-  nframes = len(frames)
-  visited:set[(int, Int2)] = set()
   p0 = Int2(0, height-1)
   assert len(frames[0][p0]) == 0
 
   endpt = Int2(width-1, 0)
-  Q:list[(int, Int2)] = []
-  pair2dist = {}
-  first_pair = (0, p0)
-  pair2dist[first_pair] = 0
-  heapq.heappush(Q, first_pair)
+  front = set([p0])
+  time = 0
+  while True:
+    next_frame = frames[(time+1) % len(frames)]
+    next_front = set()
+    for p in front:
+      # Add (0, 0) for the wait option
+      for dir in list(DIR2DELTA.values()) + [Int2(0, 0)]:
+        q = p + dir
+        if q.x < 0 or q.y < 0 or q.x >= width or q.y >= height:
+          continue
+        if len(next_frame[q]) > 0:
+          continue
+        if q == endpt:
+          return time + 1
+        next_front.add(q)
+    front = next_front
+    time += 1
+    print(f'next exploring: {next_front}, minute {time+1}')
+    print_frame(next_frame, width, height)
+    if len(next_front) == 0: return None
 
-  while Q:
-    time, p = heapq.heappop(Q)
-    if p == endpt:
-      print(f'reached end pt. time = {time}')
-      return time
-    if (p, time) in visited: continue
-    visited.add((p, time))
-    next_frame = frames[(time + 1) % nframes]
-    qdist = pair2dist[(p, time)] + 1
-    for dir in DIR2DELTA.values():
-      q = p + dir
-      nbor_pair = (q, time + 1)
-      if len(next_frame[q]) > 0:
-        # blocked
-        continue
-      if nbor_pair in visited: continue
-      if nbor_pair not in pair2dist or pair2dist[nbor_pair] > qdist:
-        pair2dist[nbor_pair] = qdist
-        # not updating - just pushing the new entry. we always check if
-        # the top item is already visited, so we won't have duplicates
-        heapq.heappush(Q, (qdist, nbor_pair))
 
 def step_blizzards(f, width, height):
   rv = make_frame()
@@ -102,8 +95,9 @@ def solve(inputf, period):
     f = step_blizzards(f, width, height)
     frames.append(f)
 
-  return shortest_path(frames, width, height)
+  bestt = shortest_path(frames, width, height)
+  return bestt + 2
 
-solve('d24sample.txt', 5)
-solve('d24s2.txt', 12)
-# solve('d24real.txt', 700)
+# solve('d24sample.txt', 5)
+# solve('d24s2.txt', 12) == 18
+print(solve('d24real.txt', 700))
