@@ -94,6 +94,9 @@ class Int2:
   def mod(self, n):
     return Int2(self.x % n, self.y % n)
 
+  def mod2(self, nx, ny):
+    return Int2(self.x % nx, self.y % ny)
+
   @staticmethod
   def min(a, b):
     """ Component-wise min """
