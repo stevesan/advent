@@ -38,17 +38,17 @@ def step_blizzards(f, width, height):
         rv[q].append(item)
   return rv
 
-def solve(inputf):
+def solve(inputf, period):
   with open(inputf, 'r') as f:
     lines = f.readlines()
   lines.reverse()
   height = len(lines) - 2
   width = len(lines[0]) - 2
 
+  assert period % width == 0
+  assert period % height == 0
+
   f0 = make_frame()
-
-  p0 = Int2(0, height-1)
-
   for x in range(width):
     for y in range(height):
       p = Int2(x, y)
@@ -59,8 +59,15 @@ def solve(inputf):
         f0[p].append(c)
 
   f = f0
-  for i in range(6):
-    print(f'---- after minute {i}')
-    print_frame(f, width, height)
+  frames = []
+  for i in range(period):
+    # print(f'---- after minute {i}')
     f = step_blizzards(f, width, height)
-solve('d24sample.txt')
+    frames.append(f)
+
+  p0 = Int2(0, height-1)
+  assert len(frames[1][p0]) == 0
+
+solve('d24sample.txt', 5)
+solve('d24s2.txt', 12)
+# solve('d24real.txt', 700)
