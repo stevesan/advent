@@ -1,6 +1,5 @@
 from collections import defaultdict
 from util import Int2
-import heapq
 
 DIR2DELTA = {
   '>':Int2(1, 0),
@@ -27,12 +26,15 @@ def make_frame():
   return defaultdict(lambda:[])
 
 def shortest_path(frames, width, height, time0, startpt, endpt):
-  p0 = Int2(0, height-1)
-  assert len(frames[0][p0]) == 0
+  p0 = startpt
+  assert len(frames[time0%len(frames)][p0]) == 0
 
-  endpt = Int2(width-1, 0)
+  A = Int2(0, height)
+  B = Int2(width-1, -1)
+  ok_oobs = [A, B]
+
   front = set([p0])
-  time = 0
+  time = time0
   while True:
     next_frame = frames[(time+1) % len(frames)]
     next_front = set()
@@ -40,7 +42,7 @@ def shortest_path(frames, width, height, time0, startpt, endpt):
       # Add (0, 0) for the wait option
       for dir in list(DIR2DELTA.values()) + [Int2(0, 0)]:
         q = p + dir
-        if q.x < 0 or q.y < 0 or q.x >= width or q.y >= height:
+        if (q.x < 0 or q.y < 0 or q.x >= width or q.y >= height) and q not in ok_oobs:
           continue
         if len(next_frame[q]) > 0:
           continue
@@ -94,10 +96,17 @@ def solve(inputf, period):
     f = step_blizzards(f, width, height)
     frames.append(f)
 
-  bestt = shortest_path(frames, width, height, 0,
-  Int2(0, height-1), Int2(width-1, 0))
-  return bestt + 2
+  A = Int2(0, height)
+  B = Int2(width-1, -1)
+
+  t = shortest_path(frames, width, height, 0, A, B)
+  print('A',t)
+  t = shortest_path(frames, width, height, t, B, A)
+  print('A',t)
+  t = shortest_path(frames, width, height, t, A, B)
+  print('A',t)
+  return t + 1
 
 # solve('d24sample.txt', 5)
-solve('d24s2.txt', 12) == 18
-# print(solve('d24real.txt', 700))
+assert solve('d24s2.txt', 12) == 54
+print(solve('d24real.txt', 700))
