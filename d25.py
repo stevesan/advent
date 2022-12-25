@@ -6,14 +6,21 @@ letter2scale = {
 }
 scale2letter = {scale:letter for letter, scale in letter2scale.items()}
 
-def encode(value, place=None):
+def encode(value, place=None, sofar=''):
+  # print(value, place, sofar)
   if place is None:
     place = int(math.log(value) / math.log(5))
   if place == 0:
     return scale2letter.get(value, None)
-  for letter, q in letter2scale.items():
-    remain = value - (5**place) * q
-    rest = encode(remain, place-1)
+  p = 5 ** place
+  scale2remain = {q:value - p*q for q in scale2letter}
+  scales = list(scale2remain.keys())
+  scales.sort(key=lambda q: abs(scale2remain[q]))
+  for q in scales:
+    remain = scale2remain[q]
+    if abs(remain) > abs(value): continue
+    letter = scale2letter[q]
+    rest = encode(remain, place-1, sofar+letter)
     if rest is not None:
       return letter + rest
 
@@ -34,6 +41,8 @@ def solve(inputf):
         num += p * q
       print(num)
       sum += num
+  print(f'sum is {sum}')
   return encode(sum)
 
 assert solve('d25s.txt') == '2=-1=0'
+print(solve('d25r.txt'))
