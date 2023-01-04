@@ -7,7 +7,7 @@ R = 1000
 def Pt(x, y, z): return np.array([x, y, z])
 
 def augment_coordinates(xx):
-  more = [xx - 2*R for x in xx]
+  more = [x - 2*R for x in xx]
   return xx + more
 
 def get_box_min(boxcenter):
@@ -28,12 +28,19 @@ def gen_overlaps(beacons:list[np.array]):
   ys = augment_coordinates([p[1] for p in beacons])
   zs = augment_coordinates([p[2] for p in beacons])
 
+  good_overlaps = []
+
   for x in xs:
     for y in ys:
       for z in zs:
         boxmin = np.array([x, y, z])
-        
+        overlap = []
+        for p in beacons:
+          if in_box(boxmin, p): overlap.append(p)
+        if len(overlap) >= 12:
+          good_overlaps.append(overlap)
 
+  return good_overlaps
 
 def main(inputf):
   with open(inputf) as f:
@@ -51,4 +58,9 @@ def main(inputf):
       beacons.append(p)
     scanner2beacons.append(beacons)
 
-main(sys.argv[1])
+  for beacons in scanner2beacons:
+    good_overlaps = gen_overlaps(beacons)
+    print(len(good_overlaps))
+
+# main(sys.argv[1])
+main('2021/d19sample.txt')
