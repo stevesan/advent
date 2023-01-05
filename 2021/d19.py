@@ -6,11 +6,13 @@ R = 1000
 
 def Pt(x, y=0, z=0): return np.array([x, y, z])
 
-def augment_coordinates(xx):
+def augment_coordinates(xx, at_least):
   more = [x - 2*R for x in xx]
-  rv = list(set(xx + more))
+  rv = xx + more
   rv.sort()
-  return rv
+  N = at_least
+  return rv[N-1:-N+1]
+  # return rv
 
 def get_box_min(boxcenter):
   return boxcenter - Pt(R, R, R)
@@ -26,9 +28,9 @@ assert in_box(get_box_min(Pt(500, 0, -500)), Pt(1500, -1001, 500)) == False
 assert in_box(get_box_min(Pt(500, 0, -500)), Pt(1501, 0, -500)) == False
 
 def gen_overlaps(beacons:list[np.array], at_least=12):
-  xs = augment_coordinates([p[0] for p in beacons])
-  ys = augment_coordinates([p[1] for p in beacons])
-  zs = augment_coordinates([p[2] for p in beacons])
+  xs = augment_coordinates([p[0] for p in beacons], at_least)
+  ys = augment_coordinates([p[1] for p in beacons], at_least)
+  zs = augment_coordinates([p[2] for p in beacons], at_least)
 
   # setup slices
   z2pts = {}
@@ -40,6 +42,8 @@ def gen_overlaps(beacons:list[np.array], at_least=12):
     z2pts[z] = pts
 
   good_overlaps = set()
+
+  print(f'n = {len(xs)*len(ys)*len(zs)}, {len(xs)} {len(ys)} {len(zs)}')
 
   for x in xs:
     for y in ys:
@@ -54,6 +58,7 @@ def gen_overlaps(beacons:list[np.array], at_least=12):
               if in_box(boxmin, p):
                 overlap.append(tuple(p))
         if len(overlap) >= at_least:
+          overlap.sort()
           good_overlaps.add(tuple(overlap))
 
   return good_overlaps
@@ -80,5 +85,5 @@ def main(inputf):
     good_overlaps = gen_overlaps(beacons)
     print(len(good_overlaps))
 
-# main(sys.argv[1])
+main(sys.argv[1])
 # main('2021/d19sample.txt')
