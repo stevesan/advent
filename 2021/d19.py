@@ -1,6 +1,7 @@
 
 import sys
 import numpy as np
+from dataclasses import dataclass
 
 R = 1000
 
@@ -52,6 +53,29 @@ def gen_overlaps(beacons:list[np.array], at_least=12):
 
 assert len(gen_overlaps([Pt(0), Pt(1), Pt(2)], 2)) == 3
 
+def compute_moments(pts):
+  rv = []
+  sum = Pt(0)
+  for p in pts:
+    sum += p
+  mean = sum / len(pts)
+  for pow in [0, 1, 2, 3]:
+    mom = 0
+    for p in pts:
+      d = np.linalg.norm(p - mean)
+      mom += d ** pow
+    rv.append(int(mom))
+
+  return tuple(rv)
+
+assert compute_moments([Pt(-1), Pt(1)]) == (2, 2, 2, 2)
+
+@dataclass
+class ScannerGroup:
+  id: int
+  beacons: list[np.array]
+
+
 def main(inputf):
   with open(inputf) as f:
     text = f.read()
@@ -68,9 +92,25 @@ def main(inputf):
       beacons.append(p)
     scanner2beacons.append(beacons)
 
-  for beacons in scanner2beacons:
+  moments2groups = {}
+  for scanner_id, beacons in enumerate(scanner2beacons):
     good_overlaps = gen_overlaps(beacons)
     print(len(good_overlaps))
 
+    for group in good_overlaps:
+      moments = compute_moments(group)
+
+      if moments not in moments2groups:
+        moments2groups[moments] = []
+      entry = ScannerGroup(scanner_id, group)
+      moments2groups[moments].append(entry)
+
+  for moments, groups in moments2groups.items():
+    if len(groups) > 1:
+      assert len(groups) == 2
+      print('----- matching groups:')
+      for group in groups:
+        print(f'  scanner {group.id}, {len(group.beacons)} pts')
+  
 main(sys.argv[1])
 # main('2021/d19sample.txt')
