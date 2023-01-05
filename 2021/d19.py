@@ -91,6 +91,9 @@ def main(inputf):
       beacons.append(p)
     scanner2beacons.append(beacons)
 
+  num_readings = sum([len(bs) for bs in scanner2beacons])
+  print(f'total readings = {num_readings}')
+
   moments2groups = {}
   for scanner_id, beacons in enumerate(scanner2beacons):
     good_overlaps = gen_overlaps(beacons)
@@ -104,12 +107,17 @@ def main(inputf):
       entry = ScannerGroup(scanner_id, group)
       moments2groups[moments].append(entry)
 
+  double_counts = 0
   for moments, groups in moments2groups.items():
     if len(groups) > 1:
       assert len(groups) == 2
+      double_counts += len(groups[0].beacons)
       print(f'----- matching groups, moments = {moments}:')
       for group in groups:
         print(f'  scanner {group.id}, {len(group.beacons)} pts')
+
+  print(f'total readings = {num_readings}')
+  print(f'actual num beacons = {num_readings - double_counts}')
   
 main(sys.argv[1])
 # main('2021/d19sample.txt')
