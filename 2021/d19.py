@@ -6,7 +6,14 @@ from dataclasses import dataclass
 
 R = 1000
 
-def Pt(x, y=0, z=0): return np.array([x, y, z])
+def Pt(x, y=0, z=0): return np.array([[x], [y], [z]], ndmin=2)
+def p2t(p): return (p[0][0], p[1][0], p[2][0])
+def t2p(t): return Pt(t[0], t[1], t[2])
+
+XUNIT = Pt(1, 0, 0)
+YUNIT = Pt(0, 1, 0)
+ZUNIT = Pt(0, 0, 1)
+
 
 def augment_coordinates(xx, at_least):
   more = [x - 2*R for x in xx]
@@ -56,7 +63,7 @@ def gen_overlaps(beacons:list[np.array], at_least=12):
         )))[0]
 
         if len(pt_ids) >= at_least:
-          overlap = [tuple(beacons[i]) for i in pt_ids]
+          overlap = [p2t(beacons[i]) for i in pt_ids]
           overlap.sort()
           good_overlaps.add(tuple(overlap))
 
@@ -64,7 +71,7 @@ def gen_overlaps(beacons:list[np.array], at_least=12):
 
 assert len(gen_overlaps([Pt(0), Pt(1), Pt(2)], 2)) == 3
 
-def compute_moments(pts):
+def compute_moments(pts:list[np.ndarray]):
   rv = []
   sum = Pt(0)
   for p in pts:
@@ -98,8 +105,8 @@ def main(inputf):
     assert 'scanner' in header
     beacons = []
     for line in group[1:]:
-      p = np.array([int(x) for x in line.split(',')])
-      beacons.append(p)
+      x, y, z = [int(x) for x in line.split(',')]
+      beacons.append(Pt(x, y, z))
     scanner2beacons.append(beacons)
 
   num_readings = sum([len(bs) for bs in scanner2beacons])
@@ -109,7 +116,8 @@ def main(inputf):
   for scanner_id, beacons in enumerate(scanner2beacons):
     good_overlaps = gen_overlaps(beacons)
     for group in good_overlaps:
-      moments = compute_moments(group)
+      vecs = [t2p(t) for t in group]
+      moments = compute_moments(vecs)
       entry = ScannerGroup(scanner_id, group)
       moments2groups[moments].append(entry)
 
