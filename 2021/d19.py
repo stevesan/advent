@@ -3,6 +3,7 @@ import sys
 import numpy as np
 from collections import defaultdict
 from dataclasses import dataclass
+import math
 
 R = 1000
 
@@ -10,10 +11,57 @@ def Pt(x, y=0, z=0): return np.array([[x], [y], [z]], ndmin=2)
 def p2t(p): return (p[0][0], p[1][0], p[2][0])
 def t2p(t): return Pt(t[0], t[1], t[2])
 
-XUNIT = Pt(1, 0, 0)
-YUNIT = Pt(0, 1, 0)
-ZUNIT = Pt(0, 0, 1)
+POS_X = np.array([1, 0, 0])
+POS_Y = np.array([0, 1, 0])
+POS_Z = np.array([0, 0, 1])
 
+# matrices that rotate +X into all 6 faces of a cube
+CUBE_FACE_ROTS = [np.transpose(np.array(axes, ndmin=2)) for axes in [
+  [POS_X, POS_Y, POS_Z],
+  [POS_Z, POS_Y, -POS_X],
+  [-POS_X, POS_Y, -POS_Z],
+  [-POS_Z, POS_Y, POS_X],
+  [POS_Y, -POS_X, POS_Z],
+  [-POS_Y, POS_X, POS_Z],
+]]
+
+def get_rotation_matrix(axis, theta):
+    """
+    Find the rotation matrix associated with counterclockwise rotation
+    about the given axis by theta radians.
+    Credit: http://stackoverflow.com/users/190597/unutbu
+
+    Args:
+        axis (list): rotation axis of the form [x, y, z]
+        theta (float): rotational angle in radians
+
+    Returns:
+        array. Rotation matrix.
+    """
+
+    axis = np.asarray(axis)
+    theta = np.asarray(theta)
+    axis = axis/math.sqrt(np.dot(axis, axis))
+    a = math.cos(theta/2.0)
+    b, c, d = -axis*math.sin(theta/2.0)
+    aa, bb, cc, dd = a*a, b*b, c*c, d*d
+    bc, ad, ac, ab, bd, cd = b*c, a*d, a*c, a*b, b*d, c*d
+    return np.array([[aa+bb-cc-dd, 2*(bc+ad), 2*(bd-ac)],
+                     [2*(bc-ad), aa+cc-bb-dd, 2*(cd+ab)],
+                     [2*(bd+ac), 2*(cd-ab), aa+dd-bb-cc]], ndmin=2) 
+
+def enum_24_rots():
+  for A in CUBE_FACE_ROTS:
+    for i in range(4):
+      theta = math.pi * i * 0.5
+      axis = A[:, 0]
+      B = get_rotation_matrix(axis, theta)
+      yield B @ A
+
+for R in enum_24_rots():
+  print('-----')
+  print(np.round(R @ Pt(1, 0, 0)))
+  print(np.round(R @ Pt(0, 1, 0)))
 
 def augment_coordinates(xx, at_least):
   more = [x - 2*R for x in xx]
