@@ -1,6 +1,7 @@
 
 import sys
 import numpy as np
+from collections import defaultdict
 from dataclasses import dataclass
 
 R = 1000
@@ -104,16 +105,11 @@ def main(inputf):
   num_readings = sum([len(bs) for bs in scanner2beacons])
   print(f'total readings = {num_readings}')
 
-  moments2groups = {}
+  moments2groups = defaultdict(lambda: [])
   for scanner_id, beacons in enumerate(scanner2beacons):
     good_overlaps = gen_overlaps(beacons)
-    print(len(good_overlaps))
-
     for group in good_overlaps:
       moments = compute_moments(group)
-
-      if moments not in moments2groups:
-        moments2groups[moments] = []
       entry = ScannerGroup(scanner_id, group)
       moments2groups[moments].append(entry)
 
