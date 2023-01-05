@@ -33,6 +33,10 @@ def gen_overlaps(beacons:list[np.array], at_least=12):
   ys = augment_coordinates([p[1] for p in beacons], at_least)
   zs = augment_coordinates([p[2] for p in beacons], at_least)
 
+  xx = np.array([p[0] for p in beacons])
+  yy = np.array([p[1] for p in beacons])
+  zz = np.array([p[2] for p in beacons])
+
   good_overlaps = set()
 
   print(f'n = {len(xs)*len(ys)*len(zs)}, {len(xs)} {len(ys)} {len(zs)}')
@@ -40,12 +44,18 @@ def gen_overlaps(beacons:list[np.array], at_least=12):
   for x in xs:
     for y in ys:
       for z in zs:
-        boxmin = np.array([x, y, z])
-        overlap = []
-        for p in beacons:
-          if in_box(boxmin, p):
-            overlap.append(tuple(p))
-        if len(overlap) >= at_least:
+        dx = np.abs(xx - x - R)
+        dy = np.abs(yy - y - R)
+        dz = np.abs(zz - z - R)
+        pt_ids = np.nonzero(np.logical_and(
+          dx <= R,
+          np.logical_and(
+            dy <= R,
+            dz <= R
+        )))[0]
+
+        if len(pt_ids) >= at_least:
+          overlap = [tuple(beacons[i]) for i in pt_ids]
           overlap.sort()
           good_overlaps.add(tuple(overlap))
 
