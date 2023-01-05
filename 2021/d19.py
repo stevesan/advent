@@ -75,7 +75,6 @@ class ScannerGroup:
   id: int
   beacons: list[np.array]
 
-
 def main(inputf):
   with open(inputf) as f:
     text = f.read()
@@ -108,7 +107,7 @@ def main(inputf):
   for moments, groups in moments2groups.items():
     if len(groups) > 1:
       assert len(groups) == 2
-      print('----- matching groups:')
+      print(f'----- matching groups, moments = {moments}:')
       for group in groups:
         print(f'  scanner {group.id}, {len(group.beacons)} pts')
   
