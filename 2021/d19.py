@@ -184,6 +184,13 @@ class Xform:
   translation: np.ndarray
   rotation: np.ndarray
 
+  def inverse(self):
+    id = (self.id[1], self.id[0])
+    return Xform(id, -self.translation, np.transpose(self.rotation))
+
+  def apply(self, v):
+    return self.rotation @ v + self.translation
+
 def find_xform_chain(edge2xform, start:int, end:int):
   if (start, end) in edge2xform:
     return [edge2xform[(start, end)]]
@@ -256,8 +263,11 @@ def main(inputf):
           edge2xform[edge] = xform
           break
 
+  # add inverses
+  inverses = {}
   for (a, b), xform in edge2xform.items():
-    print(a,b, xform.id)
+    inverses[(b,a)] = xform.inverse()
+  edge2xform.update(inverses)
   for scanner_id, beacons in enumerate(scanner2beacons):
     if scanner_id == 0: continue
     chain = find_xform_chain(edge2xform, scanner_id, 0)
