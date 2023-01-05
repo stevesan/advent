@@ -63,13 +63,17 @@ def enum_24_rots():
 #   print(np.round(R @ Pt(1, 0, 0)))
 #   print(np.round(R @ Pt(0, 1, 0)))
 
+def bb_min(vecs:list[np.ndarray]):
+  minx = min(v[0][0] for v in vecs)
+  miny = min(v[1][0] for v in vecs)
+  minz = min(v[2][0] for v in vecs)
+  mins = Pt(minx, miny, minz)
+  return mins
+
 def rotate_and_realign(R:np.ndarray, vecs:list[np.ndarray]):
   rotated = [np.round(R@v) for v in vecs]
-  minx = min(v[0][0] for v in rotated)
-  miny = min(v[1][0] for v in rotated)
-  minz = min(v[2][0] for v in rotated)
-  mins = Pt(minx, miny, minz)
-  return [v-mins for v in rotated]
+  mins = bb_min(rotated)
+  return mins, [v-mins for v in rotated]
 
 def pointsets_equal(A, B):
   if len(A) != len(B): return False
@@ -83,7 +87,7 @@ assert pointsets_equal(
   rotate_and_realign(CUBE_FACE_ROTS[0], [
     Pt(1, 1, 1),
     Pt(1, 2, 1)
-  ]),
+  ])[1],
   [Pt(0, 0, 0), Pt(0, 1, 0)])
 
 assert pointsets_equal(
@@ -174,6 +178,31 @@ class ScannerGroup:
   id: int
   beacons: list[np.array]
 
+@dataclass
+class Xform:
+  id: object
+  translation: np.ndarray
+  rotation: np.ndarray
+
+def find_xform_chain(edge2xform, start:int, end:int):
+  if (start, end) in edge2xform:
+    return [edge2xform[(start, end)]]
+
+  for (p, q), xform in edge2xform.items():
+    if p != start: continue
+    chain_from_q = find_xform_chain(edge2xform, q, end)
+    if chain_from_q:
+      return [xform] + chain_from_q
+  
+  return None
+
+test_xforms = {
+  (0, 1): 'a',
+  (1, 2): 'b',
+  (2, 3): 'c',
+}
+assert find_xform_chain(test_xforms, 0, 3) == ['a', 'b', 'c']
+
 def main(inputf):
   with open(inputf) as f:
     text = f.read()
@@ -202,6 +231,8 @@ def main(inputf):
       entry = ScannerGroup(scanner_id, group)
       moments2groups[moments].append(entry)
 
+  edge2xform = {}
+
   for moments, groups in moments2groups.items():
     if len(groups) > 1:
       assert len(groups) == 2
@@ -209,14 +240,31 @@ def main(inputf):
       A = [t2p(t) for t in groups[0].beacons]
       B = [t2p(t) for t in groups[1].beacons]
       # Still need to re-align, but rotate with identity
-      RA = rotate_and_realign(CUBE_FACE_ROTS[0], A)
+      Amins = bb_min(A)
       for R in enum_24_rots():
-        RB = rotate_and_realign(R, B)
-        if pointsets_equal(RA, RB):
-          print(f'found matching rotation:\n{R}')
+        Bmins, rotated = rotate_and_realign(R, B)
+        Bxformed = [Amins + v for v in rotated]
+        translation = Amins - Bmins
+        if pointsets_equal(A, Bxformed):
+          print(f'found matching trans={np.transpose(translation)}, Rot:\n{R}, ')
+
+          edge = (groups[1].id, groups[0].id)
+          xform = Xform(
+            id=edge,
+            translation=translation,
+            rotation=R)
+          edge2xform[edge] = xform
           break
 
-  print(f'total readings = {num_readings}')
+  for (a, b), xform in edge2xform.items():
+    print(a,b, xform.id)
+  for scanner_id, beacons in enumerate(scanner2beacons):
+    if scanner_id == 0: continue
+    chain = find_xform_chain(edge2xform, scanner_id, 0)
+    if chain:
+      id_chain = [x.id for x in chain]
+      print(f'{scanner_id} xform: {id_chain}')
+    
   
 main(sys.argv[1])
 # main('2021/d19sample.txt')
