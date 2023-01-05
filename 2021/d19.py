@@ -56,7 +56,7 @@ def enum_24_rots():
       theta = math.pi * i * 0.5
       axis = A[:, 0]
       B = get_rotation_matrix(axis, theta)
-      yield B @ A
+      yield np.round(B @ A)
 
 # for R in enum_24_rots():
 #   print('-----')
@@ -202,19 +202,21 @@ def main(inputf):
       entry = ScannerGroup(scanner_id, group)
       moments2groups[moments].append(entry)
 
-  double_counts = 0
   for moments, groups in moments2groups.items():
     if len(groups) > 1:
       assert len(groups) == 2
-      double_counts += len(groups[0].beacons)
-      print(f'----- matching groups, moments = {moments}:')
-      for group in groups:
-        vecs = [t2p(t) for t in group]
-
-        print(f'  scanner {group.id}, {len(group.beacons)} pts')
+      print(f'----- matching group for moments = {moments}. scanners {groups[0].id} and {groups[1].id}')
+      A = [t2p(t) for t in groups[0].beacons]
+      B = [t2p(t) for t in groups[1].beacons]
+      # Still need to re-align, but rotate with identity
+      RA = rotate_and_realign(CUBE_FACE_ROTS[0], A)
+      for R in enum_24_rots():
+        RB = rotate_and_realign(R, B)
+        if pointsets_equal(RA, RB):
+          print(f'found matching rotation:\n{R}')
+          break
 
   print(f'total readings = {num_readings}')
-  print(f'actual num beacons = {num_readings - double_counts}')
   
 main(sys.argv[1])
 # main('2021/d19sample.txt')
