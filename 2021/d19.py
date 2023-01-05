@@ -58,10 +58,43 @@ def enum_24_rots():
       B = get_rotation_matrix(axis, theta)
       yield B @ A
 
-for R in enum_24_rots():
-  print('-----')
-  print(np.round(R @ Pt(1, 0, 0)))
-  print(np.round(R @ Pt(0, 1, 0)))
+# for R in enum_24_rots():
+#   print('-----')
+#   print(np.round(R @ Pt(1, 0, 0)))
+#   print(np.round(R @ Pt(0, 1, 0)))
+
+def rotate_and_realign(R:np.ndarray, vecs:list[np.ndarray]):
+  rotated = [np.round(R@v) for v in vecs]
+  minx = min(v[0][0] for v in rotated)
+  miny = min(v[1][0] for v in rotated)
+  minz = min(v[2][0] for v in rotated)
+  mins = Pt(minx, miny, minz)
+  return [v-mins for v in rotated]
+
+def pointsets_equal(A, B):
+  if len(A) != len(B): return False
+  A = [p2t(p) for p in A]
+  B = [p2t(p) for p in B]
+  for a in A:
+    if a not in B: return False
+  return True
+
+assert pointsets_equal(
+  rotate_and_realign(CUBE_FACE_ROTS[0], [
+    Pt(1, 1, 1),
+    Pt(1, 2, 1)
+  ]),
+  [Pt(0, 0, 0), Pt(0, 1, 0)])
+
+assert pointsets_equal(
+  [Pt(1, 2, 3), Pt(4, 5, 6)],
+  [Pt(4, 5, 6), Pt(1, 2, 3)],
+)
+
+assert not pointsets_equal(
+  [Pt(1, 2, 3), Pt(4, 5, 6)],
+  [Pt(4, 2, 6), Pt(1, 2, 3)],
+)
 
 def augment_coordinates(xx, at_least):
   more = [x - 2*R for x in xx]
@@ -176,6 +209,8 @@ def main(inputf):
       double_counts += len(groups[0].beacons)
       print(f'----- matching groups, moments = {moments}:')
       for group in groups:
+        vecs = [t2p(t) for t in group]
+
         print(f'  scanner {group.id}, {len(group.beacons)} pts')
 
   print(f'total readings = {num_readings}')
