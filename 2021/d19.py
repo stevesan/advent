@@ -291,6 +291,8 @@ def main(inputf):
       p = T.apply(p)
     return p
 
+  scanner_abs_poses = []
+
   for scanner_id, beacons in enumerate(scanner2beacons):
     if scanner_id == 0:
       chain = []
@@ -299,12 +301,24 @@ def main(inputf):
       print(f'found chain: {chain}')
       assert chain
 
-    print(f'scanner {scanner_id} rel to 0 pos: {np.transpose(apply_chain(chain, Pt(0)))}')
+    abspos = apply_chain(chain, Pt(0))
+    scanner_abs_poses.append(abspos)
+    print(f'scanner {scanner_id} rel to 0 pos: {np.transpose(abspos)}')
     for p in beacons:
       p = np.round(apply_chain(chain, p))
       uniques.add(p2t(p))
     
   print(f'found {len(uniques)} unique pts')
+
+  # part 2: figure out longest man-distance between two scanners
+  best_md = None
+  for p in scanner_abs_poses:
+    for q in scanner_abs_poses:
+      md = np.sum(np.abs(p-q))
+      if best_md is None or md > best_md:
+        best_md = md
+  print(f'largest dist: {best_md}')
+
   
 main(sys.argv[1])
 # main('2021/d19sample.txt')
