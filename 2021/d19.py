@@ -183,13 +183,18 @@ class Xform:
   id: object
   translation: np.ndarray
   rotation: np.ndarray
+  inverted: bool = False
 
   def inverse(self):
+    assert not self.inverted
     id = (self.id[1], self.id[0])
-    return Xform(id, -self.translation, np.transpose(self.rotation))
+    return Xform(id, -self.translation, np.linalg.inv(self.rotation), inverted=True)
 
   def apply(self, v):
-    return self.rotation @ v + self.translation
+    if self.inverted:
+      return self.rotation @ (v + self.translation)
+    else:
+      return (self.rotation @ v) + self.translation
 
 def find_xform_chain(edge2xform, start:int, end:int):
   if (start, end) in edge2xform:
@@ -244,6 +249,8 @@ def main(inputf):
     if len(groups) > 1:
       assert len(groups) == 2
       print(f'----- matching group for moments = {moments}. scanners {groups[0].id} and {groups[1].id}')
+      Aid = groups[0].id
+      Bid = groups[1].id
       A = [t2p(t) for t in groups[0].beacons]
       B = [t2p(t) for t in groups[1].beacons]
       # Still need to re-align, but rotate with identity
@@ -254,13 +261,19 @@ def main(inputf):
         translation = Amins - Bmins
         if pointsets_equal(A, Bxformed):
           print(f'found matching trans={np.transpose(translation)}, Rot:\n{R}, ')
-
-          edge = (groups[1].id, groups[0].id)
+          
+          edge = (Bid, Aid)
           xform = Xform(
             id=edge,
             translation=translation,
             rotation=R)
           edge2xform[edge] = xform
+
+          invx = xform.inverse()
+          for p in A:
+            p = invx.apply(p)
+            assert p2t(p) in [p2t(q) for q in B]
+
           break
 
   # add inverses
@@ -268,13 +281,29 @@ def main(inputf):
   for (a, b), xform in edge2xform.items():
     inverses[(b,a)] = xform.inverse()
   edge2xform.update(inverses)
+
+  # find all unique points
+  uniques = set()
+
+  def apply_chain(chain, p):
+    for T in chain:
+      p = T.apply(p)
+    return p
+
   for scanner_id, beacons in enumerate(scanner2beacons):
-    if scanner_id == 0: continue
-    chain = find_xform_chain(edge2xform, scanner_id, 0)
-    if chain:
-      id_chain = [x.id for x in chain]
-      print(f'{scanner_id} xform: {id_chain}')
+    if scanner_id == 0:
+      chain = []
+    else:
+      chain = find_xform_chain(edge2xform, scanner_id, 0)
+      print(f'found chain: {chain}')
+      assert chain
+
+    print(f'scanner {scanner_id} rel to 0 pos: {np.transpose(apply_chain(chain, Pt(0)))}')
+    for p in beacons:
+      p = np.round(apply_chain(chain, p))
+      uniques.add(p2t(p))
     
+  print(f'found {len(uniques)} unique pts')
   
 main(sys.argv[1])
 # main('2021/d19sample.txt')
