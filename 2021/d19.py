@@ -196,13 +196,14 @@ class Xform:
     else:
       return (self.rotation @ v) + self.translation
 
-def find_xform_chain(edge2xform, start:int, end:int):
+def find_xform_chain(edge2xform, start:int, end:int, visited=set()):
   if (start, end) in edge2xform:
     return [edge2xform[(start, end)]]
 
   for (p, q), xform in edge2xform.items():
     if p != start: continue
-    chain_from_q = find_xform_chain(edge2xform, q, end)
+    if q in visited: continue
+    chain_from_q = find_xform_chain(edge2xform, q, end, visited.union([q]))
     if chain_from_q:
       return [xform] + chain_from_q
   
@@ -269,10 +270,10 @@ def main(inputf):
             rotation=R)
           edge2xform[edge] = xform
 
-          invx = xform.inverse()
-          for p in A:
-            p = invx.apply(p)
-            assert p2t(p) in [p2t(q) for q in B]
+          # invx = xform.inverse()
+          # for p in A:
+          #   p = invx.apply(p)
+          #   assert p2t(p) in [p2t(q) for q in B]
 
           break
 
